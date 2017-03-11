@@ -1,4 +1,4 @@
-#include "Jeu.h"
+#include "Combat.h"
 
 #include <iostream>
 #include <stdlib.h>
