@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "Terrain.h"
+
 using namespace std;
 
 
@@ -12,6 +14,7 @@ class jeu {
 
 	private:
 	unsigned int nb_joueur;
+	Terrain *terrain;
 };
 	
 

@@ -10,5 +10,6 @@ using namespace std;
 
 int main ()
 {
+	Terrain (8,8);
 	return 0;
 }
