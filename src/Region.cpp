@@ -5,6 +5,7 @@
 #include <cstring>
 #include <fstream>
 #include <cassert>
+#include <vector>
 
 using namespace std;
 
