@@ -6,21 +6,68 @@
 #include <cstring>
 #include <fstream>
 #include <cassert>
+#include <vector>
 
 using namespace std;
 
 class Region {
 
-	private : 
+	private :
 		string couleur_joueur;
 		unsigned int nb_unites;
-		//tab de region
+		vector<Region*> frontaliers;
 		string nom_region;
 
 	public :
-		/** @brief Constructeur par défault */
+		/** @brief Constructeur par défaut */
 		Region();
+		Region(const string & couleur_region, unsigned int nb_unite, const string & nom);
 
+		/** @brief Destructeur */
+		~Region();
+
+		/**
+		* @brief Accesseur pour nb_unites
+		* @return Le nombre d'unites presentes dans la region
+		*/
+		unsigned int getNbUnite () const;
+
+		/**
+		* @brief Mutateur pour nb_unites
+		* @param nb_unite : entier
+		*/
+		void setNbUnite (const unsigned int & nb_unite);
+
+		/**
+		* @brief Accesseur pour couleur_joueur
+		* @return La couleur du joueur possedant la region
+		*/
+		string getCouleurRegion () const;
+
+		/**
+		* @brief Mutateur pour couleur_joueur
+		* @param couleur_region: string
+		*/
+		void setCouleurRegion (const string & couleur_region);
+
+		/**
+		* @brief Accesseur pour nom_region
+		* @return Le nom de la region
+		*/
+		string getNomRegion () const;
+
+		void setNomRegion (const string & nom);
+
+		// vector<Region*> & getTabFrontaliers ();
+
+		void setTabFrontaliers (const vector<Region*> & tab_frontalier);
+
+		/**
+		* @brief Teste si une region donnee est voisine de l'instance consideree
+		* @param voisin : Region
+		* @return Booleen
+		*/
+		bool estFrontalier (const Region & voisin) const;
 };
 
 #endif

@@ -16,6 +16,8 @@ Terrain::Terrain()
 
 Terrain::Terrain(unsigned int dimensionX, unsigned int dimensionY)
 {
+	assert(dimensionX >= 0);
+	assert(dimensionY >= 0);
 	dim_x = dimensionX;
  	dim_y = dimensionY;
 	unsigned int i, j;
@@ -57,6 +59,4 @@ void Terrain::setdim_y(unsigned int dimensionY)
 {
 	assert(dimensionY >= 0);
 	dim_y = dimensionY;
-}	
-
-
+}
