@@ -22,7 +22,6 @@ Terrain::Terrain(unsigned int dimensionX, unsigned int dimensionY)
  	dim_y = dimensionY;
 	unsigned int i, j;
 
-
 	for(i=0;i<=dim_x;i++)
 	{
 		for(j=0;j<=dim_y;j++)

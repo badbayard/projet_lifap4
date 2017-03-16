@@ -41,7 +41,17 @@ class Pays {
 		*/
 		bool controlePays (const string & couleur_joueur) const;
 
+		/**
+		* @brief Accesseur pour tab_region
+		* @return Reference sur tab_region pour le manipuler directement
+		*/
+		vector<Region*> & getTabRegions ();
 
+		/**
+		* @brief Mutateur pout tab_region
+		* @param tabRegion : tableau de Region
+		*/
+		void setTabRegions (const vector<Region*> & tabRegion);
 };
 
 #endif
