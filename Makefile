@@ -1,7 +1,7 @@
 CC = g++
 FLAGS = -g -Wall -c
-OBJ = obj/Combat.o obj/Joueur.o obj/Pays.o obj/Region.o obj/Terrain.o obj/main.o
-SRC = src/Combat.h src/Joueur.h src/Pays.h src/Region.h src/Terrain.h src/main.cpp
+OBJ = obj/Combat.o obj/Joueur.o obj/Pays.o obj/Region.o obj/Terrain.o obj/main.o obj/Jeu.o
+SRC = src/Combat.h src/Joueur.h src/Pays.h src/Region.h src/Terrain.h src/main.cpp src/Jeu.cpp
 
 
 all : bin/test.out
@@ -23,6 +23,9 @@ obj/Region.o : $(SRC)
 
 obj/Terrain.o : $(SRC)
 	$(CC) $(FLAGS) src/Terrain.cpp -o obj/Terrain.o
+
+obj/Jeu.o : $(SRC)
+	$(CC) $(FLAGS) src/Jeu.cpp -o obj/Jeu.o
 
 obj/main.o : $(SRC)
 	$(CC) $(FLAGS) src/main.cpp -o obj/main.o

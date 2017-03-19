@@ -1,4 +1,5 @@
 #include "Terrain.h"
+#include "Joueur.h"
 
 #include <iostream>
 #include <stdlib.h>
