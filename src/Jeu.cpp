@@ -53,6 +53,11 @@ for(i =0; i<nb_joueur;i++)
 	}
  	while( ((a<1)||(a>5)) && !(estValide(a,tabou,nb_joueur)) );
 
+	if(estValide(a,tabou,nb_joueur) == 1 )
+	{
+		cout <<"problème dans la saisie"<<endl;
+	}
+
 
 	 	switch(a)
 	 	{
