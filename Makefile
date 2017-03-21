@@ -1,7 +1,7 @@
 CC = g++
 FLAGS = -g -Wall -c
 OBJ = obj/Combat.o obj/Joueur.o obj/Pays.o obj/Region.o obj/Terrain.o obj/main.o obj/Jeu.o
-SRC = src/Combat.h src/Joueur.h src/Pays.h src/Region.h src/Terrain.h src/main.cpp src/Jeu.cpp
+SRC = src/Combat.h src/Joueur.h src/Pays.h src/Region.h src/Terrain.h src/Jeu.h src/main.cpp 
 
 
 all : bin/test.out

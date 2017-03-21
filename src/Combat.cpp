@@ -1,4 +1,6 @@
 #include "Combat.h"
+#include "Joueur.h"
+#include "Region.h"
 
 #include <iostream>
 #include <stdlib.h>
@@ -80,23 +82,23 @@ using namespace std;
 		string c_def = defenseur.getCouleurJoueur();
 		
 		do{
-		cout << "Joueur " << c_att << " choisit un nombre d'unites pour l'offensive : ";
+		cout << "Joueur " << c_att << ", choisis un nombre d'unites pour l'offensive : ";
 		cin >> a;}
 		while((a<0 || a>3) && a<unite_att);
 		cout <<endl;
 		do{
-		cout << "Joueur " << c_def << " choisit un nombre d'unites pour la defense : ";
+		cout << "Joueur " << c_def << ", choisis un nombre d'unites pour la defense : ";
 		cin >> d;}
 		while((d<0 || d>2) && d<unite_def);
 	
-		if( !bataille(a,d) ){	// Si le defenseur gagne
+		if( !bataille(a,d) ){							// Si le defenseur gagne
 			region_attaquant.setNbUnite(unite_att - a +1);
 		}
-		else {
+		else {											// Si l'attaquant gagne
 			region_defenseur.setNbUnite(unite_def - d);
 			int limite = region_defenseur.getNbUnite();
 			if(limite <= 0){
-				cout << "Joueur " << c_att << " choisit un nombre d'unites a transfere dans la region conquise : ";
+				cout << "Joueur " << c_att << ", choisis un nombre d'unites a transfere dans la region conquise : ";
 				cin >> a;
 				region_defenseur.setNbUnite(a);
 				region_defenseur.setCouleurRegion(c_att);

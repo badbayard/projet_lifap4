@@ -24,7 +24,8 @@ class Region {
 		Region(const string & couleur_region, unsigned int nb_unite, const string & nom);
 
 		/** @brief Destructeur */
-		~Region();
+		~Region(){
+		}
 
 		/**
 		* @brief Accesseur pour nb_unites

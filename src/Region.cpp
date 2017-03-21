@@ -12,7 +12,7 @@ using namespace std;
 Region::Region()
 {
 	couleur_joueur = "";
-	nb_unites = 0;
+	nb_unites = 1;
 	nom_region = "";
 }
 

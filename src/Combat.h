@@ -63,8 +63,13 @@ class Combat {
 		@param region_defenseur : Region */
 	void set_region_defenseur(Region region_d);
 	
+	/**  @brief Renvoie le gagnant d'une bataille
+		  @param nb_troupes_attaquant, nb_troupes_defenseur : entier
+		  @return Vrai si l'attaquant gagne, faux sinon*/
 	bool bataille(unsigned int nb_troupes_attaquant, unsigned int nb_troupes_defenseur);
 	
+	/**  @brief Lance un combat et fais les modifications suite à celui-ci
+		 @param region_attaquant, region_defenseur : Region*/
 	void maj_troupes(Region& region_attaquant, Region& region_defenseur);
 	
 };
