@@ -11,10 +11,9 @@ using namespace std;
 
 Region::Region()
 {
-	//couleur_joueur = NULL;
+	couleur_joueur = "";
 	nb_unites = 0;
-	//tab de region
-	//nom_region = NULL;
+	nom_region = "";
 }
 
 Region::Region(const string & couleur_region, unsigned int nb_unite, const string & nom)

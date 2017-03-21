@@ -1,4 +1,5 @@
 #include "Terrain.h"
+#include "Joueur.h"
 
 #include <iostream>
 #include <stdlib.h>
@@ -21,7 +22,6 @@ Terrain::Terrain(unsigned int dimensionX, unsigned int dimensionY)
 	dim_x = dimensionX;
  	dim_y = dimensionY;
 	unsigned int i, j;
-
 
 	for(i=0;i<=dim_x;i++)
 	{
