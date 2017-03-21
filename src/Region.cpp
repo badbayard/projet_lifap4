@@ -12,11 +12,11 @@ using namespace std;
 Region::Region()
 {
 	couleur_joueur = "";
-	nb_unites = 0;
+	nb_unites = 1;
 	nom_region = "";
 }
 
-Region::Region(const string & couleur_region, unsigned int nb_unite, const string & nom)
+Region::Region(const string & nom, unsigned int nb_unite, const string & couleur_region)
 {
 	assert(nb_unite >= 0);
 	couleur_joueur = couleur_region;
@@ -64,4 +64,9 @@ bool Region::estFrontalier (const Region & voisin) const
 		}
 	}
 	return false;
+}
+
+void Region::ajouterFrontalier (const Region & voisin)
+{
+	frontaliers.push_back( (Region*) &voisin );
 }
