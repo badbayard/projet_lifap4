@@ -40,6 +40,7 @@ int main ()
 
 	//test du module jeu
 	Jeu j;
-	j.lancerjeu();
+	//j.lancerjeu();
+	//j.afficherAide();
 	return 0;
 }
