@@ -63,7 +63,7 @@ class Combat {
 		@param region_defenseur : Region */
 	void set_region_defenseur(Region region_d);
 	
-	Joueur bataille(unsigned int nb_troupes_attaquant, unsigned int nb_troupes_defenseur);
+	bool bataille(unsigned int nb_troupes_attaquant, unsigned int nb_troupes_defenseur);
 	
 	void maj_troupes(Region& region_attaquant, Region& region_defenseur);
 	
