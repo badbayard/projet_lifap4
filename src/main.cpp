@@ -15,7 +15,7 @@ int main ()
 	string essai1;
 	string essai2;
 	unsigned int a , b, c, d;
-	Terrain (8,8);
+	//Terrain (8,8);
 	
 	//test du module joueur
 	Joueur j1;

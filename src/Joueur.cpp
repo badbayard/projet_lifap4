@@ -41,7 +41,15 @@ void Joueur::setNbRegiments (unsigned int nb_Regiments)
 	nb_regiments = nb_Regiments;
 }
 
+void Joueur::setnom_joueur(string nom)
+{
+	nom_joueur=nom;
+}
 
+string Joueur::getnom_joueur()
+{
+	return nom_joueur;
+}
 
 
 

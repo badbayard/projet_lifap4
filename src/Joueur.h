@@ -46,6 +46,13 @@ class Joueur {
 		 * @param : nb_Regiments entier */
 		void setNbRegiments (unsigned int nb_Regiments);
 
+		/** @brief : modifie le nom du joueur 
+		 *  @param : nom_joueur chaine de caractere */
+		void setnom_joueur (string nom);
+
+		/** @brief:prend le nom du jouer */
+		string getnom_joueur(); 
+
 
 
 	

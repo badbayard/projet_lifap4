@@ -10,12 +10,12 @@
 
 using namespace std;
 
-
 class Jeu {
 
 	private:
 	unsigned int nb_joueur;
 	Terrain *terrain;
+  vector<Joueur> tab_joueur;
 
 	public:
 
@@ -36,6 +36,9 @@ class Jeu {
 	void phaseAttaque();
 	/** @brief : permet de mettre fin au tour */
 	bool fintour();
+	/** @brief : permet la saisie d'un joueur 
+	 *  @param : nb_Joueur : entier J1: un joueur */
+	bool saisie(unsigned int nb_joueur);
 
 };
 	

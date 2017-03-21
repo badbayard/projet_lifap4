@@ -5,6 +5,7 @@
 #include <cstring>
 #include <fstream>
 #include <cassert>
+#include <vector>
 
 using namespace std;
 
@@ -24,22 +25,16 @@ bool estValide(int a, int tabou[], int nbJoueur){
 	return false;
 }
 
-void Jeu::lancerjeu()
+bool Jeu::saisie(unsigned int nb_Joueur)
 {
-
-	int a;
-	Joueur j1;
-	unsigned int i;
-	cout <<"mettre le nombre de joueur "<<endl;
-	cin >> nb_joueur;
-	// int tab[nb_joueur];
-	int tabou[nb_joueur];
-	for(i = 0; i <nb_joueur; i++){
+	/*	unsigned int a,i;
+		int tabou[nb_Joueur];
+	for(i = 0; i <nb_Joueur; i++){
 		tabou[i] = 0;}
 
  // initialiser un joueur pour la couleur
  
-for(i =0; i<nb_joueur;i++)
+for(i =0; i<nb_Joueur;i++)
 {
 	 cout <<"couleur du joueur " <<endl;
  	do
@@ -50,30 +45,29 @@ for(i =0; i<nb_joueur;i++)
 		cout <<"Orange 4"<<endl;
 		cout <<"Blanc 5"<<endl;
 	 	cin >> a;
+		if(estValide(a,tabou,nb_Joueur) == 1 )
+		{
+			cout <<"problème dans la saisie"<<endl;
+			return false;
+		}
 	}
- 	while( ((a<1)||(a>5)) && !(estValide(a,tabou,nb_joueur)) );
-
-	if(estValide(a,tabou,nb_joueur) == 1 )
-	{
-		cout <<"problème dans la saisie"<<endl;
-	}
-
+ 	while( ((a<1)||(a>5)) && !(estValide(a,tabou,nb_Joueur)) );
 
 	 	switch(a)
 	 	{
-			 case 1: j1.setCouleurJoueur("Rouge");
+			 case 1: J1.setCouleurJoueur("Rouge");
 							// tab[i]=1;
 			 break;
-			 case 2: j1.setCouleurJoueur("Bleu");
+			 case 2: J1.setCouleurJoueur("Bleu");
 							// tab[i]=2;
 			 break;
-			 case 3: j1.setCouleurJoueur("Vert");
+			 case 3: J1.setCouleurJoueur("Vert");
 							// tab[i]=3;
 			 break;
-			 case 4: j1.setCouleurJoueur("Orange");
+			 case 4: J1.setCouleurJoueur("Orange");
 							// tab[i]=4;
 			 break;
-			 case 5: j1.setCouleurJoueur("Blanc");
+			 case 5: J1.setCouleurJoueur("Blanc");
 							// tab[i]=5;
 			 break;
 
@@ -81,7 +75,37 @@ for(i =0; i<nb_joueur;i++)
 			 break;
 		 }
 	
-tabou[i] = a;
-cout << endl;
+	tabou[i] = a;
+	cout << endl;
+	return true;*/
+	return 0;
 }
+
+
+
+
+void Jeu::lancerjeu()
+{
+  unsigned int i;
+	cout <<"mettre le nombre de joueur "<<endl;
+	cin >> nb_joueur;
+
+	for(i=0;i<nb_joueur;i++)
+	{
+		tab_joueur.push_back(Joueur());
+		cout <<"mettre votre nom"<<endl;
+	//	tab_joueur[i].setnomJoueur();
+	}
 }
+
+
+	/*
+	b=saisie(nb_joueur,j1);
+   while (b==false)
+	{
+		cout <<"recommencer la saisie "<<endl;
+		b=saisie(nb_joueur,j1);
+	}*/
+
+
+
