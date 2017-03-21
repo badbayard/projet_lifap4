@@ -5,6 +5,7 @@
 #include <cstring>
 #include <fstream>
 #include <cassert>
+#include <vector>
 
 using namespace std;
 
@@ -14,7 +15,7 @@ Pays::Pays()
 	nom_pays = "";
 }
 
-Pays::Pays(unsigned int nbregions, const string & nom)
+Pays::Pays(const string & nom, unsigned int nbregions)
 {
 	assert(nbregions >= 0);
 	nb_regions = nbregions;
@@ -38,10 +39,17 @@ bool Pays::controlePays (const string & couleur_joueur) const
 	return true;
 }
 
-vector<Region*> & Pays::getTabRegions () {
+vector<Region*> & Pays::getTabRegions ()
+{
 	return tab_region;
 }
 
-void Pays::setTabRegions (const vector<Region*> & tabRegion) {
+void Pays::setTabRegions (const vector<Region*> & tabRegion)
+{
 	tab_region = tabRegion;
+}
+
+void Pays::ajouterRegion (const Region & reg)
+{
+	tab_region.push_back( (Region*) &reg );
 }

@@ -26,7 +26,7 @@ class Pays {
 		Pays();
 
 		/** @brief Constructeur de la classe */
-		Pays(unsigned int nbregions, const string & nom);
+		Pays(const string & nom, unsigned int nbregions);
 
 		/**
 		* @brief Accesseur pour nb_regions
@@ -52,6 +52,12 @@ class Pays {
 		* @param tabRegion : tableau de Region
 		*/
 		void setTabRegions (const vector<Region*> & tabRegion);
+		
+		/**
+		* @brief Ajoute une région donnée en paramètre dans le tableau des régions de l'instance Pays considérée
+		* @param reg : Region
+		*/
+		void ajouterRegion (const Region & reg);
 };
 
 #endif

@@ -1,6 +1,16 @@
 #ifndef TERRAIN_H
 #define TERRAIN_H
 
+#include <iostream>
+#include <stdlib.h>
+#include <cstring>
+#include <fstream>
+#include <cassert>
+#include <vector>
+
+#include "Region.h"
+#include "Pays.h"
+
 using namespace std;
 
 class Terrain {
@@ -9,6 +19,13 @@ class Terrain {
 
 		unsigned int dim_x;
 		unsigned int dim_y;
+ 		vector<Pays*> tab_pays;
+ 		
+ 		/**
+ 		* @brief Ajoute un pays donné en paramètre dans la liste des pays de l'instance Terrain considérée
+ 		* @param pays : Pays
+ 		*/
+ 		void ajouterPays (const Pays & pays);
 
 	public:
 	/** @brief Constructeur par défault */
@@ -33,6 +50,9 @@ class Terrain {
 		/** @brief modifie dim_y
 		 *  @param dimensionY : entier */
 		void setdim_y(unsigned int dimensionY);
+		
+		/** @brief Initialise le terrain */
+		void initTerrain ();
 };
 
 
