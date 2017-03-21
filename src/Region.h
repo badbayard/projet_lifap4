@@ -21,10 +21,11 @@ class Region {
 	public :
 		/** @brief Constructeur par défaut */
 		Region();
-		Region(const string & nom, unsigned int nb_unite = 1, const string & couleur_region = "");
+		Region(const string & couleur_region, unsigned int nb_unite, const string & nom);
 
 		/** @brief Destructeur */
-		~Region() {}
+		~Region(){
+		}
 
 		/**
 		* @brief Accesseur pour nb_unites
@@ -69,10 +70,6 @@ class Region {
 		*/
 		bool estFrontalier (const Region & voisin) const;
 		
-		/**
-		* @brief Ajoute une région donnée en paramètre dans le tableau des frontaliers de l'instance Region considérée
-		* @param voisin : Region
-		*/
 		void ajouterFrontalier (const Region & voisin);
 };
 
