@@ -96,26 +96,112 @@ void Terrain::setdim_y(unsigned int dimensionY)
 
 void Terrain::initTerrain ()
 {
-	Pays north_america(string("Amerique du Nord"),9);
-	Region alaska(string("Alaska"));
-	Region alberta(string("Alberta"));
-	Region central_america(string("Amerique centrale"));
-	Region eastern_us(string("Etats de l'Est"));
-	Region greenland(string("Groenland"));
-	Region northwest_territory(string("Territoires du Nord-Ouest"));
-	Region ontario(string("Ontario"));
-	Region quebec(string("Quebec"));
-	Region western_us(string("Etats de l'Ouest"));
+	// Amerique du Nord
+	Pays north_america("Amerique du Nord",9);
+	Region alaska("Alaska");
+	Region alberta("Alberta");
+	Region central_america("Amerique centrale");
+	Region eastern_us("Etats de l'Est");
+	Region greenland("Groenland");
+	Region northwest_territory("Territoires du Nord-Ouest");
+	Region ontario("Ontario");
+	Region quebec("Quebec");
+	Region western_us("Etats de l'Ouest");
+	north_america.ajouterRegion(alaska);
+	north_america.ajouterRegion(alberta);
+	north_america.ajouterRegion(central_america);
+	north_america.ajouterRegion(eastern_us);
+	north_america.ajouterRegion(greenland);
+	north_america.ajouterRegion(northwest_territory);
+	north_america.ajouterRegion(ontario);
+	north_america.ajouterRegion(quebec);
+	north_america.ajouterRegion(western_us);
 	
-	Pays asia(string("Asie"),12);
-	Region kamchatka(string("Kamtchatka"));
-	
-	Pays south_america(string("Amerique du Sud"),4);
-	Region venezuela(string("Venezuela"));
+	// Asie
+	Pays asia("Asie",12);
+	Region afghanistan("Afghanistan");
+	Region china("Chine");
+	Region india("Inde");
+	Region irkutsk("Tchita");
+	Region japan("Japon");
+	Region kamchatka("Kamtchatka");
+	Region middle_east("Moyen-Orient");
+	Region mongolia("Mongolie");
+	Region siam("Siam");
+	Region siberia("Siberie");
+	Region ural("Oural");
+	Region yakutsk("Yakoutie");
+	asia.ajouterRegion(afghanistan);
+	asia.ajouterRegion(china);
+	asia.ajouterRegion(india);
+	asia.ajouterRegion(irkutsk);
+	asia.ajouterRegion(japan);
+	asia.ajouterRegion(kamchatka);
+	asia.ajouterRegion(middle_east);
+	asia.ajouterRegion(mongolia);
+	asia.ajouterRegion(siam);
+	asia.ajouterRegion(siberia);
+	asia.ajouterRegion(ural);
+	asia.ajouterRegion(yakutsk);
 
-	Pays europe(string("Europe"),7);
-	Region iceland(string("Islande"));
+	// Amerique du Sud
+	Pays south_america("Amerique du Sud",4);
+	Region argentina("Argentine");
+	Region brazil("Bresil");
+	Region peru("Perou");
+	Region venezuela("Venezuela");
+	south_america.ajouterRegion(argentina);
+	south_america.ajouterRegion(brazil);
+	south_america.ajouterRegion(peru);
+	south_america.ajouterRegion(venezuela);
+
+	// Europe
+	Pays europe("Europe",7);
+	Region great_britain("Grande-Bretagne");
+	Region iceland("Islande");
+	Region northern_eu("Europe du Nord");
+	Region scandinavia("Scandinavie");
+	Region southern_eu("Europe du Sud");
+	Region ukraine("Ukraine");
+	Region western_eu("Europe occidentale");
+	europe.ajouterRegion(great_britain);
+	europe.ajouterRegion(iceland);
+	europe.ajouterRegion(northern_eu);
+	europe.ajouterRegion(scandinavia);
+	europe.ajouterRegion(southern_eu);
+	europe.ajouterRegion(ukraine);
+	europe.ajouterRegion(western_eu);
 	
+	// Afrique
+	Pays africa("Afrique",6);
+	Region congo("Congo");
+	Region east_africa("Afrique de l'Est");
+	Region egypt("Egypte");
+	Region madagascar("Madagascar");
+	Region north_africa("Afrique du Nord");
+	Region south_africa("Afrique du Sud");
+	africa.ajouterRegion(congo);
+	africa.ajouterRegion(east_africa);
+	africa.ajouterRegion(egypt);
+	africa.ajouterRegion(madagascar);
+	africa.ajouterRegion(north_africa);
+	africa.ajouterRegion(south_africa);
+	
+	// Oceanie
+	Pays australia("Oceanie",4);
+	Region eastern_au("Australie Orientale");
+	Region indonesia("Indonesie");
+	Region new_guinea("Nouvelle-Guinee");
+	Region western_au("Australie Occidentale");
+	australia.ajouterRegion(eastern_au);
+	australia.ajouterRegion(indonesia);
+	australia.ajouterRegion(new_guinea);
+	australia.ajouterRegion(western_au);
+	
+	
+	
+	
+	// Frontieres Amerique du Nord
 	alaska.ajouterFrontalier(northwest_territory);
 	alaska.ajouterFrontalier(kamchatka);
 	alberta.ajouterFrontalier(northwest_territory);
@@ -150,15 +236,122 @@ void Terrain::initTerrain ()
 	western_us.ajouterFrontalier(eastern_us);
 	western_us.ajouterFrontalier(central_america);
 	
-	north_america.ajouterRegion(alaska);
-	north_america.ajouterRegion(alberta);
-	north_america.ajouterRegion(central_america);
-	north_america.ajouterRegion(eastern_us);
-	north_america.ajouterRegion(greenland);
-	north_america.ajouterRegion(northwest_territory);
-	north_america.ajouterRegion(ontario);
-	north_america.ajouterRegion(quebec);
-	north_america.ajouterRegion(western_us);
+	// Frontieres Asie
+	afghanistan.ajouterFrontalier(india);
+	afghanistan.ajouterFrontalier(middle_east);
+	afghanistan.ajouterFrontalier(ural);
+	afghanistan.ajouterFrontalier(china);
+	afghanistan.ajouterFrontalier(ukraine);
+	china.ajouterFrontalier(afghanistan);
+	china.ajouterFrontalier(india);
+	china.ajouterFrontalier(mongolia);
+	china.ajouterFrontalier(siam);
+	china.ajouterFrontalier(siberia);
+	china.ajouterFrontalier(ural);
+	india.ajouterFrontalier(afghanistan);
+	india.ajouterFrontalier(china);
+	india.ajouterFrontalier(middle_east);
+	india.ajouterFrontalier(siam);
+	irkutsk.ajouterFrontalier(kamchatka);
+	irkutsk.ajouterFrontalier(mongolia);
+	irkutsk.ajouterFrontalier(siberia);
+	irkutsk.ajouterFrontalier(yakutsk);
+	japan.ajouterFrontalier(kamchatka);
+	japan.ajouterFrontalier(mongolia);
+	kamchatka.ajouterFrontalier(alaska);
+	kamchatka.ajouterFrontalier(irkutsk);
+	kamchatka.ajouterFrontalier(japan);
+	kamchatka.ajouterFrontalier(mongolia);
+	kamchatka.ajouterFrontalier(yakutsk);
+	middle_east.ajouterFrontalier(southern_eu);
+	middle_east.ajouterFrontalier(egypt);
+	middle_east.ajouterFrontalier(east_africa);
+	middle_east.ajouterFrontalier(india);
+	middle_east.ajouterFrontalier(afghanistan);
+	middle_east.ajouterFrontalier(ukraine);
+	mongolia.ajouterFrontalier(china);
+	mongolia.ajouterFrontalier(irkutsk);
+	mongolia.ajouterFrontalier(japan);
+	mongolia.ajouterFrontalier(kamchatka);
+	mongolia.ajouterFrontalier(siberia);
+	siam.ajouterFrontalier(indonesia);
+	siam.ajouterFrontalier(china);
+	siam.ajouterFrontalier(india);
+	siberia.ajouterFrontalier(china);
+	siberia.ajouterFrontalier(irkutsk);
+	siberia.ajouterFrontalier(mongolia);
+	siberia.ajouterFrontalier(ural);
+	siberia.ajouterFrontalier(yakutsk);
+	ural.ajouterFrontalier(ukraine);
+	ural.ajouterFrontalier(afghanistan);
+	ural.ajouterFrontalier(china);
+	ural.ajouterFrontalier(siberia);
+	yakutsk.ajouterFrontalier(irkutsk);
+	yakutsk.ajouterFrontalier(kamchatka);
+	yakutsk.ajouterFrontalier(siberia);
+	
+	// Frontieres Europe
+	great_britain.ajouterFrontalier(iceland);
+	great_britain.ajouterFrontalier(northern_eu);
+	great_britain.ajouterFrontalier(scandinavia);
+	great_britain.ajouterFrontalier(western_eu);
+	iceland.ajouterFrontalier(great_britain);
+	iceland.ajouterFrontalier(scandinavia);
+	iceland.ajouterFrontalier(greenland);
+	northern_eu.ajouterFrontalier(scandinavia);
+	northern_eu.ajouterFrontalier(great_britain);
+	northern_eu.ajouterFrontalier(western_eu);
+	northern_eu.ajouterFrontalier(southern_eu);
+	northern_eu.ajouterFrontalier(ukraine);
+	scandinavia.ajouterFrontalier(great_britain);
+	scandinavia.ajouterFrontalier(iceland);
+	scandinavia.ajouterFrontalier(northern_eu);
+	scandinavia.ajouterFrontalier(ukraine);
+	southern_eu.ajouterFrontalier(egypt);
+	southern_eu.ajouterFrontalier(north_africa);
+	southern_eu.ajouterFrontalier(middle_east);
+	southern_eu.ajouterFrontalier(northern_eu);
+	southern_eu.ajouterFrontalier(ukraine);
+	southern_eu.ajouterFrontalier(western_eu);
+	ukraine.ajouterFrontalier(afghanistan);
+	ukraine.ajouterFrontalier(middle_east);
+	ukraine.ajouterFrontalier(ural);
+	ukraine.ajouterFrontalier(northern_eu);
+	ukraine.ajouterFrontalier(scandinavia);
+	ukraine.ajouterFrontalier(southern_eu);
+	western_eu.ajouterFrontalier(north_africa);
+	western_eu.ajouterFrontalier(great_britain);
+	western_eu.ajouterFrontalier(northern_eu);
+	western_eu.ajouterFrontalier(southern_eu);
+	
+	// Frontieres Amerique du Sud
+	argentina.ajouterFrontalier(brazil);
+	argentina.ajouterFrontalier(peru);
+	brazil.ajouterFrontalier(argentina);
+	brazil.ajouterFrontalier(peru);
+	brazil.ajouterFrontalier(venezuela);
+	brazil.ajouterFrontalier(north_africa);
+	peru.ajouterFrontalier(argentina);
+	peru.ajouterFrontalier(brazil);
+	peru.ajouterFrontalier(venezuela);
+	venezuela.ajouterFrontalier(brazil);
+	venezuela.ajouterFrontalier(peru);
+	venezuela.ajouterFrontalier(central_america);
+	
+	// Frontieres Afrique
+	congo.ajouterFrontalier(east_africa);
+	congo.ajouterFrontalier(north_africa);
+	congo.ajouterFrontalier(south_africa);
+	east_africa.ajouterFrontalier(middle_east);
+	east_africa.ajouterFrontalier(congo);
+	east_africa.ajouterFrontalier(egypt);
+	east_africa.ajouterFrontalier(madagascar);
+	east_africa.ajouterFrontalier();
+	east_africa.ajouterFrontalier();
+	egypt.ajouterFrontalier();
+	madagascar.ajouterFrontalier();
+	north_africa.ajouterFrontalier();
+	south_africa.ajouterFrontalier();
 }
 
 void Terrain::ajouterPays (const Pays & pays)
