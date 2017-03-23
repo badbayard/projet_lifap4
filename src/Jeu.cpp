@@ -1,4 +1,5 @@
 #include "Jeu.h"
+#include "Combat.h"
 
 #include <iostream>
 #include <stdlib.h>
@@ -200,6 +201,41 @@ void Jeu::phaseRenfort()
 		total_renfort += troupe_avant;
     tab_joueur[i].setNbRegiments(total_renfort);		
 	}
+}
+
+void Jeu::phaseAttaque()
+{
+	string region_depart,region_selectionner;
+	int a ;
+	cout<<" Voulez-vous attaquer une region ? " <<endl;
+	do
+	{
+		cout <<"oui : 1"<<endl;
+		cout <<"non : 2" <<endl;
+		cin >> a ;
+	}while((a<1)||(a>2));
+
+	switch(a)
+	{
+	
+	case 1:  Combat bataille;
+	       	 cout <<"Entrer le nom de la regions a selectionner "<<endl;
+					 cin >> region_depart;
+	         cout <<"Entrer le nom de la regions a attaque "<<endl;
+	         cin >> region_selectionner;
+
+			/*	if(estFrontalier()==true)
+				{
+					 bataille.set_region_attaquant(region_depart);
+					 bataille.set_region_defenseur(region_selectionner);
+					 bataille.maj_troupes(bataille.get_region_attaquant(),bataille.get_region_defenseur());
+				}*/
+	break;
+//	default: cout<<"rien"<<endl;
+//	break;
+	}
+					 
+
 }
 		
 

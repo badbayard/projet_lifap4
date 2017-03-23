@@ -71,7 +71,7 @@ class Combat {
 	/**  @brief Lance un combat et fais les modifications suite à celui-ci
 		 @param region_attaquant, region_defenseur : Region*/
 	void maj_troupes(Region& region_attaquant, Region& region_defenseur);
-	
+
 };
 
 

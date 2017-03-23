@@ -346,12 +346,33 @@ void Terrain::initTerrain ()
 	east_africa.ajouterFrontalier(congo);
 	east_africa.ajouterFrontalier(egypt);
 	east_africa.ajouterFrontalier(madagascar);
-	east_africa.ajouterFrontalier();
-	east_africa.ajouterFrontalier();
-	egypt.ajouterFrontalier();
-	madagascar.ajouterFrontalier();
-	north_africa.ajouterFrontalier();
-	south_africa.ajouterFrontalier();
+	east_africa.ajouterFrontalier(south_africa);
+	east_africa.ajouterFrontalier(north_africa);
+	egypt.ajouterFrontalier(middle_east);
+	egypt.ajouterFrontalier(southern_eu);
+	egypt.ajouterFrontalier(north_africa);
+	egypt.ajouterFrontalier(east_africa);
+	madagascar.ajouterFrontalier(east_africa);
+	madagascar.ajouterFrontalier(south_africa);
+	north_africa.ajouterFrontalier(egypt);
+	north_africa.ajouterFrontalier(east_africa);
+	north_africa.ajouterFrontalier(congo);
+	north_africa.ajouterFrontalier(brazil);
+	north_africa.ajouterFrontalier(southern_eu);
+	north_africa.ajouterFrontalier(western_eu);
+	south_africa.ajouterFrontalier(congo);
+	south_africa.ajouterFrontalier(east_africa);
+	south_africa.ajouterFrontalier(madagascar);
+
+	//Frontieres Australia
+	eastern_au.ajouterFrontalier(indonesia);
+	eastern_au.ajouterFrontalier(western_au);
+	indonesia.ajouterFrontalier(eastern_au);
+	indonesia.ajouterFrontalier(siam);
+	indonesia.ajouterFrontalier(western_au);
+	new_guinea.ajouterFrontalier(western_au);
+	new_guinea.ajouterFrontalier(eastern_au);
+	new_guinea.ajouterFrontalier(indonesia);
 }
 
 void Terrain::ajouterPays (const Pays & pays)
