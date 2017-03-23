@@ -94,7 +94,7 @@ using namespace std;
 		if( !bataille(a,d) ){							// Si le defenseur gagne
 			region_attaquant.setNbUnite(unite_att - a +1);
 		}
-		else {											// Si l'attaquant gagne
+		else {									// Si l'attaquant gagne
 			region_defenseur.setNbUnite(unite_def - d);
 			int limite = region_defenseur.getNbUnite();
 			if(limite <= 0){
