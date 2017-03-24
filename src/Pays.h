@@ -42,6 +42,12 @@ class Pays {
 		bool controlePays (const string & couleur_joueur) const;
 
 		/**
+		* @brief Accesseur pour nom_region
+		* @return string
+		*/
+		string getNomPays () const;
+
+		/**
 		* @brief Accesseur pour tab_region
 		* @return Reference sur tab_region pour le manipuler directement
 		*/

@@ -14,7 +14,7 @@ using namespace std;
 Jeu::Jeu()
 {
 	nb_joueur=0;
-	terrain = NULL;
+//	terrain = NULL;
 }
 
 
@@ -27,8 +27,10 @@ bool estValide(int a, int tabou[], int nbJoueur){
 }
 
 
-void Jeu::lancerjeu()
+void Jeu::lancerJeu()
 {
+	initJeu();
+/*
   unsigned int i,a;
 	string nom;
 	cout <<"mettre le nombre de joueur "<<endl;
@@ -62,30 +64,29 @@ void Jeu::lancerjeu()
 	 	switch(a)
 	 	{
 			 case 1: tab_joueur[i].setCouleurJoueur("Rouge");
-							// tab[i]=1;
 			 break;
+			 
 			 case 2: tab_joueur[i].setCouleurJoueur("Bleu");
-							// tab[i]=2;
 			 break;
+			 
 			 case 3: tab_joueur[i].setCouleurJoueur("Vert");
-							// tab[i]=3;
 			 break;
+			 
 			 case 4: tab_joueur[i].setCouleurJoueur("Orange");
-							// tab[i]=4;
 			 break;
+			 
 			 case 5: tab_joueur[i].setCouleurJoueur("Blanc");
-							// tab[i]=5;
 			 break;
 
 			 default:cout <<"Problème"<<endl;
 			 break;
 		 }
-	
+
 	tabou[i] = a;
 	cout << endl;
   //traitement du nombre de troupes et du nombre de regioni (42 regions)
 	tab_joueur[i].setNbRegiments(40);
-	
+
 	switch(nb_joueur)
 	{
 		case 2:tab_joueur[i].setNbRegions(21);
@@ -101,12 +102,12 @@ void Jeu::lancerjeu()
 	}
 	cout <<" le joueur "<<tab_joueur[i].getnom_joueur()<<"  dispose de : " <<tab_joueur[i].getNbRegiments() <<"   troupes "<<endl;
 	cout <<"le joueur  " <<tab_joueur[i].getnom_joueur()<<" dispose de : " <<tab_joueur[i].getNbRegions() <<"   regions " <<endl;
-
+	
 	//manque la répartition aléatoire des territoires sur la carte
-
+	
 	}
 
-//traitement pour le terrain
+//traitement pour le **terrain
  
  switch(nb_joueur)
  {
@@ -123,7 +124,7 @@ void Jeu::lancerjeu()
 	 break;
  }
 
-
+*/
 }
 
 
@@ -164,7 +165,7 @@ void Jeu::afficherAide()
 
 	switch(a)
 	{
-		case 1 : cout <<" Un joueur peut proceder à 3 actions distinctes dans l'ordre suivant"<<endl;
+		case 1 : cout <<"Un joueur peut proceder à 3 actions distinctes dans l'ordre suivant"<<endl;
 						 cout <<"1-Phase de renforts "<<endl;
 						 cout <<"2-Phase de combats " <<endl;
 						 cout <<"3-Phase de manoeuvre " <<endl;
@@ -239,6 +240,13 @@ void Jeu::phaseAttaque()
 }
 		
 
-
+void Jeu::initJeu()
+{
+	terrain.initTerrain();
+	for (unsigned int i = 0; i < terrain.getTabPays().size(); i++)
+	{
+		cout << terrain.getTabPays()[i]->getNomPays() << endl;
+	}
+}
 
 

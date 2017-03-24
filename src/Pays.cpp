@@ -39,6 +39,11 @@ bool Pays::controlePays (const string & couleur_joueur) const
 	return true;
 }
 
+string Pays::getNomPays () const
+{
+	return nom_pays;
+}
+
 vector<Region*> & Pays::getTabRegions ()
 {
 	return tab_region;

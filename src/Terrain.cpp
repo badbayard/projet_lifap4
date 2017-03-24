@@ -94,6 +94,11 @@ void Terrain::setdim_y(unsigned int dimensionY)
 	dim_y = dimensionY;
 }
 
+vector<Pays*> & Terrain::getTabPays ()
+{
+	return tab_pays;
+}
+
 void Terrain::initTerrain ()
 {
 	// Amerique du Nord
@@ -116,7 +121,7 @@ void Terrain::initTerrain ()
 	north_america.ajouterRegion(ontario);
 	north_america.ajouterRegion(quebec);
 	north_america.ajouterRegion(western_us);
-	
+
 	// Asie
 	Pays asia("Asie",12);
 	Region afghanistan("Afghanistan");
@@ -171,7 +176,7 @@ void Terrain::initTerrain ()
 	europe.ajouterRegion(southern_eu);
 	europe.ajouterRegion(ukraine);
 	europe.ajouterRegion(western_eu);
-	
+
 	// Afrique
 	Pays africa("Afrique",6);
 	Region congo("Congo");
@@ -186,7 +191,7 @@ void Terrain::initTerrain ()
 	africa.ajouterRegion(madagascar);
 	africa.ajouterRegion(north_africa);
 	africa.ajouterRegion(south_africa);
-	
+
 	// Oceanie
 	Pays australia("Oceanie",4);
 	Region eastern_au("Australie Orientale");
@@ -197,10 +202,10 @@ void Terrain::initTerrain ()
 	australia.ajouterRegion(indonesia);
 	australia.ajouterRegion(new_guinea);
 	australia.ajouterRegion(western_au);
-	
-	
-	
-	
+
+
+
+
 	// Frontieres Amerique du Nord
 	alaska.ajouterFrontalier(northwest_territory);
 	alaska.ajouterFrontalier(kamchatka);
@@ -346,33 +351,43 @@ void Terrain::initTerrain ()
 	east_africa.ajouterFrontalier(congo);
 	east_africa.ajouterFrontalier(egypt);
 	east_africa.ajouterFrontalier(madagascar);
-	east_africa.ajouterFrontalier(south_africa);
 	east_africa.ajouterFrontalier(north_africa);
-	egypt.ajouterFrontalier(middle_east);
+	east_africa.ajouterFrontalier(south_africa);
 	egypt.ajouterFrontalier(southern_eu);
-	egypt.ajouterFrontalier(north_africa);
+	egypt.ajouterFrontalier(middle_east);
 	egypt.ajouterFrontalier(east_africa);
+	egypt.ajouterFrontalier(north_africa);
 	madagascar.ajouterFrontalier(east_africa);
 	madagascar.ajouterFrontalier(south_africa);
-	north_africa.ajouterFrontalier(egypt);
-	north_africa.ajouterFrontalier(east_africa);
-	north_africa.ajouterFrontalier(congo);
 	north_africa.ajouterFrontalier(brazil);
 	north_africa.ajouterFrontalier(southern_eu);
 	north_africa.ajouterFrontalier(western_eu);
+	north_africa.ajouterFrontalier(congo);
+	north_africa.ajouterFrontalier(east_africa);
+	north_africa.ajouterFrontalier(egypt);
 	south_africa.ajouterFrontalier(congo);
 	south_africa.ajouterFrontalier(east_africa);
 	south_africa.ajouterFrontalier(madagascar);
-
-	//Frontieres Australia
-	eastern_au.ajouterFrontalier(indonesia);
+	
+	// Frontieres Oceanie
+	eastern_au.ajouterFrontalier(new_guinea);
 	eastern_au.ajouterFrontalier(western_au);
-	indonesia.ajouterFrontalier(eastern_au);
 	indonesia.ajouterFrontalier(siam);
+	indonesia.ajouterFrontalier(new_guinea);
 	indonesia.ajouterFrontalier(western_au);
-	new_guinea.ajouterFrontalier(western_au);
 	new_guinea.ajouterFrontalier(eastern_au);
 	new_guinea.ajouterFrontalier(indonesia);
+	new_guinea.ajouterFrontalier(western_au);
+	western_au.ajouterFrontalier(eastern_au);
+	western_au.ajouterFrontalier(indonesia);
+	western_au.ajouterFrontalier(new_guinea);
+
+	ajouterPays(north_america);
+	ajouterPays(asia);
+	ajouterPays(south_america);
+	ajouterPays(europe);
+	ajouterPays(africa);
+	ajouterPays(australia);
 }
 
 void Terrain::ajouterPays (const Pays & pays)
