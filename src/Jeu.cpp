@@ -225,12 +225,12 @@ void Jeu::phaseAttaque()
 	         cout <<"Entrer le nom de la regions a attaque "<<endl;
 	         cin >> region_selectionner;
 
-			/*	if(estFrontalier()==true)
-				{
-					 bataille.set_region_attaquant(region_depart);
-					 bataille.set_region_defenseur(region_selectionner);
-					 bataille.maj_troupes(bataille.get_region_attaquant(),bataille.get_region_defenseur());
-				}*/
+			//	if(estFrontalier()==true)
+			//	{
+			//		 bataille.set_region_attaquant(region_depart);
+			//		 bataille.set_region_defenseur(region_selectionner);
+			//		 bataille.maj_troupes(bataille.get_region_attaquant(),bataille.get_region_defenseur());
+			//	}
 	break;
 //	default: cout<<"rien"<<endl;
 //	break;

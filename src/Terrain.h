@@ -61,6 +61,9 @@ class Terrain {
 		
 		/** @brief Initialise le terrain */
 		void initTerrain ();
+
+		/** @brief permet de faire le test de regression */
+		void testRegressionTerrain();
 };
 
 

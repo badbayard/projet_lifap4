@@ -58,3 +58,17 @@ void Pays::ajouterRegion (const Region & reg)
 {
 	tab_region.push_back( (Region*) &reg );
 }
+
+void Pays::testRegressionPays()
+{
+	//test des get et du constructeur
+	Pays();
+	assert(getNbRegions()==0);
+	assert(getNomPays()=="");
+	
+	Pays("essai",5);
+	assert(getNbRegions()==5);
+	assert(getNomPays()=="essai");
+	
+}
+

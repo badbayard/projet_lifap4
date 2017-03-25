@@ -394,3 +394,28 @@ void Terrain::ajouterPays (const Pays & pays)
 {
 	tab_pays.push_back( (Pays*) &pays );
 }
+
+
+void Terrain::testRegressionTerrain()
+{
+	assert( dim_x >= 0);
+	assert( dim_y >= 0);
+
+	Terrain(50,55);
+	//test du constructeur de la classe avec aussi les get
+	assert(getdim_x() == 50);
+	assert(getdim_y() == 50);
+
+	//test des set
+	setdim_x(20);
+	setdim_y(60);
+
+	assert(getdim_x() == 20);
+	assert(getdim_y() == 60);
+
+	//test pour les pays
+	
+
+}
+	
+	

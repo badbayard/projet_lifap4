@@ -53,6 +53,8 @@ class Joueur {
 		/** @brief:prend le nom du jouer */
 		string getnom_joueur(); 
 
+		/** @brief: test de regression de la classe joueur */
+		void testRegressionJoueur();
 
 
 	

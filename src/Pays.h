@@ -64,6 +64,9 @@ class Pays {
 		* @param reg : Region
 		*/
 		void ajouterRegion (const Region & reg);
+
+		/** @brief test de regression pour la classe pays */
+		void testRegressionPays();
 };
 
 #endif
