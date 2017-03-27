@@ -70,3 +70,26 @@ void Region::ajouterFrontalier (const Region & voisin)
 {
 	frontaliers.push_back( (Region*) &voisin );
 }
+
+void Region::testRegressionRegion()
+{
+	//test du constructeur et des get
+	Region();
+	assert(getNomRegion()=="");
+	assert(getNbUnite()==1);
+	assert(getCouleurRegion()=="");
+
+	Region("essai",5,"Rouge");
+	assert(getNomRegion()=="essai");
+	assert(getNbUnite()==5);
+	assert(getCouleurRegion()=="Rouge");
+  
+	//test des set
+	setNbUnite(50);
+	setCouleurRegion("Bleu");
+  setNomRegion("essai2");
+
+	assert(getNomRegion()=="essai2");
+  assert(getNbUnite()==50);
+  assert(getCouleurRegion()=="Bleu");	
+}

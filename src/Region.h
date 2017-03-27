@@ -71,6 +71,9 @@ class Region {
 		bool estFrontalier (const Region & voisin) const;
 		
 		void ajouterFrontalier (const Region & voisin);
+
+		/** @brief test de regression pou la class region */
+		void testRegressionRegion();
 };
 
 #endif

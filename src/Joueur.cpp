@@ -51,5 +51,23 @@ string Joueur::getnom_joueur()
 	return nom_joueur;
 }
 
+void Joueur::testRegressionJoueur()
+{
+	assert(getCouleurJoueur()=="");
+	assert(getNbRegions()== 0);
+	assert(getNbRegiments()==0);
+	assert(getnom_joueur()=="");
+
+	setCouleurJoueur("Rouge");
+	setNbRegions(3);
+	setNbRegiments(40);
+	setnom_joueur("jessai");
+
+	assert(getCouleurJoueur()=="Rouge");
+	assert(getNbRegions()==3);
+	assert(getNbRegiments()==40);
+	assert(getnom_joueur()=="jessai");
+
+}
 
 

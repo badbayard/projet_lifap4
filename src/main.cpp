@@ -15,10 +15,10 @@ int main ()
 	string essai1;
 	string essai2;
 	unsigned int a , b, c, d;
-	Terrain (8,8);
+//	Terrain (8,8);
 	
 	//test du module joueur
-	Joueur j1;
+/*	Joueur j1;
 	j1.setCouleurJoueur("Rouge");
 	j1.setNbRegions(12);
 	j1.setNbRegiments(25);
@@ -36,10 +36,11 @@ int main ()
 	cout <<"nombre de troupe avant " << b <<endl;
 	cout <<"couleur apres " <<essai2 <<endl;
 	cout <<"nombre de regions apres " <<c <<endl;
-	cout <<" nombre de troupe apres " << d <<endl;
+	cout <<" nombre de troupe apres " << d <<endl;*/
 
 	//test du module jeu
 	Jeu j;
-	j.lancerjeu();
+	j.lancerJeu();
+	//j.afficherAide();
 	return 0;
 }

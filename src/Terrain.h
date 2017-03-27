@@ -34,6 +34,7 @@ class Terrain {
 	/** @brief Constructeur de la classe
 	 * @param dimensionX dimension Y : entier */	
 		Terrain(unsigned int dimensionX, unsigned int dimensionY);
+		
 	/** @brief destructeur de la classe */
 		~Terrain();
 
@@ -51,8 +52,18 @@ class Terrain {
 		 *  @param dimensionY : entier */
 		void setdim_y(unsigned int dimensionY);
 		
+		
+		/**
+		* @brief Accesseur pour tab_pays
+		* @return Reference sur tab_pays, directement manipulable
+		*/
+		vector<Pays*> & getTabPays ();
+		
 		/** @brief Initialise le terrain */
 		void initTerrain ();
+
+		/** @brief permet de faire le test de regression */
+		void testRegressionTerrain();
 };
 
 
