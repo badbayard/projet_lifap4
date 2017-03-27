@@ -62,7 +62,15 @@ void Region::setNbUnite (const unsigned int & nb_unite)
 	nb_unites = nb_unite;
 }
 
+vector<Region*> & Region::getTabFrontaliers ()
+{
+	return frontaliers;
+}
 
+void Region::setTabFrontaliers (const vector<Region*> & tab_frontalier)
+{
+	frontaliers = tab_frontalier;
+}
 
 bool Region::estFrontalier (const Region & voisin) const
 {

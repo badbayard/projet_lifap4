@@ -16,7 +16,7 @@ int main ()
 	string essai2;
 	unsigned int a , b, c, d;
 //	Terrain (8,8);
-
+	
 	//test du module joueur
 /*	Joueur j1;
 	j1.setCouleurJoueur("Rouge");
@@ -40,8 +40,7 @@ int main ()
 
 	//test du module jeu
 	Jeu j;
-	cout << endl << endl;
-	j.lancerjeu();
+	j.lancerJeu();
 	//j.afficherAide();
 	return 0;
 }

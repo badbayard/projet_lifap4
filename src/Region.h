@@ -26,7 +26,7 @@ class Region {
 		Region(const string & nom, unsigned int nb_unite = 1, const string & couleur_region = "");
 
 		/** @brief Destructeur */
-		~Region() {}
+		~Region();
 
 
 
