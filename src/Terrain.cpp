@@ -68,8 +68,11 @@ Terrain::Terrain(unsigned int dimensionX, unsigned int dimensionY)
 
 Terrain::~Terrain()
 {
-	dim_x= 0;
-	dim_y= 0;
+	dim_x = 0;
+	dim_y = 0;
+	for (unsigned int i = 0; i < tab_pays.size(); i++) {
+		delete tab_pays[i];
+	} 
 }
 
 unsigned int Terrain::getdim_x() const
@@ -102,17 +105,16 @@ vector<Pays*> & Terrain::getTabPays ()
 void Terrain::initTerrain ()
 {
 	// Amerique du Nord
-	Pays *north_america=new Pays("Amerique du Nord",9);
-	Region * alaska = new Region("Alaska");
-	//Region alaska("Alaska");
-	Region *alberta=new Region("Alberta");
-	Region *central_america=new Region("Amerique centrale");
-	Region *eastern_us=new Region("Etats de l'Est");
-	Region *greenland=new Region("Groenland");
-	Region *northwest_territory=new Region("Territoires du Nord-Ouest");
-	Region *ontario=new Region("Ontario");
-	Region *quebec=new Region("Quebec");
-	Region *western_us=new Region("Etats de l'Ouest");
+	Pays *north_america = new Pays("Amerique du Nord",9);
+	Region *alaska = new Region("Alaska");
+	Region *alberta = new Region("Alberta");
+	Region *central_america = new Region("Amerique centrale");
+	Region *eastern_us = new Region("Etats de l'Est");
+	Region *greenland = new Region("Groenland");
+	Region *northwest_territory = new Region("Territoires du Nord-Ouest");
+	Region *ontario = new Region("Ontario");
+	Region *quebec = new Region("Quebec");
+	Region *western_us = new Region("Etats de l'Ouest");
 	(*north_america).ajouterRegion(*alaska);
 	(*north_america).ajouterRegion(*alberta);
 	(*north_america).ajouterRegion(*central_america);
@@ -124,19 +126,19 @@ void Terrain::initTerrain ()
 	(*north_america).ajouterRegion(*western_us);
 
 	// Asie
-	Pays *asia=new Pays("Asie",12);
-	Region *afghanistan=new Region("Afghanistan");
-	Region *china=new Region("Chine");
-	Region *india=new Region("Inde");
-	Region *irkutsk=new Region("Tchita");
-	Region *japan=new Region("Japon");
-	Region *kamchatka=new Region("Kamtchatka");
-	Region *middle_east=new Region("Moyen-Orient");
-	Region *mongolia=new Region("Mongolie");
-	Region *siam=new Region("Siam");
-	Region *siberia=new Region("Siberie");
-	Region *ural=new Region("Oural");
-	Region *yakutsk=new Region("Yakoutie");
+	Pays *asia = new Pays("Asie",12);
+	Region *afghanistan = new Region("Afghanistan");
+	Region *china = new Region("Chine");
+	Region *india = new Region("Inde");
+	Region *irkutsk = new Region("Tchita");
+	Region *japan = new Region("Japon");
+	Region *kamchatka = new Region("Kamtchatka");
+	Region *middle_east = new Region("Moyen-Orient");
+	Region *mongolia = new Region("Mongolie");
+	Region *siam = new Region("Siam");
+	Region *siberia = new Region("Siberie");
+	Region *ural = new Region("Oural");
+	Region *yakutsk = new Region("Yakoutie");
 	(*asia).ajouterRegion(*afghanistan);
 	(*asia).ajouterRegion(*china);
 	(*asia).ajouterRegion(*india);
@@ -151,25 +153,25 @@ void Terrain::initTerrain ()
 	(*asia).ajouterRegion(*yakutsk);
 
 	// Amerique du Sud
-	Pays *south_america=new Pays("Amerique du Sud",4);
-	Region *argentina=new Region("Argentine");
-	Region *brazil=new Region("Bresil");
-	Region *peru=new Region("Perou");
-	Region *venezuela=new Region("Venezuela");
+	Pays *south_america = new Pays("Amerique du Sud",4);
+	Region *argentina = new Region("Argentine");
+	Region *brazil = new Region("Bresil");
+	Region *peru = new Region("Perou");
+	Region *venezuela = new Region("Venezuela");
 	(*south_america).ajouterRegion(*argentina);
 	(*south_america).ajouterRegion(*brazil);
 	(*south_america).ajouterRegion(*peru);
 	(*south_america).ajouterRegion(*venezuela);
 
 	// Europe
-	Pays *europe=new Pays("Europe",7);
-	Region *great_britain=new Region("Grande-Bretagne");
-	Region *iceland=new Region("Islande");
-	Region *northern_eu=new Region("Europe du Nord");
-	Region *scandinavia=new Region("Scandinavie");
-	Region *southern_eu=new Region("Europe du Sud");
-	Region *ukraine=new Region("Ukraine");
-	Region *western_eu=new Region("Europe occidentale");
+	Pays *europe = new Pays("Europe",7);
+	Region *great_britain = new Region("Grande-Bretagne");
+	Region *iceland = new Region("Islande");
+	Region *northern_eu = new Region("Europe du Nord");
+	Region *scandinavia = new Region("Scandinavie");
+	Region *southern_eu = new Region("Europe du Sud");
+	Region *ukraine = new Region("Ukraine");
+	Region *western_eu = new Region("Europe occidentale");
 	(*europe).ajouterRegion(*great_britain);
 	(*europe).ajouterRegion(*iceland);
 	(*europe).ajouterRegion(*northern_eu);
@@ -179,13 +181,13 @@ void Terrain::initTerrain ()
 	(*europe).ajouterRegion(*western_eu);
 
 	// Afrique
-	Pays *africa=new Pays("Afrique",6);
-	Region *congo=new Region("Congo");
-	Region *east_africa=new Region("Afrique de l'Est");
-	Region *egypt=new Region("Egypte");
-	Region *madagascar=new Region("Madagascar");
-	Region *north_africa=new Region("Afrique du Nord");
-	Region *south_africa=new Region("Afrique du Sud");
+	Pays *africa = new Pays("Afrique",6);
+	Region *congo = new Region("Congo");
+	Region *east_africa = new Region("Afrique de l'Est");
+	Region *egypt = new Region("Egypte");
+	Region *madagascar = new Region("Madagascar");
+	Region *north_africa = new Region("Afrique du Nord");
+	Region *south_africa = new Region("Afrique du Sud");
 	(*africa).ajouterRegion(*congo);
 	(*africa).ajouterRegion(*east_africa);
 	(*africa).ajouterRegion(*egypt);
@@ -194,11 +196,11 @@ void Terrain::initTerrain ()
 	(*africa).ajouterRegion(*south_africa);
 
 	// Oceanie
-	Pays *australia=new Pays("Oceanie",4);
-	Region *eastern_au=new Region("Australie Orientale");
-	Region *indonesia=new Region("Indonesie");
-	Region *new_guinea=new Region("Nouvelle-Guinee");
-	Region *western_au=new Region("Australie Occidentale");
+	Pays *australia = new Pays("Oceanie",4);
+	Region *eastern_au = new Region("Australie Orientale");
+	Region *indonesia = new Region("Indonesie");
+	Region *new_guinea = new Region("Nouvelle-Guinee");
+	Region *western_au = new Region("Australie Occidentale");
 	(*australia).ajouterRegion(*eastern_au);
 	(*australia).ajouterRegion(*indonesia);
 	(*australia).ajouterRegion(*new_guinea);
