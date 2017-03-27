@@ -16,8 +16,8 @@ class Pays {
 
 	private :
 
-		unsigned int nb_regions;
 		string nom_pays;
+		unsigned int nb_regions;
 		vector<Region*> tab_region;
 
 	public :
@@ -28,6 +28,24 @@ class Pays {
 		/** @brief Constructeur de la classe */
 		Pays(const string & nom, unsigned int nbregions);
 
+		/** @brief Destructeur pour la classe Pays */
+		~Pays();
+
+
+		/**
+		* @brief Accesseur pour nom_pays
+		* @return string
+		*/
+		string getNomPays () const;
+
+		/**
+		* @brief Mutateur pout nom_pays
+		* @param nom : string
+		*/
+		void setNomPays (const string & nom);
+
+
+
 		/**
 		* @brief Accesseur pour nb_regions
 		* @return Le nombre de regions dans le Pays
@@ -35,17 +53,12 @@ class Pays {
 		unsigned int getNbRegions () const;
 
 		/**
-		* @brief Teste si un joueur controle toutes les regions du Pays
-		* @param couleur_joueur : string (couleur associee au joueur)
-		* @return Vrai si le joueur controle toute la region, faux sinon
+		* @brief Mutateur pout nb_regions
+		* @param nbregions : entier
 		*/
-		bool controlePays (const string & couleur_joueur) const;
+		void setNbRegions (unsigned int nbregions);
 
-		/**
-		* @brief Accesseur pour nom_region
-		* @return string
-		*/
-		string getNomPays () const;
+
 
 		/**
 		* @brief Accesseur pour tab_region
@@ -58,12 +71,25 @@ class Pays {
 		* @param tabRegion : tableau de Region
 		*/
 		void setTabRegions (const vector<Region*> & tabRegion);
-		
+
+
+
+		/**
+		* @brief Teste si un joueur controle toutes les regions du Pays
+		* @param couleur_joueur : string (couleur associee au joueur)
+		* @return Vrai si le joueur controle toute la region, faux sinon
+		*/
+		bool controlePays (const string & couleur_joueur) const;
+
+
+
 		/**
 		* @brief Ajoute une région donnée en paramètre dans le tableau des régions de l'instance Pays considérée
 		* @param reg : Region
 		*/
 		void ajouterRegion (const Region & reg);
+
+
 
 		/** @brief test de regression pour la classe pays */
 		void testRegressionPays();

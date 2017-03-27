@@ -35,7 +35,7 @@ Terrain::Terrain(unsigned int dimensionX, unsigned int dimensionY)
 		cout << endl;
 	}
 
-//terrain 
+//terrain
  const char carte[18][80]={ " *******************   *********  *********************************          ",
 	                        " ******************     ******     **    **************************          ",
 							"  ***************        * *      **    ***************************          ",
@@ -63,7 +63,7 @@ Terrain::Terrain(unsigned int dimensionX, unsigned int dimensionY)
 			cout<<carte[i][j];
 		  }
 			cout <<endl;
-		}	
+		}
 }
 
 Terrain::~Terrain()
@@ -240,7 +240,7 @@ void Terrain::initTerrain ()
 	western_us.ajouterFrontalier(ontario);
 	western_us.ajouterFrontalier(eastern_us);
 	western_us.ajouterFrontalier(central_america);
-	
+
 	// Frontieres Asie
 	afghanistan.ajouterFrontalier(india);
 	afghanistan.ajouterFrontalier(middle_east);
@@ -294,7 +294,7 @@ void Terrain::initTerrain ()
 	yakutsk.ajouterFrontalier(irkutsk);
 	yakutsk.ajouterFrontalier(kamchatka);
 	yakutsk.ajouterFrontalier(siberia);
-	
+
 	// Frontieres Europe
 	great_britain.ajouterFrontalier(iceland);
 	great_britain.ajouterFrontalier(northern_eu);
@@ -328,7 +328,7 @@ void Terrain::initTerrain ()
 	western_eu.ajouterFrontalier(great_britain);
 	western_eu.ajouterFrontalier(northern_eu);
 	western_eu.ajouterFrontalier(southern_eu);
-	
+
 	// Frontieres Amerique du Sud
 	argentina.ajouterFrontalier(brazil);
 	argentina.ajouterFrontalier(peru);
@@ -342,7 +342,7 @@ void Terrain::initTerrain ()
 	venezuela.ajouterFrontalier(brazil);
 	venezuela.ajouterFrontalier(peru);
 	venezuela.ajouterFrontalier(central_america);
-	
+
 	// Frontieres Afrique
 	congo.ajouterFrontalier(east_africa);
 	congo.ajouterFrontalier(north_africa);
@@ -368,7 +368,7 @@ void Terrain::initTerrain ()
 	south_africa.ajouterFrontalier(congo);
 	south_africa.ajouterFrontalier(east_africa);
 	south_africa.ajouterFrontalier(madagascar);
-	
+
 	// Frontieres Oceanie
 	eastern_au.ajouterFrontalier(new_guinea);
 	eastern_au.ajouterFrontalier(western_au);
@@ -388,6 +388,13 @@ void Terrain::initTerrain ()
 	ajouterPays(europe);
 	ajouterPays(africa);
 	ajouterPays(australia);
+
+	for (unsigned int i = 0; i < getTabPays().size(); i++) {
+		cout << getTabPays()[i]->getNomPays() << endl;
+		for (unsigned int j = 0; j < getTabPays()[i]->getTabRegions().size(); j++) {
+			cout << "	" << getTabPays()[i]->getTabRegions()[j]->getNomRegion() << endl;
+		}
+	}
 }
 
 void Terrain::ajouterPays (const Pays & pays)
@@ -414,8 +421,6 @@ void Terrain::testRegressionTerrain()
 	assert(getdim_y() == 60);
 
 	//test pour les pays
-	
+
 
 }
-	
-	
