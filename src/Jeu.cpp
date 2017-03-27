@@ -30,8 +30,7 @@ bool estValide(int a, int tabou[], int nbJoueur){
 void Jeu::lancerJeu()
 {
 	initJeu();
-/*
-  unsigned int i,a;
+ /* unsigned int i,a;
 	string nom;
 	cout <<"mettre le nombre de joueur "<<endl;
 	cin >> nb_joueur;
@@ -122,9 +121,10 @@ void Jeu::lancerJeu()
 	 default: Terrain(20,20);
 						cout <<"Pas de joueur"<<endl;
 	 break;
+	 
  }
-
 */
+
 }
 
 
@@ -243,10 +243,10 @@ void Jeu::phaseAttaque()
 void Jeu::initJeu()
 {
 	terrain.initTerrain();
-	for (unsigned int i = 0; i < terrain.getTabPays().size(); i++)
+	/*for (unsigned int i = 0; i < terrain.getTabPays().size(); i++)
 	{
 		cout << terrain.getTabPays()[i]->getNomPays() << endl;
-	}
+	}*/
 }
 
 
