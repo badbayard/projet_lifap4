@@ -28,6 +28,18 @@ class Jeu {
 
 		/** @brief : constructeur par default */
 		Jeu();
+		
+		/** @brief : Accesseur pour le nombre de joueurs */
+		unsigned int getNbJoueur();
+		
+		/** @brief : Mutateur du nombre de joueurs */
+		void setNbJoueur(unsigned int nbj);
+		
+		/** @brief : Accesseur pour le tableau de joueurs */
+		vector<Joueur> getTabJoueur();
+		
+		/** @brief : Mutateur pour le tableau de joueurs */
+		void setTabJoueur( vector<Joueur> tabj );
 
 		/** @brief : lancer le jeu */
 		void lancerJeu();
@@ -45,7 +57,7 @@ class Jeu {
 		void phaseRenfort();
 
 		/** @brief : permet d'entrer en phase d'attaque */
-		void phaseAttaque();
+		void phaseAttaque(Joueur j);
 
 		/** @brief : permet de mettre fin au tour */
 		bool fintour();

@@ -28,6 +28,23 @@ bool estValide(int a, int tabou[], int nbJoueur){
 }
 
 
+unsigned int Jeu::getNbJoueur(){
+	return nb_joueur;
+}
+		
+void Jeu::setNbJoueur(unsigned int nbj){
+	nb_joueur = nbj;
+}
+
+vector<Joueur> Jeu::getTabJoueur(){
+	return tab_joueur;
+}
+
+void Jeu::setTabJoueur( vector<Joueur> tabj){
+	tab_joueur = tabj;
+}
+
+
 void Jeu::lancerJeu()
 {
 	initJeu();
@@ -229,7 +246,7 @@ void Jeu::phaseRenfort()
 	}
 }
 
-void Jeu::phaseAttaque()
+void Jeu::phaseAttaque(Joueur j)
 {
 	string region_depart,region_selectionner;
 	int a ;
@@ -241,27 +258,51 @@ void Jeu::phaseAttaque()
 		cin >> a ;
 	}while((a<1)||(a>2));
 
-	switch(a)
-	{
 	
-	case 1:  Combat bataille;
-	       	 cout <<"Entrer le nom de la regions a selectionner "<<endl;
-					 cin >> region_depart;
-	         cout <<"Entrer le nom de la regions a attaque "<<endl;
-	         cin >> region_selectionner;
-
-			//	if(estFrontalier()==true)
-			//	{
-			//		 bataille.set_region_attaquant(region_depart);
-			//		 bataille.set_region_defenseur(region_selectionner);
-			//		 bataille.maj_troupes(bataille.get_region_attaquant(),bataille.get_region_defenseur());
-			//	}
-	break;
-//	default: cout<<"rien"<<endl;
-//	break;
+	if(a == 1)
+	{	
+		Region region_depart, region_attaquee;
+  		vector <Region> tab_regions_frontalieres;
+		unsigned int num;
+		do{
+    		cout << "Choisis la region depuis laquelle tu veux attaquer : " << endl;
+    		for( unsigned int i = 0; i < j.getNbRegions(); i++)
+      		{
+				cout << j.getRegionsJoueur()[i]->getNomRegion() << " : " << i <<endl;
+     		}
+    		cin >> num;}
+  		while(num < 0 || num >= j.getNbRegions() );
+	
+		region_depart = *(j.getRegionsJoueur()[num]);
+		
+  		for (unsigned int i = 0; i < region_depart.getTabFrontaliers().size(); i++)
+  		{
+  			tab_regions_frontalieres.push_back(*(region_depart.getTabFrontaliers()[i]));
+  		}
+  		for( unsigned int i = 0; i < tab_regions_frontalieres.size(); i++)
+   	 		if( tab_regions_frontalieres[i].getCouleurRegion() == j.getCouleurJoueur())
+      			tab_regions_frontalieres.erase( tab_regions_frontalieres.begin() + i );
+	
+		do{
+    		cout << " Choisis la region frontaliere que tu souhaites attaquer : " <<endl;
+    		for( unsigned int i = 0; i < tab_regions_frontalieres.size(); i++)
+      		{
+				cout << tab_regions_frontalieres[i].getNomRegion() << " : " << endl;
+      		}
+    		cin >> num;}
+  		while( num < 0 || num >= tab_regions_frontalieres.size() );
+ 
+  		region_attaquee = tab_regions_frontalieres[num];
+		
+		Joueur j2;
+		for(unsigned int i = 0; i < nb_joueur; i++)
+			if(region_attaquee.getCouleurRegion() == tab_joueur[i].getCouleurJoueur())
+				j2 = tab_joueur[i];
+		
+		Combat batailleEpique(j, j2, region_depart, region_attaquee);
+		batailleEpique.maj_troupes(region_depart, region_attaquee);
 	}
-					 
-
+	
 }
 
 
@@ -292,13 +333,13 @@ void Jeu::phaseManoeuvre(Joueur j){
       tab_regions_frontalieres.erase( tab_regions_frontalieres.begin() + i );
 
   do{
-    cout << " Choisis la region frontaliere où doivent se rendre les troupes : " <<endl;
+    cout << " Choisis la region frontaliere ou doivent se rendre les troupes : " <<endl;
     for( unsigned int i = 0; i < tab_regions_frontalieres.size(); i++)
       {
 	cout << tab_regions_frontalieres[i].getNomRegion() << " : " << endl;
       }
     cin >> num;}
-  while( num < 0 ||num >= tab_regions_frontalieres.size() );
+  while( num < 0 || num >= tab_regions_frontalieres.size() );
  
   region_arrivee = tab_regions_frontalieres[num];
 
