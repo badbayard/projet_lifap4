@@ -163,6 +163,18 @@ void Jeu::lancerJeu()
 		}
 		cout << endl << endl;
 	}
+	while( !finPartie() ){
+		cout << "Phase Renfort !" <<endl;
+		phaseRenfort();
+		cout << "Phase Attaque !" <<endl;
+		for(unsigned int i = 0; i < nb_joueur; i++){
+			phaseAttaque(tab_joueur[i]);
+		}
+		cout << "Phase Manoeuvre !" << endl;
+		for(unsigned int i = 0; i < nb_joueur; i++){
+			phaseManoeuvre(tab_joueur[i]);
+		}
+	}
 }
 
 
@@ -250,7 +262,7 @@ void Jeu::phaseAttaque(Joueur j)
 {
 	string region_depart,region_selectionner;
 	int a ;
-	cout<<" Voulez-vous attaquer une region ? " <<endl;
+	cout<<"Joueur " << j.getCouleurJoueur()<< ", voulez-vous attaquer une region ? " <<endl;
 	do
 	{
 		cout <<"oui : 1"<<endl;
@@ -287,7 +299,7 @@ void Jeu::phaseAttaque(Joueur j)
     		cout << " Choisis la region frontaliere que tu souhaites attaquer : " <<endl;
     		for( unsigned int i = 0; i < tab_regions_frontalieres.size(); i++)
       		{
-				cout << tab_regions_frontalieres[i].getNomRegion() << " : " << endl;
+				cout << tab_regions_frontalieres[i].getNomRegion() << " : " << i << endl;
       		}
     		cin >> num;}
   		while( num < 0 || num >= tab_regions_frontalieres.size() );
@@ -300,7 +312,7 @@ void Jeu::phaseAttaque(Joueur j)
 				j2 = tab_joueur[i];
 		
 		Combat batailleEpique(j, j2, region_depart, region_attaquee);
-		batailleEpique.maj_troupes(region_depart, region_attaquee);
+		batailleEpique.maj_troupes(region_depart, region_attaquee, j, j2);
 	}
 	
 }
@@ -315,7 +327,7 @@ void Jeu::phaseManoeuvre(Joueur j){
   vector <Region> tab_regions_frontalieres;
 
   do{
-    cout << "Choisis la region de depart : " << endl;
+    cout << "Joueur " << j.getCouleurJoueur() << ", choisis la region de depart : " << endl;
     for( unsigned int i = 0; i < j.getNbRegions(); i++)
       {
 	cout << j.getRegionsJoueur()[i]->getNomRegion() << " : " << i <<endl;
@@ -336,7 +348,7 @@ void Jeu::phaseManoeuvre(Joueur j){
     cout << " Choisis la region frontaliere ou doivent se rendre les troupes : " <<endl;
     for( unsigned int i = 0; i < tab_regions_frontalieres.size(); i++)
       {
-	cout << tab_regions_frontalieres[i].getNomRegion() << " : " << endl;
+	cout << tab_regions_frontalieres[i].getNomRegion() << " : " << i <<endl;
       }
     cin >> num;}
   while( num < 0 || num >= tab_regions_frontalieres.size() );

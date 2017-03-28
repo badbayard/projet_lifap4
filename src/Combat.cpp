@@ -74,12 +74,12 @@ using namespace std;
 		else
 			return false;
 	}
+
 	
-	
-	void Combat::maj_troupes(Region& region_attaquant, Region& region_defenseur){
+	void Combat::maj_troupes(Region& region_attaquant, Region& region_defenseur, Joueur& jatt, Joueur& jdef){
 		int a, d, unite_att = region_attaquant.getNbUnite(), unite_def = region_defenseur.getNbUnite();
 		string c_att = attaquant.getCouleurJoueur();
-		string c_def = defenseur.getCouleurJoueur();
+		string c_def = jdef.getCouleurJoueur();
 		
 		do{
 		cout << "Joueur " << c_att << ", choisis un nombre d'unites pour l'offensive : ";
@@ -91,10 +91,12 @@ using namespace std;
 		cin >> d;}
 		while((d<0 || d>2) && d<unite_def);
 	
-		if( !bataille(a,d) ){							// Si le defenseur gagne
+		if( !bataille(a,d) ){		// Si le defenseur gagne
+			cout << " Le défenseur l'emporte !" << endl;		
 			region_attaquant.setNbUnite(unite_att - a +1);
 		}
-		else {									// Si l'attaquant gagne
+		else {						// Si l'attaquant gagne
+			cout << "Victoire !" <<endl;				
 			region_defenseur.setNbUnite(unite_def - d);
 			int limite = region_defenseur.getNbUnite();
 			if(limite <= 0){
@@ -102,6 +104,9 @@ using namespace std;
 				cin >> a;
 				region_defenseur.setNbUnite(a);
 				region_defenseur.setCouleurRegion(c_att);
+				jatt.setNbRegions(jatt.getNbRegions()+1);
+				jdef.setNbRegions(jdef.getNbRegions()-1);
+				
 			}
 			
 		}
