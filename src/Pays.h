@@ -18,6 +18,7 @@ class Pays {
 
 		string nom_pays;
 		unsigned int nb_regions;
+		unsigned int regiments_supp;
 		vector<Region*> tab_region;
 
 	public :
@@ -26,7 +27,7 @@ class Pays {
 		Pays();
 
 		/** @brief Constructeur de la classe */
-		Pays(const string & nom, unsigned int nbregions);
+		Pays(const string & nom, unsigned int nbregions, unsigned int nbregiments);
 
 		/** @brief Destructeur pour la classe Pays */
 		~Pays();
@@ -71,6 +72,14 @@ class Pays {
 		* @param tabRegion : tableau de Region
 		*/
 		void setTabRegions (const vector<Region*> & tabRegion);
+
+
+
+		/**
+		* @brief Accesseur pour regiments_supp
+		* @return Le bonus de régiments supplémentaires associé à une région
+		*/
+		unsigned int getRegimentsSupp() const;
 
 
 

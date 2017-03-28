@@ -39,7 +39,7 @@ class Jeu {
 		void afficherAide();
 
 		/** @brief : permet d'entrer en phase de manoeuvre */
-		void phaseManoeuvre ();
+		void phaseManoeuvre (Joueur j);
 
 		/** @brief : permet d'entrer en phase de renfort */
 		void phaseRenfort();

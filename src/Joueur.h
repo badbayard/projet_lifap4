@@ -6,6 +6,7 @@
 #include <cstring>
 #include <fstream>
 #include <cassert>
+#include <vector>
 
 #include "Region.h"
 
@@ -19,9 +20,14 @@ class Joueur {
 		string nom_joueur;
 		unsigned int nb_regions;
 		unsigned int nb_regiments;
-		Region *tab_region ;
+		vector<Region*> tab_region ;
 
 	public:
+		/**
+		* @brief Constructeur de la classe Joueur
+		* @param
+		*/ 
+		Joueur(const string & nom = "", const string & couleur_joueur = "");
 		
 		/** @brief : Recupére la couleur du joueur */
 		string  getCouleurJoueur() const;
@@ -52,6 +58,9 @@ class Joueur {
 
 		/** @brief:prend le nom du jouer */
 		string getnom_joueur(); 
+
+		/** @brief Accesseur pour tab_region */
+		vector<Region*> & getRegionsJoueur();
 
 		/** @brief: test de regression de la classe joueur */
 		void testRegressionJoueur();

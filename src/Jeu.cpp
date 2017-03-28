@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include <time.h>
 #include <cstring>
 #include <fstream>
 #include <cassert>
@@ -30,101 +31,121 @@ bool estValide(int a, int tabou[], int nbJoueur){
 void Jeu::lancerJeu()
 {
 	initJeu();
- /* unsigned int i,a;
-	string nom;
-	cout <<"mettre le nombre de joueur "<<endl;
-	cin >> nb_joueur;
-	int tabou[nb_joueur];
+	afficheTerrainTXT();
 
-	for(i=0;i<nb_joueur;i++)
+		// Initialisation des choix de couleurs possibles
+	vector<string> liste_couleurs;
+	liste_couleurs.push_back("Rouge");
+	liste_couleurs.push_back("Bleu");
+	liste_couleurs.push_back("Vert");
+	liste_couleurs.push_back("Orange");
+	liste_couleurs.push_back("Blanc");
+	liste_couleurs.push_back("Violet");
+	// liste_couleurs = {"Rouge","Bleu","Vert","Orange","Blanc","Violet"};
+
+		// Initialisation des joueurs
+	unsigned int n;
+	cout << "Mettre le nombre de joueurs : ";
+	do
 	{
-		//traitement pour crée les joueurs avec leur noms et leur couleur
-		tab_joueur.push_back(Joueur());
-		cout <<"mettre votre nom"<<endl;
-		cin>>nom;
-		tab_joueur[i].setnom_joueur(nom);
-		cout <<"Mettre la couleur du joueur "<<endl;
-
-			do
- 		{
-			cout <<"Rouge 1"<<endl;
-	 		cout <<"Bleu 2"<<endl;
-	 		cout <<"Vert 3"<<endl;
-			cout <<"Orange 4"<<endl;
-			cout <<"Blanc 5"<<endl;
-	 		cin >> a;
-			if(estValide(a,tabou,nb_joueur) == 1 )
-			{
-				cout <<"problème dans la saisie"<<endl;
-			}
-		}		
- 		while( ((a<1)||(a>5)) && !(estValide(a,tabou,nb_joueur)) );
-
-	 	switch(a)
-	 	{
-			 case 1: tab_joueur[i].setCouleurJoueur("Rouge");
-			 break;
-			 
-			 case 2: tab_joueur[i].setCouleurJoueur("Bleu");
-			 break;
-			 
-			 case 3: tab_joueur[i].setCouleurJoueur("Vert");
-			 break;
-			 
-			 case 4: tab_joueur[i].setCouleurJoueur("Orange");
-			 break;
-			 
-			 case 5: tab_joueur[i].setCouleurJoueur("Blanc");
-			 break;
-
-			 default:cout <<"Problème"<<endl;
-			 break;
-		 }
-
-	tabou[i] = a;
+		cin >> n;
+		if (n < 2)
+		{
+			cout << "/!\\ Minimum 2 joueurs : ";
+		}
+		if (n > 5)
+		{
+			cout << "/!\\ Maximum 5 joueurs : ";
+		}
+	} while (n < 2 || n > 5);
+	nb_joueur = n;
 	cout << endl;
-  //traitement du nombre de troupes et du nombre de regioni (42 regions)
-	tab_joueur[i].setNbRegiments(40);
 
-	switch(nb_joueur)
+	// Saisie d'un nouveau joueur
+	for (unsigned int i = 0; i < nb_joueur; i++)
 	{
-		case 2:tab_joueur[i].setNbRegions(21);
-		break;
-		case 3:tab_joueur[i].setNbRegions(14);
-		break;
-		case 4:tab_joueur[i].setNbRegions(10);
-		break;
-		case 5:tab_joueur[i].setNbRegions(8);
-		break;
-		default : cout <<"pas de joueur"<<endl;
-		break;
-	}
-	cout <<" le joueur "<<tab_joueur[i].getnom_joueur()<<"  dispose de : " <<tab_joueur[i].getNbRegiments() <<"   troupes "<<endl;
-	cout <<"le joueur  " <<tab_joueur[i].getnom_joueur()<<" dispose de : " <<tab_joueur[i].getNbRegions() <<"   regions " <<endl;
-	
-	//manque la répartition aléatoire des territoires sur la carte
-	
+		string nom;
+		unsigned int num_couleur;
+		
+		cout << "Joueur " << i+1 << ", entrez votre nom : ";
+		cin >> nom;
+		
+		cout << "Choisissez une couleur..." << endl;
+		for (unsigned int j = 0; j < liste_couleurs.size(); j++)
+		{
+			cout << liste_couleurs[j] << "	" << j+1 << endl;
+		}
+		do
+		{
+			cin >> num_couleur;
+			if (num_couleur < 1 || num_couleur > liste_couleurs.size())
+			{
+				cout << "/!\\ Donnez une valeur entre 1 et " << liste_couleurs.size() << " : ";
+			}
+		} while (num_couleur < 1 || num_couleur > liste_couleurs.size());
+		num_couleur--;
+		
+		// Ajout d'un nouveau joueur avec les valeurs saisies
+		tab_joueur.push_back( Joueur( nom, liste_couleurs[num_couleur] ) );
+		
+		// Traitement du nombre de troupes et du nombre de regions (42 regions)
+		tab_joueur[i].setNbRegiments(40);
+		switch(nb_joueur)
+		{
+			case 2:
+				tab_joueur[i].setNbRegions(21);
+				break;
+			case 3:
+				tab_joueur[i].setNbRegions(14);
+				break;
+			case 4:
+				tab_joueur[i].setNbRegions(10);
+				break;
+			case 5:
+				tab_joueur[i].setNbRegions(8);
+				break;
+			default: cout << "pas de joueur" << endl;
+				break;
+		}
+		cout << tab_joueur[i].getnom_joueur() << " (Joueur " << i+1 << ") dispose de " << tab_joueur[i].getNbRegiments() << " troupes et " << tab_joueur[i].getNbRegions() << " regions" << endl;
+
+		// Suppression de la couleur choisie dans la liste des choix de couleur
+		liste_couleurs.erase(liste_couleurs.begin() + num_couleur);
+
+		cout << endl;
 	}
 
-//traitement pour le **terrain
- 
- switch(nb_joueur)
- {
-	 case 2: Terrain(30,30);
-	 break;
-	 case 3: Terrain(40,40);
-	 break;
-	 case 4: Terrain(50,50);
-	 break;
-	 case 5: Terrain(60,60);
-	 break;
-	 default: Terrain(20,20);
-						cout <<"Pas de joueur"<<endl;
-	 break;
-	 
- }
-*/
+		// Repartition aleatoire des territoires
+	srand((unsigned int) time(NULL));
+	vector<Region*> territoires;
+	for (unsigned int i = 0; i < terrain.getTabPays().size(); i++)
+	{
+		for (unsigned int j = 0; j < terrain.getTabPays()[i]->getTabRegions().size(); j++)
+		{
+			territoires.push_back( terrain.getTabPays()[i]->getTabRegions()[j] );
+		}
+	}
 
+	for (unsigned int i = 0; i < nb_joueur; i++)
+	{
+		for (unsigned int j = 0; j < tab_joueur[i].getNbRegions(); j++)
+		{
+			unsigned int random_val = rand() % territoires.size();
+			tab_joueur[i].getRegionsJoueur().push_back( territoires[ random_val ] );
+			territoires.erase( territoires.begin() + random_val );
+		}
+	}	
+	// Il reste eventuellement des territoires non attribués pour une partie à 4 ou 5 joueurs
+
+	for (unsigned int i = 0; i < nb_joueur; i++)
+	{
+		cout << tab_joueur[i].getnom_joueur() << " occupe les territoires suivants :" << endl;
+		for (unsigned int j = 0; j < tab_joueur[i].getNbRegions(); j++)
+		{
+			cout << "	" << tab_joueur[i].getRegionsJoueur()[j]->getNomRegion() << endl;
+		}
+		cout << endl << endl;
+	}
 }
 
 
@@ -196,7 +217,11 @@ void Jeu::phaseRenfort()
 
 	for(i=0;i<nb_joueur;i++)
 	{
-		total_renfort=(tab_joueur[i].getNbRegiments()/3)+3;
+		unsigned int b = (tab_joueur[i].getNbRegiments()/3);
+		if( b >= 3 )
+			total_renfort = b;
+		else
+			total_renfort = 3;
 		troupe_avant = tab_joueur[i].getNbRegiments();
 		//rajouter les renforts en fonction du pays
 		total_renfort += troupe_avant;
@@ -238,19 +263,67 @@ void Jeu::phaseAttaque()
 					 
 
 }
+
+
+
+
+		
+void Jeu::phaseManoeuvre(Joueur j){
+  Region region_depart, region_arrivee;
+  unsigned int num;
+  vector <Region> tab_regions_frontalieres;
+
+  do{
+    cout << "Choisis la region de depart : " << endl;
+    for( unsigned int i = 0; i < j.getNbRegions(); i++)
+      {
+	cout << j.getRegionsJoueur()[i]->getNomRegion() << " : " << i <<endl;
+      }
+    cin >> num;}
+  while(num < 0 || num >= j.getNbRegions() );
+
+  region_depart = *(j.getRegionsJoueur()[num]);
+  for (unsigned int i = 0; i < region_depart.getTabFrontaliers().size(); i++)
+  {
+  	tab_regions_frontalieres.push_back(*(region_depart.getTabFrontaliers()[i]));
+  }
+  for( unsigned int i = 0; i < tab_regions_frontalieres.size(); i++)
+    if( tab_regions_frontalieres[i].getCouleurRegion() != j.getCouleurJoueur())
+      tab_regions_frontalieres.erase( tab_regions_frontalieres.begin() + i );
+
+  do{
+    cout << " Choisis la region frontaliere où doivent se rendre les troupes : " <<endl;
+    for( unsigned int i = 0; i < tab_regions_frontalieres.size(); i++)
+      {
+	cout << tab_regions_frontalieres[i].getNomRegion() << " : " << endl;
+      }
+    cin >> num;}
+  while( num < 0 ||num >= tab_regions_frontalieres.size() );
+ 
+  region_arrivee = tab_regions_frontalieres[num];
+
+  unsigned int max_troupes = region_depart.getNbUnite()-1;
+  do{
+    cout << "Choisis le nombre de troupes à déplacer entre 0 et " << max_troupes << " : ";
+    cin >> num;}
+  while(num < 0 || num > max_troupes);
+
+  region_depart.setNbUnite(region_depart.getNbUnite() - num);
+  region_arrivee.setNbUnite(region_arrivee.getNbUnite() + num);
+
+}
 		
 
 void Jeu::initJeu()
 {
 	terrain.initTerrain();
-	afficheTerrainTXT();
 }
 
 void Jeu::afficheTerrainTXT()
 {
 	for (unsigned int i = 0; i < terrain.getTabPays().size(); i++)
 	{
-		cout << terrain.getTabPays()[i]->getNomPays() << endl;
+		cout << terrain.getTabPays()[i]->getNomPays() << " (" << terrain.getTabPays()[i]->getRegimentsSupp() << ")" <<  endl;
 		for (unsigned int j = 0; j < terrain.getTabPays()[i]->getTabRegions().size(); j++)
 		{
 			cout << "	" << terrain.getTabPays()[i]->getTabRegions()[j]->getNomRegion() << endl;

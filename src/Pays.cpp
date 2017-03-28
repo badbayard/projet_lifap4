@@ -13,13 +13,16 @@ Pays::Pays()
 {
 	nb_regions = 0;
 	nom_pays = "";
+	regiments_supp = 0;
 }
 
-Pays::Pays(const string & nom, unsigned int nbregions)
+Pays::Pays(const string & nom, unsigned int nbregions, unsigned int nbregiments)
 {
 	assert(nbregions >= 0);
+	assert(nbregiments >= 0);
 	nb_regions = nbregions;
 	nom_pays = nom;
+	regiments_supp = nbregiments;
 }
 
 Pays::~Pays()
@@ -68,6 +71,13 @@ void Pays::setNbRegions (unsigned int nbregions)
 
 
 
+unsigned int Pays::getRegimentsSupp() const
+{
+	return regiments_supp;
+}
+
+
+
 bool Pays::controlePays (const string & couleur_joueur) const
 {
 	for (unsigned int i = 0; i < getNbRegions(); i++)
@@ -95,9 +105,10 @@ void Pays::testRegressionPays()
 	Pays();
 	assert(getNbRegions()==0);
 	assert(getNomPays()=="");
+	assert(getRegimentsSupp()==0);
 	
-	Pays("essai",5);
+	Pays("essai",5,4);
 	assert(getNbRegions()==5);
 	assert(getNomPays()=="essai");
-	
+	assert(getRegimentsSupp()==4);
 }

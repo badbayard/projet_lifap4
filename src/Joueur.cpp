@@ -9,6 +9,12 @@
 
 using namespace std;
 
+Joueur::Joueur(const string & nom, const string & couleur_joueur)
+{
+	nom_joueur = nom;
+	couleur = couleur_joueur;
+}
+
 string Joueur::getCouleurJoueur() const
 {
 	return couleur;
@@ -49,6 +55,11 @@ void Joueur::setnom_joueur(string nom)
 string Joueur::getnom_joueur()
 {
 	return nom_joueur;
+}
+
+vector<Region*> & Joueur::getRegionsJoueur()
+{
+	return tab_region;
 }
 
 void Joueur::testRegressionJoueur()

@@ -14,33 +14,30 @@ int main ()
 	//test du module joueur et terrain
 	string essai1;
 	string essai2;
-	unsigned int a , b, c, d;
-//	Terrain (8,8);
-	
-	//test du module joueur
-/*	Joueur j1;
-	j1.setCouleurJoueur("Rouge");
-	j1.setNbRegions(12);
-	j1.setNbRegiments(25);
-	essai1=j1.getCouleurJoueur();
-	a= j1.getNbRegions();
-	b= j1.getNbRegiments();
-	j1.setCouleurJoueur("Bleu");
-	j1.setNbRegions(15);
-	j1.setNbRegiments(22);
-	essai2=j1.getCouleurJoueur();
-	c=j1.getNbRegions();
-	d=j1.getNbRegiments();
-	cout <<"couleur avant "<< essai1 <<endl;
-	cout <<"nombre de regions avant " <<a <<endl;
-	cout <<"nombre de troupe avant " << b <<endl;
-	cout <<"couleur apres " <<essai2 <<endl;
-	cout <<"nombre de regions apres " <<c <<endl;
-	cout <<" nombre de troupe apres " << d <<endl;*/
+	unsigned int a;
 
 	//test du module jeu
 	Jeu j;
-	j.lancerJeu();
-	//j.afficherAide();
+	cout << "A vos Risk et perils !" << endl << "-----------------------------" << endl;
+	do
+	{
+		cout << "Aide jeu	1" << endl;
+		cout << "Lancer jeu	2" << endl;
+		cout << "Quitter		3" << endl;
+		cin >> a;
+	} while (a < 1 || a > 3);
+	switch (a)
+	{
+		case 1:
+			j.afficherAide();
+			break;
+		
+		case 2:
+			j.lancerJeu();
+			break;
+		
+		case 3:
+			exit(1);
+	}
 	return 0;
 }

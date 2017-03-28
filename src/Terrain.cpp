@@ -25,7 +25,7 @@ Terrain::Terrain(unsigned int dimensionX, unsigned int dimensionY)
 	dim_x = dimensionX;
  	dim_y = dimensionY;
 	unsigned int i, j;
-
+/*
 	for(i=0;i<=dim_x;i++)
 	{
 		for(j=0;j<=dim_y;j++)
@@ -34,6 +34,7 @@ Terrain::Terrain(unsigned int dimensionX, unsigned int dimensionY)
 		}
 		cout << endl;
 	}
+*/
 
 //terrain
  const char carte[18][80]={ " *******************   *********  *********************************          ",
@@ -105,7 +106,7 @@ vector<Pays*> & Terrain::getTabPays ()
 void Terrain::initTerrain ()
 {
 	// Amerique du Nord
-	Pays *north_america = new Pays("Amerique du Nord",9);
+	Pays *north_america = new Pays("Amerique du Nord",9,5);
 	Region *alaska = new Region("Alaska");
 	Region *alberta = new Region("Alberta");
 	Region *central_america = new Region("Amerique centrale");
@@ -126,7 +127,7 @@ void Terrain::initTerrain ()
 	(*north_america).ajouterRegion(*western_us);
 
 	// Asie
-	Pays *asia = new Pays("Asie",12);
+	Pays *asia = new Pays("Asie",12,7);
 	Region *afghanistan = new Region("Afghanistan");
 	Region *china = new Region("Chine");
 	Region *india = new Region("Inde");
@@ -153,7 +154,7 @@ void Terrain::initTerrain ()
 	(*asia).ajouterRegion(*yakutsk);
 
 	// Amerique du Sud
-	Pays *south_america = new Pays("Amerique du Sud",4);
+	Pays *south_america = new Pays("Amerique du Sud",4,2);
 	Region *argentina = new Region("Argentine");
 	Region *brazil = new Region("Bresil");
 	Region *peru = new Region("Perou");
@@ -164,7 +165,7 @@ void Terrain::initTerrain ()
 	(*south_america).ajouterRegion(*venezuela);
 
 	// Europe
-	Pays *europe = new Pays("Europe",7);
+	Pays *europe = new Pays("Europe",7,5);
 	Region *great_britain = new Region("Grande-Bretagne");
 	Region *iceland = new Region("Islande");
 	Region *northern_eu = new Region("Europe du Nord");
@@ -181,7 +182,7 @@ void Terrain::initTerrain ()
 	(*europe).ajouterRegion(*western_eu);
 
 	// Afrique
-	Pays *africa = new Pays("Afrique",6);
+	Pays *africa = new Pays("Afrique",6,3);
 	Region *congo = new Region("Congo");
 	Region *east_africa = new Region("Afrique de l'Est");
 	Region *egypt = new Region("Egypte");
@@ -196,7 +197,7 @@ void Terrain::initTerrain ()
 	(*africa).ajouterRegion(*south_africa);
 
 	// Oceanie
-	Pays *australia = new Pays("Oceanie",4);
+	Pays *australia = new Pays("Oceanie",4,2);
 	Region *eastern_au = new Region("Australie Orientale");
 	Region *indonesia = new Region("Indonesie");
 	Region *new_guinea = new Region("Nouvelle-Guinee");
