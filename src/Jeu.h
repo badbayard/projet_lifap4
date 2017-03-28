@@ -21,6 +21,9 @@ class Jeu {
   		/** @brief Initialise la carte a utiliser */
   		void initJeu ();
 
+  		/** @brief Affichage mode texte des regions et pays */
+  		void afficheTerrainTXT();
+
 	public:
 
 		/** @brief : constructeur par default */

@@ -243,9 +243,28 @@ void Jeu::phaseAttaque()
 void Jeu::initJeu()
 {
 	terrain.initTerrain();
-	/*for (unsigned int i = 0; i < terrain.getTabPays().size(); i++)
-	{
-		cout << terrain.getTabPays()[i]->getNomPays() << endl;
-	}*/
+	afficheTerrainTXT();
 }
 
+void Jeu::afficheTerrainTXT()
+{
+	for (unsigned int i = 0; i < terrain.getTabPays().size(); i++)
+	{
+		cout << terrain.getTabPays()[i]->getNomPays() << endl;
+		for (unsigned int j = 0; j < terrain.getTabPays()[i]->getTabRegions().size(); j++)
+		{
+			cout << "	" << terrain.getTabPays()[i]->getTabRegions()[j]->getNomRegion() << endl;
+			cout << "	(";
+			for (unsigned int k = 0; k < terrain.getTabPays()[i]->getTabRegions()[j]->getTabFrontaliers().size(); k++)
+			{
+				cout << terrain.getTabPays()[i]->getTabRegions()[j]->getTabFrontaliers()[k]->getNomRegion();
+				if (k != terrain.getTabPays()[i]->getTabRegions()[j]->getTabFrontaliers().size()-1)
+				{
+					cout << ", ";
+				}
+			}
+			cout << ")" << endl << endl;
+		}
+		cout << endl << endl;
+	}
+}
