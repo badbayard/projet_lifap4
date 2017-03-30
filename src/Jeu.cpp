@@ -105,20 +105,23 @@ void Jeu::lancerJeu()
 		// Ajout d'un nouveau joueur avec les valeurs saisies
 		tab_joueur.push_back( Joueur( nom, liste_couleurs[num_couleur] ) );
 		
-		// Traitement du nombre de troupes et du nombre de regions (42 regions)
-		tab_joueur[i].setNbRegiments(40);
+		// Traitement du nombre de troupes et du nombre de regions
 		switch(nb_joueur)
 		{
 			case 2:
+				tab_joueur[i].setNbRegiments(40);
 				tab_joueur[i].setNbRegions(21);
 				break;
 			case 3:
+				tab_joueur[i].setNbRegiments(35);
 				tab_joueur[i].setNbRegions(14);
 				break;
 			case 4:
+				tab_joueur[i].setNbRegiments(30);
 				tab_joueur[i].setNbRegions(10);
 				break;
 			case 5:
+				tab_joueur[i].setNbRegiments(40);
 				tab_joueur[i].setNbRegions(8);
 				break;
 			default: cout << "pas de joueur" << endl;
@@ -132,8 +135,9 @@ void Jeu::lancerJeu()
 		cout << endl;
 	}
 
-		// Repartition aleatoire des territoires
 	srand((unsigned int) time(NULL));
+
+		// Liste de tous les territoires
 	vector<Region*> territoires;
 	for (unsigned int i = 0; i < terrain.getTabPays().size(); i++)
 	{
@@ -143,23 +147,67 @@ void Jeu::lancerJeu()
 		}
 	}
 
+		// Repartition aleatoire des territoires
 	for (unsigned int i = 0; i < nb_joueur; i++)
 	{
 		for (unsigned int j = 0; j < tab_joueur[i].getNbRegions(); j++)
 		{
 			unsigned int random_val = rand() % territoires.size();
 			tab_joueur[i].getRegionsJoueur().push_back( territoires[ random_val ] );
+			territoires[ random_val ]->setCouleurRegion( tab_joueur[i].getCouleurJoueur() );
 			territoires.erase( territoires.begin() + random_val );
 		}
 	}	
 	// Il reste eventuellement des territoires non attribués pour une partie à 4 ou 5 joueurs
 
+		// Repartition des regiments pour chaque joueur
+	for (unsigned int i = 0; i < nb_joueur; i++)
+	{
+		cout << "	" << tab_joueur[i].getnom_joueur() << " (Joueur " << i+1 << "), repartissez vos troupes !" << endl;
+		tab_joueur[i].setNbRegiments( tab_joueur[i].getNbRegiments() - tab_joueur[i].getNbRegions() );
+		bool continuer = true;
+		unsigned int nb, num_territoire;
+		while (continuer)
+		{
+			cout << "Choisissez parmi les territoires suivants :" << endl;
+			for (unsigned int j = 0; j < tab_joueur[i].getNbRegions(); j++)
+			{
+				cout << "	" << j+1 << " " << tab_joueur[i].getRegionsJoueur()[j]->getNomRegion() << " (" << tab_joueur[i].getRegionsJoueur()[j]->getNbUnite() << " unites)" << endl;
+			}
+			do
+			{
+				cin >> num_territoire;
+				if (num_territoire < 1 || num_territoire > tab_joueur[i].getNbRegions())
+				{
+					cout << "/!\\ Erreur, recommencez : ";
+				}
+			} while (num_territoire < 1 || num_territoire > tab_joueur[i].getNbRegions());
+			cout << "Combien de regiments voulez-vous ajouter sur " << tab_joueur[i].getRegionsJoueur()[num_territoire-1]->getNomRegion() << " ?" << endl;
+			do
+			{
+				cin >> nb;
+				if (nb > tab_joueur[i].getNbRegiments())
+				{
+					cout << "/!\\ Maximum " << tab_joueur[i].getNbRegiments() << " unites : ";
+				}
+			} while (nb > tab_joueur[i].getNbRegiments());
+			tab_joueur[i].getRegionsJoueur()[num_territoire-1]->setNbUnite( tab_joueur[i].getRegionsJoueur()[num_territoire-1]->getNbUnite() + nb );
+			if ((((int) tab_joueur[i].getNbRegiments()) - ((int) nb)) <= 0)
+			{
+				continuer = false;
+			}
+			tab_joueur[i].setNbRegiments( tab_joueur[i].getNbRegiments() - nb );
+		}
+		cout << endl;
+	}
+
+		// Affichage recap pour chaque joueur
 	for (unsigned int i = 0; i < nb_joueur; i++)
 	{
 		cout << tab_joueur[i].getnom_joueur() << " occupe les territoires suivants :" << endl;
 		for (unsigned int j = 0; j < tab_joueur[i].getNbRegions(); j++)
 		{
-			cout << "	" << tab_joueur[i].getRegionsJoueur()[j]->getNomRegion() << endl;
+			cout << "	" << tab_joueur[i].getRegionsJoueur()[j]->getNomRegion() << " (" << tab_joueur[i].getRegionsJoueur()[j]->getNbUnite() << " unites)" << endl;
 		}
 		cout << endl << endl;
 	}

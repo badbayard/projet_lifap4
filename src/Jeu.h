@@ -12,7 +12,7 @@ using namespace std;
 
 class Jeu {
 
-	private:
+	protected:
 
 		unsigned int nb_joueur;
 		Terrain terrain;

@@ -44,12 +44,7 @@ int main ()
 
 
 
-	//test du module joueur et terrain
-	string essai1;
-	string essai2;
-	unsigned int a;
-
-	//test du module jeu
+	unsigned int saisie;
 	Jeu jeu;
 	cout << "A vos Risk et perils !" << endl << "-----------------------------" << endl;
 	do
@@ -57,9 +52,9 @@ int main ()
 		cout << "Aide jeu	1" << endl;
 		cout << "Lancer jeu	2" << endl;
 		cout << "Quitter		3" << endl;
-		cin >> a;
-	} while (a < 1 || a > 3);
-	switch (a)
+		cin >> saisie;
+	} while (saisie < 1 || saisie > 3);
+	switch (saisie)
 	{
 		case 1:
 			jeu.afficherAide();

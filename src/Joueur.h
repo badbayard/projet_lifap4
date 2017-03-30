@@ -46,7 +46,7 @@ class Joueur {
 		void setNbRegions(unsigned int nb_Regions);
 
 		/** @brief : Recupére le nombre de regiments du joueur */
-		unsigned int getNbRegiments ()const;
+		unsigned int getNbRegiments () const;
 
 		/** @brief : modifie le nombre de regiments 
 		 * @param : nb_Regiments entier */
