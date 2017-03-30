@@ -1,5 +1,5 @@
-#ifndef JEU_SDL_H
-#define JEU_SDL_H
+#ifndef JEUSDL_H
+#define JEUSDL_H
 
 #include <iostream>
 #include <stdlib.h>
@@ -15,7 +15,21 @@ using namespace std;
 class JeuSDL : public Jeu
 {
 
-	// protected:
+	protected:
+		SDL_Surface * surface;
+		SDL_Texture * texture;
+		SDL_Window * fenetre;
+		SDL_Renderer * renderer;
+		SDL_Rect r;
+
+		/** 
+		* @brief Initialise les elements SDL necessaire a l'affichage graphique du jeu
+		* @return true si tout s'est bien passé, false s'il y a eu une erreur
+		*/
+		bool afficherInit();
+
+		/** @brief Quitte la SDL proprement en fin de programme */
+		void quitterSDL();
 
 	public:
 		JeuSDL();

@@ -31,7 +31,7 @@ bin/test.out : obj/main.o obj/Jeu.o $(OBJ)
 
 # !!! # Lignes a revoir pour la SDL
 bin/testSDL.out : obj/JeuSDL.o obj/mainSDL.o obj/Jeu.o $(OBJ)
-	$(CC) $(OBJ) $(INCLUDE_SDL_DIR) $(C11FLAG) obj/JeuSDL.o obj/mainSDL.o -o bin/testSDL.out $(LIBS_SDL)
+	$(CC) $(OBJ) $(INCLUDE_SDL_DIR) $(C11FLAG) obj/JeuSDL.o obj/Jeu.o obj/mainSDL.o -o bin/testSDL.out $(LIBS_SDL)
 
 
 
