@@ -328,12 +328,12 @@ void Jeu::phaseAttaque(Joueur j)
     		cout << "Choisis la region depuis laquelle tu veux attaquer : " << endl;
     		for( unsigned int i = 0; i < j.getNbRegions(); i++)
       		{
-				cout << j.getRegionsJoueur()[i]->getNomRegion() << " : " << i <<endl;
+				cout << i+1 << " : " << j.getRegionsJoueur()[i]->getNomRegion() << " (" << j.getRegionsJoueur()[i]->getNbUnite() << " unites)" <<endl;
      		}
     		cin >> num;}
-  		while(num < 0 || num >= j.getNbRegions() );
+  		while((num < 1) || (num > j.getNbRegions()) || (j.getRegionsJoueur()[num-1]->getNbUnite() < 2));
 	
-		region_depart = *(j.getRegionsJoueur()[num]);
+		region_depart = *(j.getRegionsJoueur()[num-1]);
 		
   		for (unsigned int i = 0; i < region_depart.getTabFrontaliers().size(); i++)
   		{
@@ -347,12 +347,12 @@ void Jeu::phaseAttaque(Joueur j)
     		cout << " Choisis la region frontaliere que tu souhaites attaquer : " <<endl;
     		for( unsigned int i = 0; i < tab_regions_frontalieres.size(); i++)
       		{
-				cout << tab_regions_frontalieres[i].getNomRegion() << " : " << i << endl;
+				cout << i+1 << " : " << tab_regions_frontalieres[i].getNomRegion() << " (" << tab_regions_frontalieres[i].getNbUnite() << " unites)" << endl;
       		}
     		cin >> num;}
-  		while( num < 0 || num >= tab_regions_frontalieres.size() );
+  		while( num < 1 || num > tab_regions_frontalieres.size() );
  
-  		region_attaquee = tab_regions_frontalieres[num];
+  		region_attaquee = tab_regions_frontalieres[num-1];
 		
 		Joueur j2;
 		for(unsigned int i = 0; i < nb_joueur; i++)
