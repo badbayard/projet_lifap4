@@ -2,6 +2,8 @@ CC = g++
 FLAGS = -g -Wall -c
 OBJ = obj/Combat.o obj/Joueur.o obj/Pays.o obj/Region.o obj/Terrain.o obj/main.o obj/Jeu.o
 SRC = src/Combat.h src/Joueur.h src/Pays.h src/Region.h src/Terrain.h src/Jeu.h src/main.cpp
+INCLUDE_DIR_SDL = -I/usr/include/SDL2
+LIBS_SDL = -lSDL2 -lSDL2_ttf -lSDL2_image
 
 
 all : bin/test.out

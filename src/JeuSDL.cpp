@@ -21,6 +21,7 @@ JeuSDL::JeuSDL() : Jeu()
 	texture = NULL;
 	fenetre = NULL;
 	renderer = NULL;
+	//afficherInit();
 }
 
 JeuSDL::~JeuSDL()
@@ -68,6 +69,20 @@ bool JeuSDL::afficherInit()
 		SDL_Quit();
 		return false;
 	}
+   
+	//chargement de l'image
+	surface = IMG_Load("../data/Risk.jpg"); // <-----------debut modif
+	
+	if(!surface)
+	{
+		cout << "Erreur de chargement de l'image " << endl;
+		cout << IMG_GetError() <<endl;
+		return false;
+	}
+
+	//affichage de la texture
+	texture = SDL_CreateTextureFromSurface(renderer,surface);
+
 
 	return true;
 }
@@ -83,3 +98,5 @@ void JeuSDL::quitterSDL()
 	IMG_Quit();
 	SDL_Quit();
 }
+
+
