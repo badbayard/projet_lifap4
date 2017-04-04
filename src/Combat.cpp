@@ -14,7 +14,7 @@ using namespace std;
 		
 	}
 	
-	Combat::Combat(Joueur joueur_a, Joueur joueur_d, Region region_a, Region region_d){
+	Combat::Combat(Joueur &joueur_a, Joueur& joueur_d, Region region_a, Region region_d){
 		attaquant = joueur_a;
 		defenseur = joueur_d;
 		region_attaquant = region_a;
@@ -78,41 +78,89 @@ using namespace std;
 			return false;
 	}
 
+	int pos_region_tabJoueur(Joueur& j, Region& region_defenseur){
+		int i =0;
+		
+		// On incrémente i tant qu'on ne trouve pas la region. 42 = arrêt d'urgence
+		while(j.getRegionsJoueur()[i]->getNomRegion() != region_defenseur.getNomRegion() && i < 42){
+					i++;
+				}
+		if(i == 42)
+			cout << "Baka !" <<endl;
+		return i;
+	}
+
+	void maj_region_defenseur(Joueur& jatt, Joueur& jdef, Region& region_defenseur, int nbTroupesMaxAttaquant){
+		int a;
+		string c_att = jatt.getCouleurJoueur();
+		do{
+			cout << "Joueur " << c_att << ", choisis un nombre d'unites a transfere dans la region conquise (entre 1 et " << nbTroupesMaxAttaquant-1 << ") : ";
+			cin >> a;}
+		while(a < 1 || a >= nbTroupesMaxAttaquant);
+				
+		// On change la couleur de la région et on ajoute le nombre de troupes indiqués par l'attaquant
+		region_defenseur.setNbUnite(a);
+		region_defenseur.setCouleurRegion(c_att);
+				
+		// On cherche la position de la region dans le tableau du joueur defenseur
+		int position = pos_region_tabJoueur(jdef, region_defenseur);
+		cout <<" pos= " << position <<endl;
+		cout<< "tailleJDEF= " << jdef.getRegionsJoueur().size() <<endl;
+				cout<< "tailleJATT= " << jatt.getRegionsJoueur().size() <<endl;
+		jdef.getRegionsJoueur().erase(jdef.getRegionsJoueur().begin() + position);
+		jatt.getRegionsJoueur().push_back(&region_defenseur);
+				
+				cout<< "tailleJDEF= " << jdef.getRegionsJoueur().size() <<endl;
+				cout<< "tailleJATT= " << jatt.getRegionsJoueur().size() <<endl;
+				
+				cout<< "getNBREGIonsAtt= " << jatt.getNbRegions() <<endl;
+								cout<< "getNBREGIonsDef= " << jdef.getNbRegions() <<endl;
+		jatt.setNbRegions(jatt.getNbRegions()+1);
+		jdef.setNbRegions(jdef.getNbRegions()-1);	
+						cout<< "getNBREGIonsAtt= " << jatt.getNbRegions() <<endl;
+								cout<< "getNBREGIonsDef= " << jdef.getNbRegions() <<endl;		
+}
+	
 	
 	void Combat::maj_troupes(Region& region_attaquant, Region& region_defenseur, Joueur& jatt, Joueur& jdef){
 		int a, d, unite_att = region_attaquant.getNbUnite(), unite_def = region_defenseur.getNbUnite();
+		
+		// On initialise les couleurs des joueurs dans des variables
 		string c_att = attaquant.getCouleurJoueur();
 		string c_def = jdef.getCouleurJoueur();
 		
+		// On choisit le nombre des troupes pour l'attaque et la défense
 		do{
 		cout << "Joueur " << c_att << ", choisis un nombre d'unites pour l'offensive (entre 0 et " << (unite_att>3? 3:unite_att) << ") : ";
 		cin >> a;}
 		while((a<0) || (a>3) || (a>unite_att)); 
 		cout <<endl;
 		do{
-		cout << "Joueur " << c_def << ", choisis un nombre d'unites pour la defense (entre 0 et " << (unite_def>2? 2:unite_def) << ") : ";
+		cout << "Joueur " << c_def << ", choisis un nombre d'unites pour la defense (entre 1 et " << (unite_def>2? 2:unite_def) << ") : ";
 		cin >> d;}
-		while((d<0) || (d>2) || (d>unite_def));
+		while((d<1) || (d>2) || (d>unite_def));
 	
-		if( !bataille(a,d) ){		// Si le defenseur gagne
+		// On lance la bataille et on véifie qui gagne
+		if( !bataille(a,d) ){ 		
+			// Si le defenseur gagne, on diminue les troupes de l'attaquant
 			cout << " Le défenseur l'emporte !" << endl <<endl;		
 			region_attaquant.setNbUnite(unite_att - a +1);
 		}
-		else {						// Si l'attaquant gagne
-			cout << "Victoire !" <<endl<<endl;				
-			region_defenseur.setNbUnite(unite_def - d);
+		else {						
+			// Si l'attaquant gagne, on doit changer la region du defenseur de couleur, l'enlever de ces regions et l'ajouter dans celles de l'attaquant
+			cout << "Victoire !" <<endl<<endl;			
+			region_defenseur.setNbUnite(unite_def - d);	//On décrémente les troupes dans la region defenseur
 			unsigned int limite = region_defenseur.getNbUnite();
-			if(limite <= 0){
-				do{
-					cout << "Joueur " << c_att << ", choisis un nombre d'unites a transfere dans la region conquise (entre 1 et " << unite_att-1 << ") : ";
-					cin >> a;}
-				while(a < 1 || a >= unite_att);
-				
-				region_defenseur.setNbUnite(a);
-				region_defenseur.setCouleurRegion(c_att);
-				jatt.setNbRegions(jatt.getNbRegions()+1);
-				jdef.setNbRegions(jdef.getNbRegions()-1);
-				
+			if(limite <= 0){	// Si le nombre de troupes est <= 0, on doit faire le changement de region
+			cout << "avant : "<<endl;
+			cout<< "tailleJDEF= " << jdef.getRegionsJoueur().size() <<endl;
+				cout<< "tailleJATT= " << jatt.getRegionsJoueur().size() <<endl;
+			maj_region_defenseur(jatt, jdef, region_defenseur, unite_att);
+				cout <<endl<< "après : " <<endl;
+				cout<< "tailleJDEF= " << jdef.getRegionsJoueur().size() <<endl;
+				cout<< "tailleJATT= " << jatt.getRegionsJoueur().size() <<endl;
+								cout<< "getNBREGIonsAtt= " << jatt.getNbRegions() <<endl;
+								cout<< "getNBREGIonsDef= " << jdef.getNbRegions() <<endl;
 			}
 		}
 	}

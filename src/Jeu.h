@@ -51,13 +51,13 @@ class Jeu {
 		void afficherAide();
 
 		/** @brief : permet d'entrer en phase de manoeuvre */
-		void phaseManoeuvre (Joueur j);
+		void phaseManoeuvre (Joueur &j);
 
 		/** @brief : permet d'entrer en phase de renfort */
 		void phaseRenfort();
 
 		/** @brief : permet d'entrer en phase d'attaque */
-		void phaseAttaque(Joueur j);
+		void phaseAttaque(Joueur &j);
 
 		/** @brief : permet de mettre fin au tour */
 		bool fintour();

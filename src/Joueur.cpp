@@ -27,7 +27,7 @@ void Joueur::setCouleurJoueur(string couleur_joueur)
 
 unsigned int Joueur::getNbRegions()const
 {
-	return nb_regions;
+	return nb_regions;	
 }
 
 void Joueur::setNbRegions(unsigned int nb_Regions)
