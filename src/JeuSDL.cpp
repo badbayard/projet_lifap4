@@ -34,6 +34,7 @@ JeuSDL::~JeuSDL()
 	}
 	IMG_Quit();
 	SDL_Quit();
+	
 }
 
 bool JeuSDL::afficherInit()
@@ -52,8 +53,8 @@ bool JeuSDL::afficherInit()
 	}
 
 	// Creation fenetre
-	fenetre = SDL_CreateWindow("A vos Risk et perils!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1600, 1062, SDL_WINDOW_SHOWN);
-	if (fenetre == NULL) {
+	fenetre = SDL_CreateWindow("A vos Risk et perils!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 1000, SDL_WINDOW_SHOWN);
+	if (fenetre == NULL) { //la taille avant 1600 et 1062
 		cout << "SDL_CreateWindow Error: " << SDL_GetError() << endl;
 		IMG_Quit();
 		SDL_Quit();
@@ -71,7 +72,7 @@ bool JeuSDL::afficherInit()
 	}
    
 	//chargement de l'image
-	surface = IMG_Load("../data/Risk.jpg"); // <-----------debut modif
+	surface = IMG_Load("data/Risk.jpg"); // <-----------debut modif
 	
 	if(!surface)
 	{

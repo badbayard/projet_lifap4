@@ -13,7 +13,7 @@ using namespace std;
 int main ()
 {
 	JeuSDL jeu;
-	//jeu.afficherInit();
+	jeu.afficherInit();
 	//jeu.initJeu();
 	// jeu.lancerJeu();
 	// jeu.quitterJeu();

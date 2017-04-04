@@ -26,12 +26,12 @@ class JeuSDL : public Jeu
 		* @brief Initialise les elements SDL necessaire a l'affichage graphique du jeu
 		* @return true si tout s'est bien passé, false s'il y a eu une erreur
 		*/
-		bool afficherInit();
 
 		/** @brief Quitte la SDL proprement en fin de programme */
 		void quitterSDL();
 
 	public:
+		bool afficherInit();
 		JeuSDL();
 		~JeuSDL();
 	
