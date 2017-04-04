@@ -14,7 +14,7 @@ int main ()
 {
 	JeuSDL jeu;
 	jeu.afficherInit();
-	//jeu.initJeu();
+	// jeu.initJeu();
 	// jeu.lancerJeu();
 	// jeu.quitterJeu();
 	return 0;

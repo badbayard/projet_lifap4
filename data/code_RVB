@@ -1,211 +1,232 @@
-Code RVB des régions:
+42
 
-alaska: 
-R->223
-V->87
-B->88
 
-north_america:
-R->225
-V->87
-B->88
+9
 
-ontario:
-R->225
-V->88
-B->90
+alaska
+R 223
+V 87
+B 88
 
-alberta:
-R->226
-V->89
-B->90
+alberta
+R 226
+V 89
+B 90
 
-Quebec:
-R->228
-V->89
-B->90
+central_america
+R 231
+V 91
+B 97
 
-Western United-States:
-R->228
-V->91
-B->92
+eastern_us
+R 228
+V 89
+B 95
 
-Eastern United States:
-R->228
-V->89
-B->95
+greenland
+R 231
+V 91
+B 95
 
-Greenland:
-R->231
-V->91
-B->95
+northwest_territory
+R 225
+V 87
+B 88
 
-Central America:
-R->231
-V->91
-B->97
+ontario
+R 225
+V 88
+B 90
 
-Argentina:
-R->215
-V->84
-B->88
+quebec
+R 228
+V 89
+B 90
 
-Brazil:
-R->217
-V->85
-B->89
+western_us
+R 228
+V 91
+B 92
 
-Peru:
-R->219
-V->86
-B->89
 
-Venezuela:
-R->222
-V->87
-B->90
+12
 
-Great-Britain:
-R->149
-V->68
-B->173
+afghanistan
+R 169
+V 79
+B 94
 
-Iceland:
-R->149
-V->69
-B->175
+china
+R 169
+V 79
+B 96
 
-Northern Europe:
-R->151
-V->69
-B->175
+india
+R 173
+V 80
+B 97
 
-Scandinavia:
-R->151
-V->69
-B->176
+irkutsk
+R 173
+V 80
+B 100
 
-Southern Europe:
-R->151
-V->70
-B->178
+japan
+R 175
+V 80
+B 100
 
-Ukraine:
-R->154
-V->71
-B->181
+kamchatka
+R 178
+V 81
+B 101
 
-Western Europe:
-R->156
-V->71
-B->181
+middle_east
+R 179
+V 81
+B 102
 
-Congo:
-R->155
-V->61
-B->98
+mongolia
+R 179
+V 81
+B 104
 
-East Africa:
-R->157
-V->62
-B->98
+siam
+R 180
+V 180
+B 105
 
-Egypt:
-R->161
-V->63
-B->100
+siberia
+R 184
+V 82
+B 106
 
-Madagascar:
-R->162
-V->64
-B->100
+ural
+R 187
+V 83
+B 108
 
-Nort Africa:
-R->162
-V->64
-B->102
+yakutsk
+R 190
+V 84
+B 109
 
-South Africa:
-R->164
-V->64
-B->102
 
-Afghanistan:
-R->169
-V->79
-B->94
+4
 
-China:
-R->169
-V->79
-B->96
+argentina
+R 215
+V 84
+B 88
 
-India:
-R->173
-V->80
-B->97
+brazil
+R 217
+V 85
+B 89
 
-Irkutsk:
-R->173
-V->80
-B->100
+peru
+R 219
+V 86
+B 89
 
-Japan:
-R->175
-V->80
-B->100
+venezuela
+R 222
+V 87
+B 90
 
-Kamchatka:
-R->178
-V->81
-B->101
 
-Middle East:
-R->179
-V->81
-B->102
+7
 
-Mongolia:
-R->179
-V->81
-B->104
+great_britain
+R 149
+V 68
+B 173
 
-Siam:
-R->180
-V->180
-B->105
+iceland
+R 149
+V 69
+B 175
 
-Siberia:
-R->184
-V->82
-B->106
+northern_eu
+R 151
+V 69
+B 175
 
-Ural:
-R->187
-V->83
-B->108
+scandinavia
+R 151
+V 69
+B 176
 
-Yakutsk:
-R->190
-V->84
-B->109
+southern_eu
+R 151
+V 70
+B 178
 
-Eatern Australia:
-R->166
-V->65
-B->161
+ukraine
+R 154
+V 71
+B 181
 
-Indonesia:
-R->168
-V->66
-B->161
+western_eu
+R 156
+V 71
+B 181
 
-New Guinea:
-R->170
-V->67
-B->161
 
-Western Australia:
-R->173
-V->68
-B->161
+6
+
+congo
+R 155
+V 61
+B 98
+
+east_africa
+R 157
+V 62
+B 98
+
+egypt
+R 161
+V 63
+B 100
+
+madagascar
+R 162
+V 64
+B 100
+
+north_africa
+R 162
+V 64
+B 102
+
+south_africa
+R 164
+V 64
+B 102
+
+
+4
+
+eastern_au
+R 166
+V 65
+B 161
+
+indonesia
+R 168
+V 66
+B 161
+
+new_guinea
+R 170
+V 67
+B 161
+
+western_au
+R 173
+V 68
+B 161
+
+
+
