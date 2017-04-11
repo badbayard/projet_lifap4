@@ -23,7 +23,7 @@ class Combat {
 	public : 
 	/** @brief Constructeur par défaut */
 		Combat();
-		Combat(Joueur joueur_a, Joueur joueur_d, Region region_a, Region region_d);
+		Combat(Joueur &joueur_a, Joueur &joueur_d, Region region_a, Region region_d);
 		
 	/** @brief Destructeur */
 		~Combat();

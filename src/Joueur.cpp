@@ -27,13 +27,17 @@ void Joueur::setCouleurJoueur(string couleur_joueur)
 
 unsigned int Joueur::getNbRegions()const
 {
-	return nb_regions;	
+	return tab_region.size();	
 }
 
-void Joueur::setNbRegions(unsigned int nb_Regions)
+unsigned int Joueur::getNbRegionsInit(){
+	return nb_regions_initial;
+}
+
+void Joueur::setNbRegionsInit(unsigned int nb_Regions)
 {
 	assert (nb_Regions >= 0);
-	nb_regions = nb_Regions;
+	nb_regions_initial = nb_Regions;
 }
 
 unsigned int Joueur::getNbRegiments() const
@@ -70,7 +74,7 @@ void Joueur::testRegressionJoueur()
 	assert(getnom_joueur()=="");
 
 	setCouleurJoueur("Rouge");
-	setNbRegions(3);
+	setNbRegionsInit(3);
 	setNbRegiments(40);
 	setnom_joueur("jessai");
 

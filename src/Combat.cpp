@@ -85,8 +85,6 @@ using namespace std;
 		while(j.getRegionsJoueur()[i]->getNomRegion() != region_defenseur.getNomRegion() && i < 42){
 					i++;
 				}
-		if(i == 42)
-			cout << "Baka !" <<endl;
 		return i;
 	}
 
@@ -104,21 +102,10 @@ using namespace std;
 				
 		// On cherche la position de la region dans le tableau du joueur defenseur
 		int position = pos_region_tabJoueur(jdef, region_defenseur);
-		cout <<" pos= " << position <<endl;
-		cout<< "tailleJDEF= " << jdef.getRegionsJoueur().size() <<endl;
-				cout<< "tailleJATT= " << jatt.getRegionsJoueur().size() <<endl;
-		jdef.getRegionsJoueur().erase(jdef.getRegionsJoueur().begin() + position);
+
 		jatt.getRegionsJoueur().push_back(&region_defenseur);
-				
-				cout<< "tailleJDEF= " << jdef.getRegionsJoueur().size() <<endl;
-				cout<< "tailleJATT= " << jatt.getRegionsJoueur().size() <<endl;
-				
-				cout<< "getNBREGIonsAtt= " << jatt.getNbRegions() <<endl;
-								cout<< "getNBREGIonsDef= " << jdef.getNbRegions() <<endl;
-		jatt.setNbRegions(jatt.getNbRegions()+1);
-		jdef.setNbRegions(jdef.getNbRegions()-1);	
-						cout<< "getNBREGIonsAtt= " << jatt.getNbRegions() <<endl;
-								cout<< "getNBREGIonsDef= " << jdef.getNbRegions() <<endl;		
+		jdef.getRegionsJoueur().erase(jdef.getRegionsJoueur().begin() + position);
+			
 }
 	
 	
@@ -152,15 +139,8 @@ using namespace std;
 			region_defenseur.setNbUnite(unite_def - d);	//On décrémente les troupes dans la region defenseur
 			unsigned int limite = region_defenseur.getNbUnite();
 			if(limite <= 0){	// Si le nombre de troupes est <= 0, on doit faire le changement de region
-			cout << "avant : "<<endl;
-			cout<< "tailleJDEF= " << jdef.getRegionsJoueur().size() <<endl;
-				cout<< "tailleJATT= " << jatt.getRegionsJoueur().size() <<endl;
-			maj_region_defenseur(jatt, jdef, region_defenseur, unite_att);
-				cout <<endl<< "après : " <<endl;
-				cout<< "tailleJDEF= " << jdef.getRegionsJoueur().size() <<endl;
-				cout<< "tailleJATT= " << jatt.getRegionsJoueur().size() <<endl;
-								cout<< "getNBREGIonsAtt= " << jatt.getNbRegions() <<endl;
-								cout<< "getNBREGIonsDef= " << jdef.getNbRegions() <<endl;
+				maj_region_defenseur(jatt, jdef, region_defenseur, unite_att);
+
 			}
 		}
 	}

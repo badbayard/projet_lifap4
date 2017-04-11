@@ -110,24 +110,24 @@ void Jeu::lancerJeu()
 		{
 			case 2:
 				tab_joueur[i].setNbRegiments(40);
-				tab_joueur[i].setNbRegions(21);
+				tab_joueur[i].setNbRegionsInit(21);
 				break;
 			case 3:
 				tab_joueur[i].setNbRegiments(35);
-				tab_joueur[i].setNbRegions(14);
+				tab_joueur[i].setNbRegionsInit(14);
 				break;
 			case 4:
 				tab_joueur[i].setNbRegiments(30);
-				tab_joueur[i].setNbRegions(10);
+				tab_joueur[i].setNbRegionsInit(10);
 				break;
 			case 5:
-				tab_joueur[i].setNbRegiments(40);
-				tab_joueur[i].setNbRegions(8);
+				tab_joueur[i].setNbRegiments(25);
+				tab_joueur[i].setNbRegionsInit(8);
 				break;
 			default: cout << "pas de joueur" << endl;
 				break;
 		}
-		cout << tab_joueur[i].getnom_joueur() << " (Joueur " << i+1 << ") dispose de " << tab_joueur[i].getNbRegiments() << " troupes et " << tab_joueur[i].getNbRegions() << " regions" << endl;
+		cout << tab_joueur[i].getnom_joueur() << " (Joueur " << i+1 << ") dispose de " << tab_joueur[i].getNbRegiments() << " troupes et " << tab_joueur[i].getNbRegionsInit() << " regions" << endl;
 
 		// Suppression de la couleur choisie dans la liste des choix de couleur
 		liste_couleurs.erase(liste_couleurs.begin() + num_couleur);
@@ -150,7 +150,7 @@ void Jeu::lancerJeu()
 		// Repartition aleatoire des territoires
 	for (unsigned int i = 0; i < nb_joueur; i++)
 	{
-		for (unsigned int j = 0; j < tab_joueur[i].getNbRegions(); j++)
+		for (unsigned int j = 0; j < tab_joueur[i].getNbRegionsInit(); j++)
 		{
 			unsigned int random_val = rand() % territoires.size();
 			tab_joueur[i].getRegionsJoueur().push_back( territoires[ random_val ] );
@@ -261,7 +261,7 @@ void Jeu::afficherAide()
 		cout <<"Les renforts : 2 " <<endl;
 		cout <<"Les combats : 3 " <<endl;
 		cout <<"Les manoeuvres : 4"<<endl;
-		cout <<"Les conditions de victoire : 5 " <<endl;
+		cout <<"La condition de victoire : 5 " <<endl;
 		cin >> a;
 	}
 	while((a<1)||(a>4));
@@ -269,21 +269,21 @@ void Jeu::afficherAide()
 	switch(a)
 	{
 		case 1 : cout <<"Un joueur peut proceder à 3 actions distinctes dans l'ordre suivant"<<endl;
-						 cout <<"1-Phase de renforts "<<endl;
-						 cout <<"2-Phase de combats " <<endl;
+						 cout <<"1-Phase de renfort "<<endl;
+						 cout <<"2-Phase de combat " <<endl;
 						 cout <<"3-Phase de manoeuvre " <<endl;
 		break;
 
-		case 2 : cout <<"La phase de renforts permet d'avoir des renforts en fonction du nombre de regions controles et de pays controleren entier " <<endl;
+		case 2 : cout <<"La phase de renfort permet d'avoir des renforts en fonction du nombre de regions controles et de pays controle en entier " <<endl;
 		break;
 
-		case 3 : cout <<"La phase de combats permet d'engager le combat contre un autre joueur qui se situe a votre frontiere " <<endl;
+		case 3 : cout <<"La phase de combat permet d'engager le combat contre un autre joueur qui se situe a votre frontiere " <<endl;
 		break;
 
-		case 4 : cout <<"la phase de manoeuvre permet de faire un déplacement de troupe d'une regions a une autre regions frontaliere" <<endl; 
+		case 4 : cout <<"La phase de manoeuvre permet de faire un déplacement de troupe d'une region a une autre region frontaliere" <<endl; 
 		break;
 
-		case 5 : cout <<"Les conditions de victoire sont le contrôle totale de la map"<<endl;
+		case 5 : cout <<"La condition de victoire est le contrôle totale de la map"<<endl;
 		break;
 
 		default : exit(1);
@@ -374,6 +374,11 @@ void Jeu::phaseAttaque(Joueur& j)
 		batailleEpique.maj_troupes(region_depart, region_attaquee, j, *j2);
 	}
 	
+	cout <<endl << "Affichage des regions après la bataille : " <<endl;
+	for( unsigned int i =0; i < j.getNbRegions(); i++){
+		cout << i+1 << " : " << j.getRegionsJoueur()[i]->getNomRegion() << " (" << j.getRegionsJoueur()[i]->getNbUnite() << " unites)" <<endl;
+	}	
+	cout <<endl;
 }
 
 
@@ -390,7 +395,7 @@ void Jeu::phaseManoeuvre(Joueur& j){
     cout << "Joueur " << j.getCouleurJoueur() << ", choisis la region de depart : " << endl;
     for( unsigned int i = 0; i < j.getNbRegions(); i++)
       {
-	cout << i+1 << " : " << j.getRegionsJoueur()[i]->getNomRegion() <<endl;
+	cout << i+1 << " : " << j.getRegionsJoueur()[i]->getNomRegion() << " (" << j.getRegionsJoueur()[i]->getNbUnite() << " unites)" <<endl;
       }
     cin >> num;}
   while(num < 1 || num > j.getNbRegions() );
@@ -408,7 +413,7 @@ void Jeu::phaseManoeuvre(Joueur& j){
     cout << " Choisis la region frontaliere ou doivent se rendre les troupes : " <<endl;
     for( unsigned int i = 0; i < tab_regions_frontalieres.size(); i++)
       {
-	cout << i+1 << " : " << tab_regions_frontalieres[i].getNomRegion() <<endl;
+	cout << i+1 << " : " << tab_regions_frontalieres[i].getNomRegion()  << " (" << tab_regions_frontalieres[i].getNbUnite() << " unites)" <<endl;
       }
     cin >> num;}
   while( num < 1 || num > tab_regions_frontalieres.size() );
@@ -423,7 +428,6 @@ void Jeu::phaseManoeuvre(Joueur& j){
 
   region_depart.setNbUnite(region_depart.getNbUnite() - num);
   region_arrivee.setNbUnite(region_arrivee.getNbUnite() + num);
-
 }
 		
 

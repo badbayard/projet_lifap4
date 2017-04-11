@@ -18,7 +18,7 @@ class Joueur {
 
 		string couleur;
 		string nom_joueur;
-		unsigned int nb_regions;
+		unsigned int nb_regions_initial;
 		unsigned int nb_regiments;
 		vector<Region*> tab_region ;
 
@@ -39,11 +39,15 @@ class Joueur {
 
 		/** @brief : Recupére le nombre de region du joueur */
 		unsigned int getNbRegions() const;
-
-		/** @brief : modifie le nombre de region 
+		
+		/** @brief : Recupère le nombre de region initial du joueur
+		*/
+		unsigned int getNbRegionsInit();
+		 
+		 /** @brief : modifie le nombre de region initial du joueur 
 		 * @param : nb_Regions entier
 		 * */
-		void setNbRegions(unsigned int nb_Regions);
+		void setNbRegionsInit(unsigned int nb_Regions);
 
 		/** @brief : Recupére le nombre de regiments du joueur */
 		unsigned int getNbRegiments () const;
