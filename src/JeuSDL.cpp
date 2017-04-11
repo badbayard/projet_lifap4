@@ -64,11 +64,11 @@ void Image::draw(SDL_Renderer * render, int x, int y, int w, int h)
 {
 	// Positionnement
     int ok;
-    SDL_Rect r;
-    r.x = x;
-    r.y = y;
-    r.w = (w < 0) ? surface->w : w;
-    r.h = (w < 0) ? surface->h : h;
+    SDL_Rect rect;
+    rect.x = x;
+    rect.y = y;
+    rect.w = (w < 0) ? surface->w : w;
+    rect.h = (w < 0) ? surface->h : h;
 
 	// Mise a jour de la texture si elle a change
     if (a_change) {
@@ -78,7 +78,7 @@ void Image::draw(SDL_Renderer * render, int x, int y, int w, int h)
     }
 
 	// Affichage de la texture
-    ok = SDL_RenderCopy(render,texture,NULL,&r);
+    ok = SDL_RenderCopy(render,texture,NULL,&rect);
     assert(ok == 0);
 }
 
@@ -99,8 +99,11 @@ JeuSDL::JeuSDL() : Jeu()
 	//afficherInit();
 }
 
+
+
 JeuSDL::~JeuSDL()
 {
+/*
 	if (renderer != nullptr) {
 		SDL_DestroyRenderer(renderer);
 	}
@@ -109,7 +112,12 @@ JeuSDL::~JeuSDL()
 	}
 	IMG_Quit();
 	SDL_Quit();
+*/
+	quitterSDL();
 }
+
+
+
 
 bool JeuSDL::afficherInit()
 {
@@ -146,58 +154,16 @@ bool JeuSDL::afficherInit()
 		return false;
 	}
 
-/*
-	// Chargement de l'image
-	surface = IMG_Load("data/Risk_modif.xcf");
-	
-	if(surface == NULL) {
-		cout << "Erreur de chargement de l'image " << "data/Risk.jpg" << endl;
-		cout << "(IMG_GetError) " << IMG_GetError() << endl;
-		cout << "(SDL_GetError) " << SDL_GetError() << endl;
-		return false;
-	}
-
-	// Chargement de la texture
-	texture = SDL_CreateTextureFromSurface(renderer,surface);
-    if (texture == NULL) {
-        cout << "Erreur: probleme creation texture pour " << "data/Risk.jpg" << endl;
-        exit(1);
-    }
-*/
-
 	// On vide le renderer
 	SDL_RenderClear(renderer);
 	
-	if (ecran_titre.loadTexture(string("data/Risk_modif.xcf"), renderer)) {
-		ecran_titre.draw(renderer,0,0);
-	}
-
-/*
-	// Affichage de la texture
-    int ok;
-    SDL_Rect r;
-    r.x = 0;
-    r.y = 0;
-    r.w = surface->w;
-    r.h = surface->h;
-
-    if (a_change) {
-        ok = SDL_UpdateTexture(texture,NULL,surface->pixels,surface->pitch);
-        assert(ok == 0);
-        a_change = false;
-    }
-
-    ok = SDL_RenderCopy(renderer,texture,NULL,&r);
-    assert(ok == 0);
-*/
-
-
 	// Mise a jour buffer
-	SDL_RenderPresent(renderer);
-	SDL_Delay(20000);
-
 	return true;
 }
+
+
+
+
 
 void JeuSDL::quitterSDL()
 {
@@ -212,3 +178,70 @@ void JeuSDL::quitterSDL()
 }
 
 
+
+
+
+void JeuSDL::initJeu()
+{
+	Jeu::initJeu();
+	
+}
+
+
+
+
+
+void JeuSDL::boucleJeu()
+{
+	// Initialisation donnees de jeu
+	initJeu();
+	
+	// Affichage carte
+	SDL_RenderClear(renderer);
+	if (carte.loadTexture(string("data/Risk_modif.xcf"), renderer)) {
+		carte.draw(renderer);
+	}
+	SDL_RenderPresent(renderer);
+
+	// File d'evenements : stocke toutes les donnees d'evenement
+	SDL_Event evenements;
+	bool quitter = false;
+	
+	// Tant qu'un evenement quitter n'a pas ete declenche
+	while (!quitter) {
+		// Tant qu'il reste des evenements a traiter dans la file d'evenement
+		while (SDL_PollEvent( &evenements )) {	// Recuperation d'un evenement
+
+			// Selon le type d'evenement
+			switch (evenements.type) {
+				// Si on apuuie sur le bouton X de la fenetre
+				case SDL_QUIT:
+					quitter = true;
+					break;
+	
+				// Si on appuie sur une touche du clavier
+				case SDL_KEYDOWN:
+					// Selon la touche appuiee
+					switch (evenements.key.keysym.scancode) {
+						// Si on appuie sur la touche Escape
+						case SDL_SCANCODE_ESCAPE:
+							quitter = true;
+							break;
+	
+						// Pour les autres touches non gerees par le switch
+						default:
+							break;
+					}
+					break;
+	
+				// Evenements de la souris
+				// Au mouvement de la souris
+				case SDL_MOUSEMOTION:
+					SDL_GetMouseState(&souris_x, &souris_y);
+					cout << "souris_x : " << souris_x << "	,	souris_y : " << souris_y << endl;
+					//SDL_GetRGB(, , &r, &g, &b);
+					break;
+			}
+		}
+	}
+}
