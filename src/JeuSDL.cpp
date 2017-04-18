@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <stdlib.h>
 #include <time.h>
 #include <cstring>
@@ -189,7 +190,7 @@ void JeuSDL::quitterSDL()
 void JeuSDL::initJeu()
 {
 	Jeu::initJeu();
-	
+	lireDonneesCarte("data/code_RVB");
 }
 
 
@@ -245,14 +246,32 @@ void JeuSDL::boucleJeu()
 					SDL_GetMouseState(&souris_x, &souris_y);
 					pix.x = souris_x;
 					pix.y = souris_y;
-
 					SDL_RenderReadPixels(renderer, &pix, SDL_PIXELFORMAT_ARGB8888, &current_pix, sizeof(current_pix));
-					cout << current_pix << endl;
 					SDL_GetRGB(current_pix, carte.surface->format, &r, &g, &b);
+					system("clear");
 					cout << "souris_x : " << souris_x << "	,	souris_y : " << souris_y << endl;
-					cout << "r : " << (int)r << "	,	g : " << (int)g << "	,	b : " << (int)b << endl;
+					cout << "r : " << (int)r << endl;
+					cout << "g : " << (int)g << endl;
+					cout << "b : " << (int)b << endl;
 					break;
 			}
 		}
 	}
+}
+
+
+
+
+
+void JeuSDL::lireDonneesCarte(const string & chemin)
+{
+	ifstream fichier(chemin.c_str(), ios::in);
+	if (!fichier.is_open()) {
+		cout << "Erreur: le fichier " << chemin << " n'a pas pu etre ouvert" << endl;
+		exit(1);
+	}
+	/**************************************************/
+	/***** Traitements a effectuer sur le fichier *****/
+	/**************************************************/
+	fichier.close();
 }

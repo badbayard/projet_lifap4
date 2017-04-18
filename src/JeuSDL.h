@@ -2,6 +2,7 @@
 #define JEUSDL_H
 
 #include <iostream>
+#include <fstream>
 #include <stdlib.h>
 #include <stdio.h>
 #include <cstring>
@@ -54,6 +55,12 @@ class JeuSDL : public Jeu
 
   		/** @brief Initialise la carte a utiliser */
   		void initJeu ();
+
+  		/** 
+  		* @brief Charge les donnees de la carte contenues dans le fichier chemin 
+  		* @param chemin (string) : nom du fichier contenant les codes couleur sur la carte
+  		*/
+  		void lireDonneesCarte (const string & chemin);
   		
 	public:
 		JeuSDL();

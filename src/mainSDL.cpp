@@ -15,7 +15,7 @@ int main ()
 	JeuSDL jeu;
 	if ( !jeu.afficherInit() ) {
 		jeu.quitterSDL();
-		exit(0);
+		exit(1);
 	}
 	jeu.boucleJeu();
 	jeu.quitterSDL();
