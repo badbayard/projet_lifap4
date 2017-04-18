@@ -19,13 +19,14 @@ using namespace std;
 class Image
 {
 	private:
-		SDL_Surface * surface;
 		SDL_Texture * texture;
 		bool a_change;
 
 		bool loadSurface(const string & nom_image);
 
 	public:
+		SDL_Surface * surface;
+
 		Image();
 		~Image(){}
 		bool loadTexture(const string & nom_image, SDL_Renderer * render);
@@ -47,7 +48,9 @@ class JeuSDL : public Jeu
 		SDL_Window * fenetre;
 		SDL_Renderer * renderer;
 		int souris_x, souris_y;
-		int r, g, b;
+		Uint32 current_pix;
+		SDL_Rect pix;
+		Uint8 r, g, b;
 
   		/** @brief Initialise la carte a utiliser */
   		void initJeu ();
@@ -62,7 +65,7 @@ class JeuSDL : public Jeu
 		* @return true si tout s'est bien passé, false s'il y a eu une erreur
 		*/
 		bool afficherInit();
-		
+
 		/**
 		* @brief Lance la partie
 		*/

@@ -5,110 +5,110 @@
 
 alaska
 R 223
-V 87
+V 192
 B 88
 
 alberta
 R 226
-V 89
+V 192
 B 90
 
 central_america
 R 231
-V 91
+V 200
 B 97
 
 eastern_us
 R 228
-V 89
+V 200
 B 95
 
 greenland
 R 231
-V 91
+V 200
 B 95
 
 northwest_territory
 R 225
-V 87
+V 192
 B 88
 
 ontario
 R 225
-V 88
+V 192
 B 90
 
 quebec
-R 228
-V 89
-B 90
+R 221
+V 192
+B 88
 
 western_us
-R 228
-V 91
-B 92
+R 207
+V 193
+B 84
 
 
 12
 
 afghanistan
 R 169
-V 79
+V 201
 B 94
 
 china
 R 169
-V 79
+V 201
 B 96
 
 india
 R 173
-V 80
+V 204
 B 97
 
 irkutsk
 R 173
-V 80
+V 204
 B 100
 
 japan
 R 175
-V 80
+V 204
 B 100
 
 kamchatka
 R 178
-V 81
+V 207
 B 101
 
 middle_east
 R 179
-V 81
+V 207
 B 102
 
 mongolia
 R 179
-V 81
+V 207
 B 104
 
 siam
 R 180
-V 180
+V 207
 B 105
 
 siberia
 R 184
-V 82
+V 209
 B 106
 
 ural
 R 187
-V 83
+V 212
 B 108
 
 yakutsk
 R 190
-V 84
+V 214
 B 109
 
 
@@ -116,22 +116,22 @@ B 109
 
 argentina
 R 215
-V 84
+V 72
 B 88
 
 brazil
 R 217
-V 85
+V 73
 B 89
 
 peru
 R 219
-V 86
+V 73
 B 89
 
 venezuela
 R 222
-V 87
+V 74
 B 90
 
 
@@ -139,37 +139,37 @@ B 90
 
 great_britain
 R 149
-V 68
+V 166
 B 173
 
 iceland
 R 149
-V 69
+V 166
 B 175
 
 northern_eu
 R 151
-V 69
+V 166
 B 175
 
 scandinavia
 R 151
-V 69
+V 166
 B 176
 
 southern_eu
 R 151
-V 70
+V 166
 B 178
 
 ukraine
 R 154
-V 71
+V 169
 B 181
 
 western_eu
 R 156
-V 71
+V 169
 B 181
 
 
@@ -177,32 +177,32 @@ B 181
 
 congo
 R 155
-V 61
+V 122
 B 98
 
 east_africa
 R 157
-V 62
+V 122
 B 98
 
 egypt
 R 161
-V 63
+V 125
 B 100
 
 madagascar
 R 162
-V 64
+V 125
 B 100
 
 north_africa
 R 162
-V 64
+V 125
 B 102
 
 south_africa
 R 164
-V 64
+V 125
 B 102
 
 
@@ -210,22 +210,22 @@ B 102
 
 eastern_au
 R 166
-V 65
+V 72
 B 161
 
 indonesia
 R 168
-V 66
+V 72
 B 161
 
 new_guinea
 R 170
-V 67
+V 72
 B 161
 
 western_au
 R 173
-V 68
+V 72
 B 161
 
 

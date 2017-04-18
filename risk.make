@@ -29,20 +29,17 @@ all : bin/test.out bin/testSDL.out
 bin/test.out : obj/main.o obj/Jeu.o $(OBJ)
 	$(CC) $(OBJ) obj/main.o obj/Jeu.o -o bin/test.out
 
-# !!! # Lignes a revoir pour la SDL
 bin/testSDL.out : obj/JeuSDL.o obj/mainSDL.o obj/Jeu.o $(OBJ)
 	$(CC) $(OBJ) $(INCLUDE_SDL_DIR) $(C11FLAG) obj/JeuSDL.o obj/Jeu.o obj/mainSDL.o -o bin/testSDL.out $(LIBS_SDL)
 
 
 
-# !!! # Lignes a revoir pour la SDL
 obj/mainSDL.o : src/mainSDL.cpp src/JeuSDL.h src/JeuSDL.cpp src/Jeu.h src/Jeu.cpp
 	$(CC) $(CCFLAGS) $(OBJFLAGS) $(INCLUDE_SDL_DIR) $(C11FLAG) src/mainSDL.cpp -o obj/mainSDL.o $(LIBS_SDL)
 
 obj/main.o : src/main.cpp src/Jeu.h src/Jeu.cpp
 	$(CC) $(CCFLAGS) $(OBJFLAGS) src/main.cpp -o obj/main.o
 
-# !!! # Lignes a revoir pour la SDL
 obj/JeuSDL.o : src/JeuSDL.cpp src/JeuSDL.h src/Jeu.h src/Jeu.cpp
 	$(CC) $(CCFLAGS) $(OBJFLAGS) $(INCLUDE_SDL_DIR) $(C11FLAG) src/JeuSDL.cpp -o obj/JeuSDL.o $(LIBS_SDL)
 

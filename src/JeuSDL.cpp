@@ -35,11 +35,11 @@ bool Image::loadSurface(const string & nom_image)
 		cout << "(SDL_GetError) " << SDL_GetError() << endl;
 		return false;
 	}
-/*
+
     SDL_Surface * surfaceCorrectPixelFormat = SDL_ConvertSurfaceFormat(surface,SDL_PIXELFORMAT_ARGB8888,0);
     SDL_FreeSurface(surface);
     surface = surfaceCorrectPixelFormat;
-*/
+
 	return true;
 }
 
@@ -96,6 +96,11 @@ JeuSDL::JeuSDL() : Jeu()
 {
 	fenetre = NULL;
 	renderer = NULL;
+	pix.w = 1;
+	pix.h = 1;
+	r = 0;
+	g = 0;
+	b = 0;
 	//afficherInit();
 }
 
@@ -238,8 +243,14 @@ void JeuSDL::boucleJeu()
 				// Au mouvement de la souris
 				case SDL_MOUSEMOTION:
 					SDL_GetMouseState(&souris_x, &souris_y);
+					pix.x = souris_x;
+					pix.y = souris_y;
+
+					SDL_RenderReadPixels(renderer, &pix, SDL_PIXELFORMAT_ARGB8888, &current_pix, sizeof(current_pix));
+					cout << current_pix << endl;
+					SDL_GetRGB(current_pix, carte.surface->format, &r, &g, &b);
 					cout << "souris_x : " << souris_x << "	,	souris_y : " << souris_y << endl;
-					//SDL_GetRGB(, , &r, &g, &b);
+					cout << "r : " << (int)r << "	,	g : " << (int)g << "	,	b : " << (int)b << endl;
 					break;
 			}
 		}
