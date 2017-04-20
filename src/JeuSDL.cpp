@@ -273,7 +273,7 @@ void JeuSDL::boucleJeu()
 void JeuSDL::lireDonneesCarte(const string & chemin)
 {
 
-	ifstream fichier(chemin.c_str(), ios::in);
+/*	ifstream fichier(chemin.c_str(), ios::in);
 	if (!fichier.is_open()) {
 		cout << "Erreur: le fichier " << chemin << " n'a pas pu etre ouvert" << endl;
 		exit(1);
@@ -290,7 +290,7 @@ void JeuSDL::lireDonneesCarte(const string & chemin)
 	}
 
 	//unordered_map<string, CodeRGB>::iterator it;
-	/*
+	
 	for (unordered_map<string, CodeRGB>::iterator it = CodeCouleur.begin() ; it != CodeCouleur.end() ; ++it) {
 		cout << it->first << endl;
 		cout << "R: " << it->second.R << endl;
@@ -299,11 +299,11 @@ void JeuSDL::lireDonneesCarte(const string & chemin)
 		cout << endl;
 
 	}
-*/
 
-	fichier.close();
 
-/*
+	fichier.close();*/
+
+
 	CodeCouleur[ string("Alaska") ] = CodeRGB( 223, 192, 88 );
 	CodeCouleur[ string("Alberta") ] = CodeRGB( 226, 192, 90 );
 	CodeCouleur[ string("Amerique centrale") ] = CodeRGB( 231, 200, 97 );
@@ -316,38 +316,38 @@ void JeuSDL::lireDonneesCarte(const string & chemin)
 	CodeCouleur[ string("Afghanistan") ] = CodeRGB( 169, 201, 94 );
 	CodeCouleur[ string("Chine") ] = CodeRGB( 169, 201, 96 );
 	CodeCouleur[ string("Inde") ] = CodeRGB( 173, 204, 97 );
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-	CodeCouleur[ string("") ] = CodeRGB(,,);
-*/
+	CodeCouleur[ string("Tchita") ] = CodeRGB(173,204,100);
+	CodeCouleur[ string("Japon") ] = CodeRGB(175,204,100);
+	CodeCouleur[ string("Kamtchaka") ] = CodeRGB(178,207,101);
+	CodeCouleur[ string("Moyen-Orient") ] = CodeRGB(179,207,102);
+	CodeCouleur[ string("Mongolie") ] = CodeRGB(179,207,104);
+	CodeCouleur[ string("Siam") ] = CodeRGB(180,207,105);
+	CodeCouleur[ string("Siberie") ] = CodeRGB(184,209,106);
+	CodeCouleur[ string("Oural") ] = CodeRGB(187,212,108);
+	CodeCouleur[ string("Yakoutie") ] = CodeRGB(190,214,109);
+	CodeCouleur[ string("Argentine") ] = CodeRGB(215,72,88);
+	CodeCouleur[ string("Bresil") ] = CodeRGB(217,73,89);
+	CodeCouleur[ string("Perou") ] = CodeRGB(219,73,89);
+	CodeCouleur[ string("Venezuela") ] = CodeRGB(222,74,90);
+	CodeCouleur[ string("Grande-Bretagne") ] = CodeRGB(149,166,173);
+	CodeCouleur[ string("Islande") ] = CodeRGB(149,166,175);
+	CodeCouleur[ string("Europe du Nord") ] = CodeRGB(151,166,175);
+	CodeCouleur[ string("Scandinavie") ] = CodeRGB(151,166,176);
+	CodeCouleur[ string("Europe du Sud") ] = CodeRGB(151,166,178);
+	CodeCouleur[ string("Ukraine") ] = CodeRGB(154,169,181);
+	CodeCouleur[ string("Europe occidentale") ] = CodeRGB(156,169,181);
+	CodeCouleur[ string("Congo") ] = CodeRGB(155,122,98);
+	CodeCouleur[ string("Afrique de l'Est") ] = CodeRGB(157,122,98);
+	CodeCouleur[ string("Egypte") ] = CodeRGB(161,125,100);
+	CodeCouleur[ string("Madagascar") ] = CodeRGB(162,125,100);
+	CodeCouleur[ string("Afrique du Nord") ] = CodeRGB(162,125,102);
+	CodeCouleur[ string("Afrique du Sud") ] = CodeRGB(162,125,102);
+	CodeCouleur[ string("Australie Orientale") ] = CodeRGB(166,72,161);
+	CodeCouleur[ string("Indonesie") ] = CodeRGB(168,72,161);
+	CodeCouleur[ string("Nouvelle-Guinee") ] = CodeRGB(170,72,161);
+	CodeCouleur[ string("Australie Occidentale") ] = CodeRGB(173,72,161);
+	//CodeCouleur[ string("") ] = CodeRGB(,,);
+
 }
 
 
