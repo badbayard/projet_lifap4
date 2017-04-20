@@ -52,6 +52,8 @@ class JeuSDL : public Jeu
 		Uint32 current_pix;
 		SDL_Rect pix;
 		Uint8 r, g, b;
+		Image menu;
+		Image Aide;
 
   		/** @brief Initialise la carte a utiliser */
   		void initJeu ();
@@ -63,7 +65,7 @@ class JeuSDL : public Jeu
   		void lireDonneesCarte (const string & chemin);
   		
 	public:
-		JeuSDL();
+		 JeuSDL();
 		~JeuSDL();
 
 
@@ -82,6 +84,9 @@ class JeuSDL : public Jeu
 		* @brief Quitte la SDL proprement en fin de programme
 		*/
 		void quitterSDL();
+
+		void MenuSDL();
+
 };
 
 #endif

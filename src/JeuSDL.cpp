@@ -160,6 +160,11 @@ bool JeuSDL::afficherInit()
 		return false;
 	}
 
+	//Initialisation de SDL_TTF
+	if( TTF_Init() == -1 ) {
+		return false;
+	}
+
 	// On vide le renderer
 	SDL_RenderClear(renderer);
 	
@@ -180,6 +185,7 @@ void JeuSDL::quitterSDL()
 		SDL_DestroyWindow(fenetre);
 	}
 	IMG_Quit();
+	TTF_Quit();
 	SDL_Quit();
 }
 
@@ -274,4 +280,99 @@ void JeuSDL::lireDonneesCarte(const string & chemin)
 	/***** Traitements a effectuer sur le fichier *****/
 	/**************************************************/
 	fichier.close();
+}
+
+
+
+
+void JeuSDL::MenuSDL()
+{
+	bool r = false;
+	SDL_Event evenements;
+	bool quitter = false;
+
+
+	//--------------------------------------------------
+
+
+
+
+	//---------------------------------------------
+
+
+	r = afficherInit();
+	SDL_RenderClear(renderer);
+	if(r == true)
+	{
+		menu.loadTexture("data/cavalerie-france.xcf",renderer);
+		menu.draw(renderer,0,0);
+	}
+	else
+	{
+		cout << "probleme avec la sdl" <<endl;
+		quitterSDL();
+	}
+
+	SDL_RenderPresent(renderer);
+
+// Tant qu'un evenement quitter n'a pas ete declenche
+while (!quitter) {
+	// Tant qu'il reste des evenements a traiter dans la file d'evenement
+	while (SDL_PollEvent( &evenements )) {	// Recuperation d'un evenement
+
+		// Selon le type d'evenement
+		switch (evenements.type) {
+			// Si on apuuie sur le bouton X de la fenetre
+			case SDL_QUIT:
+				quitter = true;
+				break;
+
+			// Si on appuie sur une touche du clavier
+			case SDL_KEYDOWN:
+				// Selon la touche appuiee
+				switch (evenements.key.keysym.scancode) {
+					// Si on appuie sur la touche Escape
+					case SDL_SCANCODE_ESCAPE:
+						quitter = true;
+						break;
+
+					// Pour les autres touches non gerees par le switch
+					default:
+						break;
+				}
+				break;
+
+			// Evenements de la souris
+			// Au mouvement de la souris
+			case SDL_MOUSEBUTTONUP:
+				//SDL_GetMouseState(&souris_x, &souris_y);
+				souris_x=evenements.button.x;
+				souris_y=evenements.button.y;
+				cout << "souris_x : " << souris_x << "	,	souris_y : " << souris_y << endl;
+
+				if(souris_x > 46 && souris_x < 176 && souris_y > 620 && souris_y < 623) //pour le bouton quitter
+				{
+					quitter = true ;
+				}
+
+				if(souris_x > 52 && souris_x < 125 && souris_y > 550 && souris_y < 565)
+				{
+					Aide.loadTexture("data/fond-gris.xcf",renderer);
+					SDL_RenderClear(renderer);
+					Aide.draw(renderer,0,0);
+					SDL_RenderPresent(renderer);
+
+
+				}
+				if(souris_x > 33 && souris_x < 222 && souris_y > 700 && souris_y < 710)
+				{
+					SDL_RenderClear(renderer);
+					menu.draw(renderer,0,0);
+					SDL_RenderPresent(renderer);
+				}
+
+				break;
+		}
+	}
+}
 }
