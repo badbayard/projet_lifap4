@@ -1,232 +1,168 @@
-42
-
-
-9
-
-alaska
-R 223
-V 192
-B 88
-
-alberta
-R 226
-V 192
-B 90
-
-central_america
-R 231
-V 200
-B 97
-
-eastern_us
-R 228
-V 200
-B 95
-
-greenland
-R 231
-V 200
-B 95
-
-northwest_territory
-R 225
-V 192
-B 88
-
-ontario
-R 225
-V 192
-B 90
-
-quebec
-R 221
-V 192
-B 88
-
-western_us
-R 207
-V 193
-B 84
-
-
-12
-
-afghanistan
-R 169
-V 201
-B 94
-
-china
-R 169
-V 201
-B 96
-
-india
-R 173
-V 204
-B 97
-
-irkutsk
-R 173
-V 204
-B 100
-
-japan
-R 175
-V 204
-B 100
-
-kamchatka
-R 178
-V 207
-B 101
-
-middle_east
-R 179
-V 207
-B 102
-
-mongolia
-R 179
-V 207
-B 104
-
-siam
-R 180
-V 207
-B 105
-
-siberia
-R 184
-V 209
-B 106
-
-ural
-R 187
-V 212
-B 108
-
-yakutsk
-R 190
-V 214
-B 109
-
-
-4
-
-argentina
-R 215
-V 72
-B 88
-
-brazil
-R 217
-V 73
-B 89
-
-peru
-R 219
-V 73
-B 89
-
-venezuela
-R 222
-V 74
-B 90
-
-
-7
-
-great_britain
-R 149
-V 166
-B 173
-
-iceland
-R 149
-V 166
-B 175
-
-northern_eu
-R 151
-V 166
-B 175
-
-scandinavia
-R 151
-V 166
-B 176
-
-southern_eu
-R 151
-V 166
-B 178
-
-ukraine
-R 154
-V 169
-B 181
-
-western_eu
-R 156
-V 169
-B 181
-
-
-6
-
-congo
-R 155
-V 122
-B 98
-
-east_africa
-R 157
-V 122
-B 98
-
-egypt
-R 161
-V 125
-B 100
-
-madagascar
-R 162
-V 125
-B 100
-
-north_africa
-R 162
-V 125
-B 102
-
-south_africa
-R 164
-V 125
-B 102
-
-
-4
-
-eastern_au
-R 166
-V 72
-B 161
-
-indonesia
-R 168
-V 72
-B 161
-
-new_guinea
-R 170
-V 72
-B 161
-
-western_au
-R 173
-V 72
-B 161
-
-
-
+Alaska
+223
+192
+88
+Alberta
+226
+192
+90
+Amerique centrale
+231
+200
+97
+Etats de l'Est
+228
+200
+95
+Groenland
+231
+200
+95
+Territoires du Nord-Ouest
+225
+192
+88
+Ontario
+225
+192
+90
+Quebec
+221
+192
+88
+Etats de l'Ouest
+207
+193
+84
+Afghanistan
+169
+201
+94
+Chine
+169
+201
+96
+Inde
+173
+204
+97
+Tchita
+173
+204
+100
+Japon
+175
+204
+100
+Kamtchatka
+178
+207
+101
+Moyen-Orient
+179
+207
+102
+Mongolie
+179
+207
+104
+Siam
+180
+207
+105
+Siberie
+184
+209
+106
+Oural
+187
+212
+108
+Yakoutie
+190
+214
+109
+Argentine
+215
+72
+88
+Bresil
+217
+73
+89
+Perou
+219
+73
+89
+Venezuela
+222
+74
+90
+Grande-Bretagne
+149
+166
+173
+Islande
+149
+166
+175
+Europe du Nord
+151
+166
+175
+Scandinavie
+151
+166
+176
+Europe du Sud
+151
+166
+178
+Ukraine
+154
+169
+181
+Europe occidentale
+156
+169
+181
+Congo
+155
+122
+98
+Afrique de l'Est
+157
+122
+98
+Egypte
+161
+125
+100
+Madagascar
+162
+125
+100
+Afrique du Nord
+162
+125
+102
+Afrique du Sud
+164
+125
+102
+Australie Orientale
+166
+72
+161
+Indonesie
+168
+72
+161
+Nouvelle-Guinee
+170
+72
+161
+Australie Occidentale
+173
+72
+161

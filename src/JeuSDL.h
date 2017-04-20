@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <cstring>
+#include <unordered_map>
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <SDL_image.h>
@@ -34,8 +35,22 @@ class Image
 		void draw(SDL_Renderer * render, int x = 0, int y = 0, int w = -1, int h = -1);
 };
 
-
-
+/*
+typedef struct sCodeRGB CodeRGB;
+struct sCodeRGB
+{
+	int R, G, B;
+};
+*/
+class CodeRGB
+{
+	public:
+		int R, G, B;
+		
+		CodeRGB(int red = 0, int green = 0, int blue = 0) {
+			R = red;	G = green;	B = blue;
+		}
+};
 
 
 /*
@@ -54,6 +69,7 @@ class JeuSDL : public Jeu
 		Uint8 r, g, b;
 		Image menu;
 		Image Aide;
+		unordered_map<string, CodeRGB> CodeCouleur;
 
   		/** @brief Initialise la carte a utiliser */
   		void initJeu ();
@@ -65,7 +81,7 @@ class JeuSDL : public Jeu
   		void lireDonneesCarte (const string & chemin);
   		
 	public:
-		 JeuSDL();
+		JeuSDL();
 		~JeuSDL();
 
 

@@ -6,6 +6,7 @@
 #include <fstream>
 #include <cassert>
 #include <vector>
+#include <unordered_map>
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <SDL_image.h>
@@ -271,15 +272,82 @@ void JeuSDL::boucleJeu()
 
 void JeuSDL::lireDonneesCarte(const string & chemin)
 {
+
 	ifstream fichier(chemin.c_str(), ios::in);
 	if (!fichier.is_open()) {
 		cout << "Erreur: le fichier " << chemin << " n'a pas pu etre ouvert" << endl;
 		exit(1);
 	}
-	/**************************************************/
-	/***** Traitements a effectuer sur le fichier *****/
-	/**************************************************/
+
+	string ligne;
+	int rouge, vert, bleu;
+	while (!fichier.eof()) {
+		//getline(fichier, ligne);
+		fichier >> rouge;
+		//fichier >> vert;
+		//fichier >> bleu;
+		//CodeCouleur[ string(ligne) ] = CodeRGB(rouge,vert,bleu);
+	}
+
+	//unordered_map<string, CodeRGB>::iterator it;
+	/*
+	for (unordered_map<string, CodeRGB>::iterator it = CodeCouleur.begin() ; it != CodeCouleur.end() ; ++it) {
+		cout << it->first << endl;
+		cout << "R: " << it->second.R << endl;
+		cout << "G: " << it->second.G << endl;
+		cout << "B: " << it->second.B << endl;
+		cout << endl;
+
+	}
+*/
+
 	fichier.close();
+
+/*
+	CodeCouleur[ string("Alaska") ] = CodeRGB( 223, 192, 88 );
+	CodeCouleur[ string("Alberta") ] = CodeRGB( 226, 192, 90 );
+	CodeCouleur[ string("Amerique centrale") ] = CodeRGB( 231, 200, 97 );
+	CodeCouleur[ string("Etats de l'Est") ] = CodeRGB( 228, 200, 95 );
+	CodeCouleur[ string("Groenland") ] = CodeRGB( 231, 200, 95 );
+	CodeCouleur[ string("Territoires du Nord-Ouest") ] = CodeRGB( 225, 192, 88 );
+	CodeCouleur[ string("Ontario") ] = CodeRGB( 225, 192, 88 );
+	CodeCouleur[ string("Quebec") ] = CodeRGB( 221, 192, 88 );
+	CodeCouleur[ string("Etats de l'Ouest") ] = CodeRGB( 207, 193, 84);
+	CodeCouleur[ string("Afghanistan") ] = CodeRGB( 169, 201, 94 );
+	CodeCouleur[ string("Chine") ] = CodeRGB( 169, 201, 96 );
+	CodeCouleur[ string("Inde") ] = CodeRGB( 173, 204, 97 );
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+	CodeCouleur[ string("") ] = CodeRGB(,,);
+*/
 }
 
 
