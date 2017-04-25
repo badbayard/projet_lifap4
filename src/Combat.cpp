@@ -88,7 +88,7 @@ using namespace std;
 		return i;
 	}
 
-	void maj_region_defenseur(Joueur& jatt, Joueur& jdef, Region& region_defenseur, int nbTroupesMaxAttaquant){
+	void maj_region(Joueur& jatt, Joueur& jdef, Region& region_defenseur, Region& region_attaquant, int nbTroupesMaxAttaquant){
 		int a;
 		string c_att = jatt.getCouleurJoueur();
 		do{
@@ -97,14 +97,25 @@ using namespace std;
 		while(a < 1 || a >= nbTroupesMaxAttaquant);
 				
 		// On change la couleur de la région et on ajoute le nombre de troupes indiqués par l'attaquant
-		region_defenseur.setNbUnite(a);
+	//	cout << "DEBUGmajregion AVANT => RegionDef.NbUnite = " << region_defenseur.getNbUnite() <<endl;
+	//	cout << "DEBUGmajregion AVANT => RegionAtt.NbUnite = " << region_attaquant.getNbUnite() <<endl;
 		region_defenseur.setCouleurRegion(c_att);
+		region_defenseur.setNbUnite(a);
+		region_attaquant.setNbUnite(region_attaquant.getNbUnite() - a);
+		
+	//	cout << "DEBUGmajregion APRES => RegionDef.NbUnite = " << region_defenseur.getNbUnite() <<endl;
+	//	cout << "DEBUGmajregion APRES => RegionAtt.NbUnite = " << region_attaquant.getNbUnite() <<endl;
 				
 		// On cherche la position de la region dans le tableau du joueur defenseur
-		int position = pos_region_tabJoueur(jdef, region_defenseur);
+		int positionDef = pos_region_tabJoueur(jdef, region_defenseur);
+		
+		int positionAtt = pos_region_tabJoueur(jatt, region_attaquant);
+	/*	cout << "IIICCCIIIII => " << jatt.getRegionsJoueur()[positionAtt]->getNomRegion() << " : " << jatt.getRegionsJoueur()[positionAtt]->getNbUnite() << " unites" <<endl;*/
+		jatt.getRegionsJoueur().erase(jatt.getRegionsJoueur().begin() + positionAtt);
+		jatt.getRegionsJoueur().push_back(&region_attaquant);
 
 		jatt.getRegionsJoueur().push_back(&region_defenseur);
-		jdef.getRegionsJoueur().erase(jdef.getRegionsJoueur().begin() + position);
+		jdef.getRegionsJoueur().erase(jdef.getRegionsJoueur().begin() + positionDef);
 			
 }
 	
@@ -113,7 +124,7 @@ using namespace std;
 		int a, d, unite_att = region_attaquant.getNbUnite(), unite_def = region_defenseur.getNbUnite();
 		
 		// On initialise les couleurs des joueurs dans des variables
-		string c_att = attaquant.getCouleurJoueur();
+		string c_att = jatt.getCouleurJoueur();
 		string c_def = jdef.getCouleurJoueur();
 		
 		// On choisit le nombre des troupes pour l'attaque et la défense
@@ -127,19 +138,31 @@ using namespace std;
 		cin >> d;}
 		while((d<1) || (d>2) || (d>unite_def));
 	
-		// On lance la bataille et on véifie qui gagne
+		// On lance la bataille et on vérifie qui gagne
 		if( !bataille(a,d) ){ 		
 			// Si le defenseur gagne, on diminue les troupes de l'attaquant
 			cout << " Le défenseur l'emporte !" << endl <<endl;		
 			region_attaquant.setNbUnite(unite_att - a +1);
+			int positionAtt = pos_region_tabJoueur(jatt, region_attaquant);
+			jatt.getRegionsJoueur().erase(jatt.getRegionsJoueur().begin() + positionAtt);
+			jatt.getRegionsJoueur().push_back(&region_attaquant);
 		}
 		else {						
 			// Si l'attaquant gagne, on doit changer la region du defenseur de couleur, l'enlever de ces regions et l'ajouter dans celles de l'attaquant
 			cout << "Victoire !" <<endl<<endl;			
 			region_defenseur.setNbUnite(unite_def - d);	//On décrémente les troupes dans la region defenseur
+			int positionDef = pos_region_tabJoueur(jdef, region_defenseur);
+			jdef.getRegionsJoueur().erase(jdef.getRegionsJoueur().begin() + positionDef);
+			jdef.getRegionsJoueur().push_back(&region_defenseur);
+			
 			unsigned int limite = region_defenseur.getNbUnite();
 			if(limite <= 0){	// Si le nombre de troupes est <= 0, on doit faire le changement de region
-				maj_region_defenseur(jatt, jdef, region_defenseur, unite_att);
+		/*	cout << "DEBUGmajtroupes AVANT => RegionDef.NbUnite = " << region_defenseur.getNbUnite() <<endl;
+		cout << "DEBUGmajtroupes AVANT => RegionAtt.NbUnite = " << region_attaquant.getNbUnite() <<endl;*/
+				maj_region(jatt, jdef, region_defenseur, region_attaquant, unite_att);
+
+/*cout << "DEBUGmajtroupes APRES => RegionDef.NbUnite = " << region_defenseur.getNbUnite() <<endl;
+		cout << "DEBUGmajtroupes APRES => RegionAtt.NbUnite = " << region_attaquant.getNbUnite() <<endl;*/
 
 			}
 		}

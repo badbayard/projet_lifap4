@@ -162,7 +162,7 @@ void Jeu::lancerJeu()
 
 		// Repartition des regiments pour chaque joueur
 	for (unsigned int i = 0; i < nb_joueur; i++)
-	{	unsigned int tmp = tab_joueur[i].getNbRegiments();
+	{	
 	
 		tab_joueur[i].setNbRegiments( tab_joueur[i].getNbRegiments() - tab_joueur[i].getNbRegions() );
 		cout << "	" << tab_joueur[i].getnom_joueur() << " (Joueur " << i+1 << "), repartissez vos troupes ! (" << tab_joueur[i].getNbRegiments() << " unites restantes)" << endl<<endl;
@@ -200,7 +200,6 @@ void Jeu::lancerJeu()
 			}
 			tab_joueur[i].setNbRegiments( tab_joueur[i].getNbRegiments() - nb );
 		}
-		tab_joueur[i].setNbRegiments(tmp);
 		cout << endl;
 	}
 
@@ -221,6 +220,7 @@ void Jeu::lancerJeu()
 		phaseRenfort();
 		cout <<endl<< "Phase Attaque !" <<endl;
 		for(unsigned int i = 0; i < nb_joueur; i++){
+		
 			phaseAttaque(tab_joueur[i]);
 		}
 		cout <<endl<< "Phase Manoeuvre !" << endl;
@@ -294,20 +294,40 @@ void Jeu::afficherAide()
 
 void Jeu::phaseRenfort()
 {
-	unsigned int i,total_renfort,troupe_avant;
+	unsigned int num, i, k, total_renfort;
 	//unsigned int bonus_pays;
 
 	for(i=0;i<nb_joueur;i++)
 	{
-		unsigned int b = (tab_joueur[i].getNbRegiments()/3);
+		unsigned int b = (tab_joueur[i].getNbRegions()/3);
 		if( b >= 3 )
 			total_renfort = b;
 		else
 			total_renfort = 3;
-		troupe_avant = tab_joueur[i].getNbRegiments();
 		//rajouter les renforts en fonction du pays
-		total_renfort += troupe_avant;
-    tab_joueur[i].setNbRegiments(total_renfort);		
+    tab_joueur[i].setNbRegiments(total_renfort);
+    
+    while(total_renfort > 0){
+    	cout << " Joueur " << tab_joueur[i].getCouleurJoueur() << ", choisis une region où placer les renforts (" << total_renfort << " restants) " <<endl;
+    	for(k =0; k < tab_joueur[i].getNbRegions(); k++){
+		cout << k+1 << " : " << tab_joueur[i].getRegionsJoueur()[k]->getNomRegion() << " (" << tab_joueur[i].getRegionsJoueur()[k]->getNbUnite() << " unites)" <<endl;
+		}
+    	cin >> k;
+    	while( k <=0 || k > tab_joueur[i].getNbRegions()+1){
+    		cout << "Saisie incorrecte, recommencez : ";
+    		cin >> k;
+    	}
+    	do{
+    		cout << "Choisis le nombre de troupes à placer entre 0 et " << total_renfort << " : ";
+    		cin >> num;}
+  		while(num < 0 || num > total_renfort);
+  		
+  		tab_joueur[i].getRegionsJoueur()[k-1]->setNbUnite(tab_joueur[i].getRegionsJoueur()[k-1]->getNbUnite() + num);
+  		total_renfort = total_renfort - num;
+  		
+  		cout << endl;
+    }
+    cout <<endl;
 	}
 }
 
@@ -326,7 +346,7 @@ void Jeu::phaseAttaque(Joueur& j)
 	
 	if(a == 1)
 	{	
-		Region region_depart, region_attaquee;
+		Region region_attaquant, region_defenseur;
   		vector <Region> tab_regions_frontalieres;
 		unsigned int num;
 		
@@ -340,12 +360,12 @@ void Jeu::phaseAttaque(Joueur& j)
     		cin >> num;}
   		while((num < 1) || (num > j.getNbRegions()) || (j.getRegionsJoueur()[num-1]->getNbUnite() < 2));
 	
-		region_depart = *(j.getRegionsJoueur()[num-1]);
+		region_attaquant = *(j.getRegionsJoueur()[num-1]);
 		
 		// On crée le tableau des regions frontalieres qui ne sont pas de la même couleur que celle du joueur
-  		for (unsigned int i = 0; i < region_depart.getTabFrontaliers().size(); i++)
+  		for (unsigned int i = 0; i < region_attaquant.getTabFrontaliers().size(); i++)
   		{
-  			tab_regions_frontalieres.push_back(*(region_depart.getTabFrontaliers()[i]));
+  			tab_regions_frontalieres.push_back(*(region_attaquant.getTabFrontaliers()[i]));
   		}
   		for( unsigned int i = 0; i < tab_regions_frontalieres.size(); i++)
    	 		if( tab_regions_frontalieres[i].getCouleurRegion() == j.getCouleurJoueur())
@@ -361,17 +381,17 @@ void Jeu::phaseAttaque(Joueur& j)
     		cin >> num;}
   		while( num < 1 || num > tab_regions_frontalieres.size() );
  
-  		region_attaquee = tab_regions_frontalieres[num-1];
+  		region_defenseur = tab_regions_frontalieres[num-1];
 		
 		// On récupère le joueur qui va être attaqué via la couleur de la région attaquée
 		Joueur *j2;
 		for(unsigned int i = 0; i < nb_joueur; i++)
-			if(region_attaquee.getCouleurRegion() == tab_joueur[i].getCouleurJoueur())
+			if(region_defenseur.getCouleurRegion() == tab_joueur[i].getCouleurJoueur())
 				j2 = &(tab_joueur[i]);
 		
 		// On lance le combat !
-		Combat batailleEpique(j, *j2, region_depart, region_attaquee);
-		batailleEpique.maj_troupes(region_depart, region_attaquee, j, *j2);
+		Combat batailleEpique(j, *j2, region_attaquant, region_defenseur);
+		batailleEpique.maj_troupes(region_attaquant, region_defenseur, j, *j2);
 	}
 	
 	cout <<endl << "Affichage des regions après la bataille : " <<endl;
@@ -428,6 +448,12 @@ void Jeu::phaseManoeuvre(Joueur& j){
 
   region_depart.setNbUnite(region_depart.getNbUnite() - num);
   region_arrivee.setNbUnite(region_arrivee.getNbUnite() + num);
+  
+  cout <<endl << "Affichage des regions après la manoeuvre : " <<endl;
+	for( unsigned int i =0; i < j.getNbRegions(); i++){
+		cout << i+1 << " : " << j.getRegionsJoueur()[i]->getNomRegion() << " (" << j.getRegionsJoueur()[i]->getNbUnite() << " unites)" <<endl;
+	}	
+	cout <<endl;
 }
 		
 
