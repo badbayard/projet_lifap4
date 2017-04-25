@@ -24,7 +24,24 @@ Image::Image()
 {
 	surface = NULL;
 	texture = NULL;
+	font = NULL;
 	a_change = false;
+}
+
+Image::~Image()
+{
+	if (surface != NULL) {
+		SDL_FreeSurface(surface);
+		surface = NULL;
+	}
+	if (texture != NULL) {
+		SDL_DestroyTexture(texture);
+		texture = NULL;
+	}
+	if (font != NULL) {
+		TTF_CloseFont(font);
+		font = NULL;
+	}
 }
 
 bool Image::loadSurface(const string & nom_image)
@@ -60,6 +77,36 @@ bool Image::loadTexture(const string & nom_image, SDL_Renderer * render)
     }
     
     return true;
+}
+
+bool Image::loadFont(const string & font_file, int ptsize)
+{
+	if (font != NULL) {
+		TTF_CloseFont(font);
+		font = NULL;
+	}
+	font = TTF_OpenFont(font_file.c_str(), ptsize);
+	if (font == NULL) {
+		cout << "TTF_OpenFont Erreur: " << SDL_GetError() << endl;
+		return false;
+	}
+	return true;
+}
+
+bool Image::writeOnTexture(const string & message, TTF_Font * ft, SDL_Renderer * render, SDL_Color text_color, SDL_Color background)
+{
+	surface = TTF_RenderUTF8_Shaded(ft, message.c_str(), text_color, background);
+	if (surface == NULL) {
+		cout << "writeOnTexture Erreur: " << SDL_GetError() << endl;
+		return false;
+	}
+	texture = SDL_CreateTextureFromSurface(render,surface);
+    if (texture == NULL) {
+        cout << "Erreur: probleme creation texture TTF pour " << message << endl;
+        return false;
+    }
+	SDL_FreeSurface(surface);
+	return true;
 }
 
 void Image::draw(SDL_Renderer * render, int x, int y, int w, int h)
@@ -103,6 +150,7 @@ JeuSDL::JeuSDL() : Jeu()
 	r = 0;
 	g = 0;
 	b = 0;
+	all_ok = true;
 	//afficherInit();
 }
 
@@ -161,8 +209,10 @@ bool JeuSDL::afficherInit()
 		return false;
 	}
 
-	//Initialisation de SDL_TTF
+	//Initialisation de SDL_ttf
 	if( TTF_Init() == -1 ) {
+		cout << "TTF_Init Erreur: " << SDL_GetError() << endl;
+		SDL_Quit();
 		return false;
 	}
 
@@ -186,7 +236,9 @@ void JeuSDL::quitterSDL()
 		SDL_DestroyWindow(fenetre);
 	}
 	IMG_Quit();
-	TTF_Quit();
+	if (TTF_WasInit()) {
+		TTF_Quit();
+	}
 	SDL_Quit();
 }
 
@@ -198,6 +250,9 @@ void JeuSDL::initJeu()
 {
 	Jeu::initJeu();
 	lireDonneesCarte("data/code_RVB");
+	all_ok = all_ok && carte.loadTexture(string("data/Risk_modif.xcf"), renderer);
+	all_ok = all_ok && hover_box.loadFont("data/tugano.ttf");
+	
 }
 
 
@@ -210,62 +265,100 @@ void JeuSDL::boucleJeu()
 	initJeu();
 	
 	// Affichage carte
-	SDL_RenderClear(renderer);
-	if (carte.loadTexture(string("data/Risk_modif.xcf"), renderer)) {
-		carte.draw(renderer);
-	}
-	SDL_RenderPresent(renderer);
+	// SDL_RenderClear(renderer);
+	if (all_ok) {
+		// carte.draw(renderer);
+		// File d'evenements : stocke toutes les donnees d'evenement
+		SDL_Event evenements;
+		bool quitter = false;
 
-	// File d'evenements : stocke toutes les donnees d'evenement
-	SDL_Event evenements;
-	bool quitter = false;
-	
-	// Tant qu'un evenement quitter n'a pas ete declenche
-	while (!quitter) {
-		// Tant qu'il reste des evenements a traiter dans la file d'evenement
-		while (SDL_PollEvent( &evenements )) {	// Recuperation d'un evenement
+		// Tant qu'un evenement quitter n'a pas ete declenche
+		while (!quitter) {
+			//SDL_RenderClear(renderer);
+			//carte.draw(renderer);
+			// Tant qu'il reste des evenements a traiter dans la file d'evenement
+			while (SDL_PollEvent( &evenements )) {	// Recuperation d'un evenement
+			SDL_RenderClear(renderer);
+			carte.draw(renderer);
 
-			// Selon le type d'evenement
-			switch (evenements.type) {
-				// Si on apuuie sur le bouton X de la fenetre
-				case SDL_QUIT:
-					quitter = true;
-					break;
-	
-				// Si on appuie sur une touche du clavier
-				case SDL_KEYDOWN:
-					// Selon la touche appuiee
-					switch (evenements.key.keysym.scancode) {
-						// Si on appuie sur la touche Escape
-						case SDL_SCANCODE_ESCAPE:
-							quitter = true;
-							break;
-	
-						// Pour les autres touches non gerees par le switch
-						default:
-							break;
-					}
-					break;
-	
-				// Evenements de la souris
-				// Au mouvement de la souris
-				case SDL_MOUSEMOTION:
-					SDL_GetMouseState(&souris_x, &souris_y);
-					pix.x = souris_x;
-					pix.y = souris_y;
-					SDL_RenderReadPixels(renderer, &pix, SDL_PIXELFORMAT_ARGB8888, &current_pix, sizeof(current_pix));
-					SDL_GetRGB(current_pix, carte.surface->format, &r, &g, &b);
-					system("clear");
-					cout << "souris_x : " << souris_x << "	,	souris_y : " << souris_y << endl;
-					cout << "r : " << (int)r << endl;
-					cout << "g : " << (int)g << endl;
-					cout << "b : " << (int)b << endl;
-					break;
+				// Selon le type d'evenement
+				switch (evenements.type) {
+					// Si on apuuie sur le bouton X de la fenetre
+					case SDL_QUIT:
+						quitter = true;
+						break;
+
+					// Si on appuie sur une touche du clavier
+					case SDL_KEYDOWN:
+						// Selon la touche appuiee
+						switch (evenements.key.keysym.scancode) {
+							// Si on appuie sur la touche Escape
+							case SDL_SCANCODE_ESCAPE:
+								quitter = true;
+								break;
+
+							// Pour les autres touches non gerees par le switch
+							default:
+								break;
+						}
+						break;
+
+					// Evenements de la souris
+					// Au mouvement de la souris
+					case SDL_MOUSEMOTION:
+						SDL_GetMouseState(&souris_x, &souris_y);
+						pix.x = souris_x;
+						pix.y = souris_y;
+						SDL_RenderReadPixels(renderer, &pix, SDL_PIXELFORMAT_ARGB8888, &current_pix, sizeof(current_pix));
+						SDL_GetRGB(current_pix, carte.surface->format, &r, &g, &b);
+						hover_box.writeOnTexture("Hello world!", hover_box.font, renderer);
+						hover_box.draw(renderer, souris_x + 20, souris_y + 20);
+						system("clear");
+						cout << "souris_x : " << souris_x << "	,	souris_y : " << souris_y << endl;
+						cout << "r : " << (int)r << endl;
+						cout << "g : " << (int)g << endl;
+						cout << "b : " << (int)b << endl;
+						cout << ">>> " << getNomParRGB( (int)r, (int)g, (int)b ) << endl;
+						cout << "nb codes connus : " << CodeCouleur.size() << endl;
+						break;
+					
+					// Quand on clique avec la souris
+					case SDL_MOUSEBUTTONDOWN:
+						//hover_box.writeOnTexture("Hello world!", hover_box.font, renderer);
+						//hover_box.draw(renderer, souris_x + 20, souris_y + 20);
+						break;
+				}
+				SDL_RenderPresent(renderer);
 			}
+			// Mise a jour buffer
+			//SDL_RenderPresent(renderer);
 		}
+	}
+	// SDL_RenderPresent(renderer);
+	
+	else {
+		cout << "----> Last error: " << SDL_GetError() << endl;
 	}
 }
 
+
+
+string JeuSDL::getNomParRGB(int R, int G, int B)
+{
+	for (unordered_map<string, CodeRGB>::iterator it = CodeCouleur.begin() ; it != CodeCouleur.end() ; ++it) {
+		/*
+		cout << it->first << endl;
+		cout << "R: " << it->second.R << endl;
+		cout << "G: " << it->second.G << endl;
+		cout << "B: " << it->second.B << endl;
+		cout << endl;
+		*/
+		if (it->second.R == R && it->second.G == G && it->second.B == B) {
+			return it->first;
+		}
+	}
+	return string("Aucun pays correspondant");
+}
 
 
 
@@ -297,7 +390,6 @@ void JeuSDL::lireDonneesCarte(const string & chemin)
 		cout << "G: " << it->second.G << endl;
 		cout << "B: " << it->second.B << endl;
 		cout << endl;
-
 	}
 
 
@@ -310,9 +402,9 @@ void JeuSDL::lireDonneesCarte(const string & chemin)
 	CodeCouleur[ string("Etats de l'Est") ] = CodeRGB( 228, 200, 95 );
 	CodeCouleur[ string("Groenland") ] = CodeRGB( 231, 200, 95 );
 	CodeCouleur[ string("Territoires du Nord-Ouest") ] = CodeRGB( 225, 192, 88 );
-	CodeCouleur[ string("Ontario") ] = CodeRGB( 225, 192, 88 );
+	CodeCouleur[ string("Ontario") ] = CodeRGB( 225, 192, 90 );
 	CodeCouleur[ string("Quebec") ] = CodeRGB( 221, 192, 88 );
-	CodeCouleur[ string("Etats de l'Ouest") ] = CodeRGB( 207, 193, 84);
+	CodeCouleur[ string("Etats de l'Ouest") ] = CodeRGB( 207, 193, 84 );
 	CodeCouleur[ string("Afghanistan") ] = CodeRGB( 169, 201, 94 );
 	CodeCouleur[ string("Chine") ] = CodeRGB( 169, 201, 96 );
 	CodeCouleur[ string("Inde") ] = CodeRGB( 173, 204, 97 );
@@ -341,7 +433,7 @@ void JeuSDL::lireDonneesCarte(const string & chemin)
 	CodeCouleur[ string("Egypte") ] = CodeRGB(161,125,100);
 	CodeCouleur[ string("Madagascar") ] = CodeRGB(162,125,100);
 	CodeCouleur[ string("Afrique du Nord") ] = CodeRGB(162,125,102);
-	CodeCouleur[ string("Afrique du Sud") ] = CodeRGB(162,125,102);
+	CodeCouleur[ string("Afrique du Sud") ] = CodeRGB(164,125,102);
 	CodeCouleur[ string("Australie Orientale") ] = CodeRGB(166,72,161);
 	CodeCouleur[ string("Indonesie") ] = CodeRGB(168,72,161);
 	CodeCouleur[ string("Nouvelle-Guinee") ] = CodeRGB(170,72,161);
@@ -368,17 +460,18 @@ void JeuSDL::MenuSDL()
 	//---------------------------------------------
 
 
-	r = afficherInit();
+	//r = afficherInit();
+	r = menu.loadTexture("data/cavalerie-france.xcf",renderer);
 	SDL_RenderClear(renderer);
 	if(r == true)
 	{
-		menu.loadTexture("data/cavalerie-france.xcf",renderer);
+		//menu.loadTexture("data/cavalerie-france.xcf",renderer);
 		menu.draw(renderer,0,0);
 	}
 	else
 	{
 		cout << "probleme avec la sdl" <<endl;
-		quitterSDL();
+		//quitterSDL();
 	}
 
 	SDL_RenderPresent(renderer);
@@ -418,7 +511,7 @@ while (!quitter) {
 				souris_y=evenements.button.y;
 				cout << "souris_x : " << souris_x << "	,	souris_y : " << souris_y << endl;
 
-				if(souris_x > 46 && souris_x < 176 && souris_y > 620 && souris_y < 623) //pour le bouton quitter
+				if(souris_x > 46 && souris_x < 176 && souris_y > 590 && souris_y < 650) //pour le bouton quitter
 				{
 					quitter = true ;
 				}

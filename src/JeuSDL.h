@@ -24,14 +24,16 @@ class Image
 		SDL_Texture * texture;
 		bool a_change;
 
-		bool loadSurface(const string & nom_image);
-
 	public:
 		SDL_Surface * surface;
+		TTF_Font * font;
 
 		Image();
-		~Image(){}
+		~Image();
+		bool loadSurface(const string & nom_image);
 		bool loadTexture(const string & nom_image, SDL_Renderer * render);
+		bool loadFont(const string & font_file, int ptsize = 16);
+		bool writeOnTexture(const string & message, TTF_Font * ft, SDL_Renderer * render, SDL_Color text_color = {0,0,0}, SDL_Color background = {255,255,255});
 		void draw(SDL_Renderer * render, int x = 0, int y = 0, int w = -1, int h = -1);
 };
 
@@ -69,7 +71,10 @@ class JeuSDL : public Jeu
 		Uint8 r, g, b;
 		Image menu;
 		Image Aide;
+		Image hover_box;
 		unordered_map<string, CodeRGB> CodeCouleur;
+		bool all_ok;
+
 
   		/** @brief Initialise la carte a utiliser */
   		void initJeu ();
@@ -102,6 +107,8 @@ class JeuSDL : public Jeu
 		void quitterSDL();
 
 		void MenuSDL();
+		
+		string getNomParRGB(int R, int G, int B);
 
 };
 
