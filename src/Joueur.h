@@ -14,7 +14,7 @@ using namespace std ;
 
 class Joueur {
 
-	private : 
+	private :
 
 		string couleur;
 		string nom_joueur;
@@ -26,25 +26,25 @@ class Joueur {
 		/**
 		* @brief Constructeur de la classe Joueur
 		* @param
-		*/ 
+		*/
 		Joueur(const string & nom = "", const string & couleur_joueur = "");
-		
+
 		/** @brief : Recupére la couleur du joueur */
 		string  getCouleurJoueur() const;
 
-		/** @brief : modifie la couleur du joueur  
+		/** @brief : modifie la couleur du joueur
 		 * @param : couleur_joueur chaine de caractére
-		 * */ 
+		 * */
 		void setCouleurJoueur(string couleur_joueur);
 
 		/** @brief : Recupére le nombre de region du joueur */
 		unsigned int getNbRegions() const;
-		
+
 		/** @brief : Recupère le nombre de region initial du joueur
 		*/
 		unsigned int getNbRegionsInit();
-		 
-		 /** @brief : modifie le nombre de region initial du joueur 
+
+		 /** @brief : modifie le nombre de region initial du joueur
 		 * @param : nb_Regions entier
 		 * */
 		void setNbRegionsInit(unsigned int nb_Regions);
@@ -52,16 +52,16 @@ class Joueur {
 		/** @brief : Recupére le nombre de regiments du joueur */
 		unsigned int getNbRegiments () const;
 
-		/** @brief : modifie le nombre de regiments 
+		/** @brief : modifie le nombre de regiments
 		 * @param : nb_Regiments entier */
 		void setNbRegiments (unsigned int nb_Regiments);
 
-		/** @brief : modifie le nom du joueur 
+		/** @brief : modifie le nom du joueur
 		 *  @param : nom_joueur chaine de caractere */
 		void setnom_joueur (string nom);
 
 		/** @brief:prend le nom du jouer */
-		string getnom_joueur(); 
+		string getnom_joueur();
 
 		/** @brief Accesseur pour tab_region */
 		vector<Region*> & getRegionsJoueur();
@@ -70,7 +70,7 @@ class Joueur {
 		void testRegressionJoueur();
 
 
-	
+
 };
 
 #endif

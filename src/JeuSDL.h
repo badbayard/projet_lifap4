@@ -6,10 +6,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <cstring>
+#include <vector>
+#include <cassert>
 #include <unordered_map>
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <SDL_image.h>
+#include <SDL/SDL_mixer.h>
 
 #include "Jeu.h"
 
@@ -110,6 +113,7 @@ class JeuSDL : public Jeu
 		
 		string getNomParRGB(int R, int G, int B);
 
+		void MusicSDL();
 };
 
 #endif

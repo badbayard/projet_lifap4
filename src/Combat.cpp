@@ -2,11 +2,6 @@
 #include "Joueur.h"
 #include "Region.h"
 
-#include <iostream>
-#include <stdlib.h>
-#include <cstring>
-#include <fstream>
-#include <cassert>
 
 using namespace std;
 

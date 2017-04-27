@@ -1,11 +1,6 @@
 #include "Joueur.h"
 
-#include <iostream>
-#include <stdlib.h>
-#include <cstring>
-#include <fstream>
-#include <cassert>
-#include <vector>
+
 
 using namespace std;
 
@@ -27,7 +22,7 @@ void Joueur::setCouleurJoueur(string couleur_joueur)
 
 unsigned int Joueur::getNbRegions()const
 {
-	return tab_region.size();	
+	return tab_region.size();
 }
 
 unsigned int Joueur::getNbRegionsInit(){
@@ -84,4 +79,3 @@ void Joueur::testRegressionJoueur()
 	assert(getnom_joueur()=="jessai");
 
 }
-

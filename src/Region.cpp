@@ -1,10 +1,3 @@
-#include <iostream>
-#include <stdlib.h>
-#include <cstring>
-#include <fstream>
-#include <cassert>
-#include <vector>
-
 #include "Region.h"
 
 using namespace std;

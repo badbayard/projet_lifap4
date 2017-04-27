@@ -1,10 +1,3 @@
-#include <iostream>
-#include <stdlib.h>
-#include <cstring>
-#include <fstream>
-#include <cassert>
-#include <vector>
-
 #include "Pays.h"
 
 using namespace std;
@@ -106,7 +99,7 @@ void Pays::testRegressionPays()
 	assert(getNbRegions()==0);
 	assert(getNomPays()=="");
 	assert(getRegimentsSupp()==0);
-	
+
 	Pays("essai",5,4);
 	assert(getNbRegions()==5);
 	assert(getNomPays()=="essai");

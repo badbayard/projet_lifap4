@@ -1,16 +1,3 @@
-#include <iostream>
-#include <fstream>
-#include <stdlib.h>
-#include <time.h>
-#include <cstring>
-#include <fstream>
-#include <cassert>
-#include <vector>
-#include <unordered_map>
-#include <SDL.h>
-#include <SDL_ttf.h>
-#include <SDL_image.h>
-
 #include "JeuSDL.h"
 #include "Jeu.h"
 #include "Combat.h"
@@ -68,14 +55,14 @@ bool Image::loadTexture(const string & nom_image, SDL_Renderer * render)
 	if (!loadSurface(nom_image)) {
 		return false;
 	}
-	
+
 	// Chargement de la texture
 	texture = SDL_CreateTextureFromSurface(render,surface);
     if (texture == NULL) {
         cout << "Erreur: probleme creation texture pour " << nom_image << endl;
         return false;
     }
-    
+
     return true;
 }
 
@@ -177,7 +164,7 @@ JeuSDL::~JeuSDL()
 bool JeuSDL::afficherInit()
 {
 	// Initialisation SDL
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+	if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) < 0) {
 		cout << "SDL_Init Erreur: " << SDL_GetError() << endl;
 		return false;
 	}
@@ -216,9 +203,8 @@ bool JeuSDL::afficherInit()
 		return false;
 	}
 
-	// On vide le renderer
 	SDL_RenderClear(renderer);
-	
+
 	// Mise a jour buffer
 	return true;
 }
@@ -240,6 +226,7 @@ void JeuSDL::quitterSDL()
 		TTF_Quit();
 	}
 	SDL_Quit();
+	Mix_CloseAudio();
 }
 
 
@@ -252,7 +239,7 @@ void JeuSDL::initJeu()
 	lireDonneesCarte("data/code_RVB");
 	all_ok = all_ok && carte.loadTexture(string("data/Risk_modif.xcf"), renderer);
 	all_ok = all_ok && hover_box.loadFont("data/tugano.ttf");
-	
+
 }
 
 
@@ -263,7 +250,7 @@ void JeuSDL::boucleJeu()
 {
 	// Initialisation donnees de jeu
 	initJeu();
-	
+
 	// Affichage carte
 	// SDL_RenderClear(renderer);
 	if (all_ok) {
@@ -321,7 +308,7 @@ void JeuSDL::boucleJeu()
 						cout << ">>> " << getNomParRGB( (int)r, (int)g, (int)b ) << endl;
 						cout << "nb codes connus : " << CodeCouleur.size() << endl;
 						break;
-					
+
 					// Quand on clique avec la souris
 					case SDL_MOUSEBUTTONDOWN:
 						//hover_box.writeOnTexture("Hello world!", hover_box.font, renderer);
@@ -335,7 +322,7 @@ void JeuSDL::boucleJeu()
 		}
 	}
 	// SDL_RenderPresent(renderer);
-	
+
 	else {
 		cout << "----> Last error: " << SDL_GetError() << endl;
 	}
@@ -383,7 +370,7 @@ void JeuSDL::lireDonneesCarte(const string & chemin)
 	}
 
 	//unordered_map<string, CodeRGB>::iterator it;
-	
+
 	for (unordered_map<string, CodeRGB>::iterator it = CodeCouleur.begin() ; it != CodeCouleur.end() ; ++it) {
 		cout << it->first << endl;
 		cout << "R: " << it->second.R << endl;
@@ -450,6 +437,7 @@ void JeuSDL::MenuSDL()
 	bool r = false;
 	SDL_Event evenements;
 	bool quitter = false;
+	MusicSDL();
 
 
 	//--------------------------------------------------
@@ -532,8 +520,31 @@ while (!quitter) {
 					SDL_RenderPresent(renderer);
 				}
 
-				break;
+			break;
 		}
 	}
 }
+}
+
+
+void JeuSDL::MusicSDL()
+{
+		//afficherInit();
+	  SDL_Init(SDL_INIT_AUDIO);
+		Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 1024 );
+		//Mix_Music *son;
+		//Mix_AllocateChannels(2);
+		//son = Mix_LoadMUS("data/music_menu.ogg");
+		//Mix_PlayChannel(1, son, 5);
+
+		//Mix_PlayMusic(son,-1);
+
+		Mix_AllocateChannels(16);
+		Mix_Chunk *son ;
+		son = Mix_LoadWAV("data/music_menu.wav");
+		Mix_PlayChannel(2,son,0);
+
+
+
+
 }

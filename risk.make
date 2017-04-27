@@ -15,7 +15,7 @@ C11FLAG = -std=c++11
 INCLUDE_SDL_DIR = -I/usr/include/SDL2
 
 # Modules SDL2 a inclure
-LIBS_SDL = -lSDL2 -lSDL2_ttf -lSDL2_image
+LIBS_SDL = -lSDL2 -lSDL2_ttf -lSDL2_image -lSDL_mixer
 
 
 OBJ = obj/Combat.o obj/Terrain.o obj/Pays.o obj/Region.o obj/Joueur.o

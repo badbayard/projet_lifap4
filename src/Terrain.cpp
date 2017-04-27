@@ -3,13 +3,6 @@
 #include "Pays.h"
 #include "Region.h"
 
-#include <iostream>
-#include <stdlib.h>
-#include <cstring>
-#include <fstream>
-#include <cassert>
-#include <vector>
-
 using namespace std;
 
 Terrain::Terrain()
@@ -73,7 +66,7 @@ Terrain::~Terrain()
 	dim_y = 0;
 	for (unsigned int i = 0; i < tab_pays.size(); i++) {
 		delete tab_pays[i];
-	} 
+	}
 }
 
 unsigned int Terrain::getdim_x() const
@@ -244,7 +237,7 @@ void Terrain::initTerrain ()
 	(*western_us).ajouterFrontalier(*ontario);
 	(*western_us).ajouterFrontalier(*eastern_us);
 	(*western_us).ajouterFrontalier(*central_america);
-	
+
 	// Frontieres Asie
 	(*afghanistan).ajouterFrontalier(*india);
 	(*afghanistan).ajouterFrontalier(*middle_east);
@@ -298,7 +291,7 @@ void Terrain::initTerrain ()
 	(*yakutsk).ajouterFrontalier(*irkutsk);
 	(*yakutsk).ajouterFrontalier(*kamchatka);
 	(*yakutsk).ajouterFrontalier(*siberia);
-	
+
 	// Frontieres Europe
 	(*great_britain).ajouterFrontalier(*iceland);
 	(*great_britain).ajouterFrontalier(*northern_eu);
@@ -332,7 +325,7 @@ void Terrain::initTerrain ()
 	(*western_eu).ajouterFrontalier(*great_britain);
 	(*western_eu).ajouterFrontalier(*northern_eu);
 	(*western_eu).ajouterFrontalier(*southern_eu);
-	
+
 	// Frontieres Amerique du Sud
 	(*argentina).ajouterFrontalier(*brazil);
 	(*argentina).ajouterFrontalier(*peru);
@@ -346,7 +339,7 @@ void Terrain::initTerrain ()
 	(*venezuela).ajouterFrontalier(*brazil);
 	(*venezuela).ajouterFrontalier(*peru);
 	(*venezuela).ajouterFrontalier(*central_america);
-	
+
 	// Frontieres Afrique
 	(*congo).ajouterFrontalier(*east_africa);
 	(*congo).ajouterFrontalier(*north_africa);
@@ -372,7 +365,7 @@ void Terrain::initTerrain ()
 	(*south_africa).ajouterFrontalier(*congo);
 	(*south_africa).ajouterFrontalier(*east_africa);
 	(*south_africa).ajouterFrontalier(*madagascar);
-	
+
 	// Frontieres Oceanie
 	(*eastern_au).ajouterFrontalier(*new_guinea);
 	(*eastern_au).ajouterFrontalier(*western_au);
@@ -419,8 +412,6 @@ void Terrain::testRegressionTerrain()
 	assert(getdim_y() == 60);
 
 	//test pour les pays
-	
+
 
 }
-	
-	
