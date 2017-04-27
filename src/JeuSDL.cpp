@@ -82,7 +82,7 @@ bool Image::loadFont(const string & font_file, int ptsize)
 
 bool Image::writeOnTexture(const string & message, TTF_Font * ft, SDL_Renderer * render, SDL_Color text_color, SDL_Color background)
 {
-	surface = TTF_RenderUTF8_Shaded(ft, message.c_str(), text_color, background);
+	surface = TTF_RenderUTF8_Blended_Wrapped(ft, message.c_str(), text_color, 500);
 	if (surface == NULL) {
 		cout << "writeOnTexture Erreur: " << SDL_GetError() << endl;
 		return false;
@@ -92,7 +92,7 @@ bool Image::writeOnTexture(const string & message, TTF_Font * ft, SDL_Renderer *
         cout << "Erreur: probleme creation texture TTF pour " << message << endl;
         return false;
     }
-	SDL_FreeSurface(surface);
+	//SDL_FreeSurface(surface);
 	return true;
 }
 
@@ -203,8 +203,9 @@ bool JeuSDL::afficherInit()
 		return false;
 	}
 
+	// On vide le renderer
 	SDL_RenderClear(renderer);
-
+	
 	// Mise a jour buffer
 	return true;
 }
@@ -222,9 +223,12 @@ void JeuSDL::quitterSDL()
 		SDL_DestroyWindow(fenetre);
 	}
 	IMG_Quit();
+	/*
+	// Ce bloc cause un core dump s'il est exécuté
 	if (TTF_WasInit()) {
 		TTF_Quit();
 	}
+	*/
 	SDL_Quit();
 	Mix_CloseAudio();
 }
@@ -250,7 +254,10 @@ void JeuSDL::boucleJeu()
 {
 	// Initialisation donnees de jeu
 	initJeu();
-
+	bool manoeuvre = false;
+	bool renfort = true;
+	bool attaque = false;
+	
 	// Affichage carte
 	// SDL_RenderClear(renderer);
 	if (all_ok) {
@@ -261,12 +268,15 @@ void JeuSDL::boucleJeu()
 
 		// Tant qu'un evenement quitter n'a pas ete declenche
 		while (!quitter) {
-			//SDL_RenderClear(renderer);
+			SDL_RenderClear(renderer);
 			//carte.draw(renderer);
+			
 			// Tant qu'il reste des evenements a traiter dans la file d'evenement
 			while (SDL_PollEvent( &evenements )) {	// Recuperation d'un evenement
 			SDL_RenderClear(renderer);
 			carte.draw(renderer);
+			
+				
 
 				// Selon le type d'evenement
 				switch (evenements.type) {
@@ -298,22 +308,27 @@ void JeuSDL::boucleJeu()
 						pix.y = souris_y;
 						SDL_RenderReadPixels(renderer, &pix, SDL_PIXELFORMAT_ARGB8888, &current_pix, sizeof(current_pix));
 						SDL_GetRGB(current_pix, carte.surface->format, &r, &g, &b);
-						hover_box.writeOnTexture("Hello world!", hover_box.font, renderer);
-						hover_box.draw(renderer, souris_x + 20, souris_y + 20);
+						string pays = getNomParRGB( (int)r, (int)g, (int)b );
+						string est_pays = pays;
+						pays += "\n\nJoueur : " + terrain.getTabPays()[0]->getNomPays();
+						pays += "\nNb regiments : ";
 						system("clear");
 						cout << "souris_x : " << souris_x << "	,	souris_y : " << souris_y << endl;
 						cout << "r : " << (int)r << endl;
 						cout << "g : " << (int)g << endl;
 						cout << "b : " << (int)b << endl;
-						cout << ">>> " << getNomParRGB( (int)r, (int)g, (int)b ) << endl;
-						cout << "nb codes connus : " << CodeCouleur.size() << endl;
+						cout << ">>> " << pays << endl;
+						if (est_pays != "x") {
+							hover_box.writeOnTexture( pays, hover_box.font, renderer);
+							hover_box.draw(renderer, 60, 760);
+						}
 						break;
-
+					
 					// Quand on clique avec la souris
-					case SDL_MOUSEBUTTONDOWN:
+					//case SDL_MOUSEBUTTONDOWN:
 						//hover_box.writeOnTexture("Hello world!", hover_box.font, renderer);
 						//hover_box.draw(renderer, souris_x + 20, souris_y + 20);
-						break;
+						//break;
 				}
 				SDL_RenderPresent(renderer);
 			}
@@ -322,7 +337,7 @@ void JeuSDL::boucleJeu()
 		}
 	}
 	// SDL_RenderPresent(renderer);
-
+	
 	else {
 		cout << "----> Last error: " << SDL_GetError() << endl;
 	}
@@ -344,7 +359,7 @@ string JeuSDL::getNomParRGB(int R, int G, int B)
 			return it->first;
 		}
 	}
-	return string("Aucun pays correspondant");
+	return string("x");
 }
 
 
@@ -428,6 +443,8 @@ void JeuSDL::lireDonneesCarte(const string & chemin)
 	//CodeCouleur[ string("") ] = CodeRGB(,,);
 
 }
+
+
 
 
 

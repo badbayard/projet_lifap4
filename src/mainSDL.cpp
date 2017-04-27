@@ -17,7 +17,7 @@ int main ()
 		jeu.quitterSDL();
 		exit(1);
 	}
-	jeu.MenuSDL();
+	//jeu.MenuSDL();
 
 	jeu.boucleJeu();
 	jeu.quitterSDL();
