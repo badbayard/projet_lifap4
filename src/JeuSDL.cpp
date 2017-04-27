@@ -531,7 +531,7 @@ void JeuSDL::MusicSDL()
 {
 		//afficherInit();
 	  SDL_Init(SDL_INIT_AUDIO);
-		Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 1024 );
+  	Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 1024 );
 		//Mix_Music *son;
 		//Mix_AllocateChannels(2);
 		//son = Mix_LoadMUS("data/music_menu.ogg");
@@ -544,7 +544,16 @@ void JeuSDL::MusicSDL()
 		son = Mix_LoadWAV("data/music_menu.wav");
 		Mix_PlayChannel(2,son,0);
 
+			/*	Mix_Music *musique = NULL;
+
+		    musique = Mix_LoadMUS("data/music_menu.mp4"); //Charge le son a l'adresse indiquée
 
 
+		    if(musique == NULL)  //Vérifie si le son est ok.
+		    {
+		        cout << "Erreur lors du chargement du son";
+		    }
+
+		    Mix_PlayMusic(musique, 1); // on joue notre son qu'une seul fois. */
 
 }

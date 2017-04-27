@@ -26,7 +26,10 @@ class Pays {
 		/** @brief Constructeur par défault */
 		Pays();
 
-		/** @brief Constructeur de la classe */
+		/** @brief Constructeur de la classe
+		 		@param nom : chaine de caractère
+				@param nbregions : entier
+				@param nbregiments : entier*/
 		Pays(const string & nom, unsigned int nbregions, unsigned int nbregiments);
 
 		/** @brief Destructeur pour la classe Pays */

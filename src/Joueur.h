@@ -25,22 +25,27 @@ class Joueur {
 	public:
 		/**
 		* @brief Constructeur de la classe Joueur
-		* @param
+		* @param nom : chaine de caractère
+			@param couleur_joueur
+			@return Un Joueur
 		*/
 		Joueur(const string & nom = "", const string & couleur_joueur = "");
 
-		/** @brief : Recupére la couleur du joueur */
+		/** @brief : Recupére la couleur du joueur
+		 		@return une chaine de caractère*/
 		string  getCouleurJoueur() const;
 
 		/** @brief : modifie la couleur du joueur
-		 * @param : couleur_joueur chaine de caractére
+		 * @param : couleur_joueur chaine de caractère
 		 * */
 		void setCouleurJoueur(string couleur_joueur);
 
-		/** @brief : Recupére le nombre de region du joueur */
+		/** @brief : Recupére le nombre de region du joueur
+				@return entier*/
 		unsigned int getNbRegions() const;
 
 		/** @brief : Recupère le nombre de region initial du joueur
+				@return entier
 		*/
 		unsigned int getNbRegionsInit();
 
@@ -49,7 +54,8 @@ class Joueur {
 		 * */
 		void setNbRegionsInit(unsigned int nb_Regions);
 
-		/** @brief : Recupére le nombre de regiments du joueur */
+		/** @brief : Recupére le nombre de regiments du joueur
+				@return : entier*/
 		unsigned int getNbRegiments () const;
 
 		/** @brief : modifie le nombre de regiments
@@ -60,10 +66,12 @@ class Joueur {
 		 *  @param : nom_joueur chaine de caractere */
 		void setnom_joueur (string nom);
 
-		/** @brief:prend le nom du jouer */
+		/** @brief:prend le nom du jouer
+				@return chaine de caractère*/
 		string getnom_joueur();
 
-		/** @brief Accesseur pour tab_region */
+		/** @brief Accesseur pour tab_region 
+				@return Tableau dynamique de Region*/
 		vector<Region*> & getRegionsJoueur();
 
 		/** @brief: test de regression de la classe joueur */

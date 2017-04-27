@@ -17,7 +17,7 @@ class Jeu {
 		unsigned int nb_joueur;
 		Terrain terrain;
   		vector<Joueur> tab_joueur;
-  		
+
   		/** @brief Initialise la carte a utiliser */
   		void initJeu ();
 
@@ -28,16 +28,20 @@ class Jeu {
 
 		/** @brief : constructeur par default */
 		Jeu();
-		
-		/** @brief : Accesseur pour le nombre de joueurs */
+
+		/** @brief : Accesseur pour le nombre de joueurs
+				@return un entier
+		 */
 		unsigned int getNbJoueur();
-		
+
 		/** @brief : Mutateur du nombre de joueurs */
 		void setNbJoueur(unsigned int nbj);
-		
-		/** @brief : Accesseur pour le tableau de joueurs */
+
+		/** @brief : Accesseur pour le tableau de joueurs
+				@ return Tableau dynamique de joueur
+		*/
 		vector<Joueur> getTabJoueur();
-		
+
 		/** @brief : Mutateur pour le tableau de joueurs */
 		void setTabJoueur( vector<Joueur> tabj );
 
@@ -62,7 +66,7 @@ class Jeu {
 		/** @brief : permet de mettre fin au tour */
 		bool fintour();
 };
-	
+
 
 
 
