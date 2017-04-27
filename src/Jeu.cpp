@@ -292,6 +292,9 @@ void Jeu::afficherAide()
 }
 
 
+//--------------------------------------------------------------------------------------
+//Phase Renfort
+
 void Jeu::phaseRenfort()
 {
 	unsigned int num, i, k, total_renfort;
@@ -330,6 +333,10 @@ void Jeu::phaseRenfort()
     cout <<endl;
 	}
 }
+
+
+//--------------------------------------------------------------------------------------
+//Phase Attaque
 
 void Jeu::phaseAttaque(Joueur& j)
 {
@@ -402,8 +409,8 @@ void Jeu::phaseAttaque(Joueur& j)
 }
 
 
-
-
+//--------------------------------------------------------------------------------------
+//Phase Manoeuvre
 		
 void Jeu::phaseManoeuvre(Joueur& j){
 
@@ -411,11 +418,13 @@ void Jeu::phaseManoeuvre(Joueur& j){
   unsigned int num;
   vector <Region> tab_regions_frontalieres;
 
+
 	// Debug => cout << "GetNbRegions : " << j.getNbRegions() <<endl;
   do{
     cout << "Joueur " << j.getCouleurJoueur() << ", choisis la region de depart : " << endl;
     for( unsigned int i = 0; i < j.getNbRegions(); i++)
       {
+      //Problème incompréhensible avec getNomRegion ...
 	cout << i+1 << " : " << j.getRegionsJoueur()[i]->getNomRegion() << " (" << j.getRegionsJoueur()[i]->getNbUnite() << " unites)" <<endl;
       }
     cin >> num;}
@@ -455,8 +464,13 @@ void Jeu::phaseManoeuvre(Joueur& j){
 		cout << i+1 << " : " << j.getRegionsJoueur()[i]->getNomRegion() << " (" << j.getRegionsJoueur()[i]->getNbUnite() << " unites)" <<endl;
 	}	
 	cout <<endl;
+	
+//	cout << endl << "Nom Region 21 => " << j.getRegionsJoueur()[20]->getNomRegion() << endl << "Nb unites 21 => " << j.getRegionsJoueur()[20]->getNbUnite() <<endl;
 }
 		
+	
+//--------------------------------------------------------------------------------------
+
 
 void Jeu::initJeu()
 {

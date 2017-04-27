@@ -109,9 +109,8 @@ using namespace std;
 		jatt.getRegionsJoueur().erase(jatt.getRegionsJoueur().begin() + positionAtt);
 		jatt.getRegionsJoueur().push_back(&region_attaquant);
 
-		jatt.getRegionsJoueur().push_back(&region_defenseur);
 		jdef.getRegionsJoueur().erase(jdef.getRegionsJoueur().begin() + positionDef);
-			
+		jatt.getRegionsJoueur().push_back(&region_defenseur);
 }
 	
 	

@@ -18,7 +18,6 @@ Region::Region(const string & nom, unsigned int nb_unite, const string & couleur
 }
 
 
-
 string Region::getNomRegion () const
 {
 	return nom_region;
@@ -28,8 +27,6 @@ void Region::setNomRegion (const string & nom)
 {
 	nom_region = nom;
 }
-
-
 
 
 string Region::getCouleurRegion () const
