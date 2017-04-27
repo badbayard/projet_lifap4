@@ -411,6 +411,7 @@ void Jeu::phaseManoeuvre(Joueur& j){
   unsigned int num;
   vector <Region> tab_regions_frontalieres;
 
+	// Debug => cout << "GetNbRegions : " << j.getNbRegions() <<endl;
   do{
     cout << "Joueur " << j.getCouleurJoueur() << ", choisis la region de depart : " << endl;
     for( unsigned int i = 0; i < j.getNbRegions(); i++)
