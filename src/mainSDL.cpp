@@ -14,12 +14,11 @@ int main ()
 {
 	JeuSDL jeu;
 	if ( !jeu.afficherInit() ) {
-		jeu.quitterSDL();
+		jeu.quitterSDL()
 		exit(1);
 	}
-	//jeu.MenuSDL();
-
-	jeu.boucleJeu();
+	jeu.MenuSDL();
+	//jeu.boucleJeu();
 	jeu.quitterSDL();
 	return 0;
 }

@@ -18,16 +18,6 @@ Terrain::Terrain(unsigned int dimensionX, unsigned int dimensionY)
 	dim_x = dimensionX;
  	dim_y = dimensionY;
 	unsigned int i, j;
-/*
-	for(i=0;i<=dim_x;i++)
-	{
-		for(j=0;j<=dim_y;j++)
-		{
-			cout << "*";
-		}
-		cout << endl;
-	}
-*/
 
 //terrain
  const char carte[18][80]={ " *******************   *********  *********************************          ",

@@ -145,16 +145,6 @@ JeuSDL::JeuSDL() : Jeu()
 
 JeuSDL::~JeuSDL()
 {
-/*
-	if (renderer != nullptr) {
-		SDL_DestroyRenderer(renderer);
-	}
-	if (fenetre != nullptr) {
-		SDL_DestroyWindow(fenetre);
-	}
-	IMG_Quit();
-	SDL_Quit();
-*/
 	quitterSDL();
 }
 
@@ -205,7 +195,7 @@ bool JeuSDL::afficherInit()
 
 	// On vide le renderer
 	SDL_RenderClear(renderer);
-	
+
 	// Mise a jour buffer
 	return true;
 }
@@ -257,7 +247,7 @@ void JeuSDL::boucleJeu()
 	bool manoeuvre = false;
 	bool renfort = true;
 	bool attaque = false;
-	
+
 	// Affichage carte
 	// SDL_RenderClear(renderer);
 	if (all_ok) {
@@ -270,13 +260,13 @@ void JeuSDL::boucleJeu()
 		while (!quitter) {
 			SDL_RenderClear(renderer);
 			//carte.draw(renderer);
-			
+
 			// Tant qu'il reste des evenements a traiter dans la file d'evenement
 			while (SDL_PollEvent( &evenements )) {	// Recuperation d'un evenement
 			SDL_RenderClear(renderer);
 			carte.draw(renderer);
-			
-				
+
+
 
 				// Selon le type d'evenement
 				switch (evenements.type) {
@@ -323,7 +313,7 @@ void JeuSDL::boucleJeu()
 							hover_box.draw(renderer, 60, 760);
 						}
 						break;
-					
+
 					// Quand on clique avec la souris
 					//case SDL_MOUSEBUTTONDOWN:
 						//hover_box.writeOnTexture("Hello world!", hover_box.font, renderer);
@@ -337,7 +327,7 @@ void JeuSDL::boucleJeu()
 		}
 	}
 	// SDL_RenderPresent(renderer);
-	
+
 	else {
 		cout << "----> Last error: " << SDL_GetError() << endl;
 	}
@@ -367,36 +357,6 @@ string JeuSDL::getNomParRGB(int R, int G, int B)
 
 void JeuSDL::lireDonneesCarte(const string & chemin)
 {
-
-/*	ifstream fichier(chemin.c_str(), ios::in);
-	if (!fichier.is_open()) {
-		cout << "Erreur: le fichier " << chemin << " n'a pas pu etre ouvert" << endl;
-		exit(1);
-	}
-
-	string ligne;
-	int rouge, vert, bleu;
-	while (!fichier.eof()) {
-		//getline(fichier, ligne);
-		fichier >> rouge;
-		//fichier >> vert;
-		//fichier >> bleu;
-		//CodeCouleur[ string(ligne) ] = CodeRGB(rouge,vert,bleu);
-	}
-
-	//unordered_map<string, CodeRGB>::iterator it;
-
-	for (unordered_map<string, CodeRGB>::iterator it = CodeCouleur.begin() ; it != CodeCouleur.end() ; ++it) {
-		cout << it->first << endl;
-		cout << "R: " << it->second.R << endl;
-		cout << "G: " << it->second.G << endl;
-		cout << "B: " << it->second.B << endl;
-		cout << endl;
-	}
-
-
-	fichier.close();*/
-
 
 	CodeCouleur[ string("Alaska") ] = CodeRGB( 223, 192, 88 );
 	CodeCouleur[ string("Alberta") ] = CodeRGB( 226, 192, 90 );
@@ -548,29 +508,30 @@ void JeuSDL::MusicSDL()
 {
 		//afficherInit();
 	  SDL_Init(SDL_INIT_AUDIO);
-  	Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 1024 );
-		//Mix_Music *son;
+		//SDL_WM_SetCaption("SDL_Mixer", NULL);
+		if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1) //Initialisation de l'API Mixer
+
+		{
+
+   		printf("%s", Mix_GetError());
+
+		}
 		//Mix_AllocateChannels(2);
-		//son = Mix_LoadMUS("data/music_menu.ogg");
-		//Mix_PlayChannel(1, son, 5);
-
-		//Mix_PlayMusic(son,-1);
-
-		Mix_AllocateChannels(16);
+	/*	Mix_AllocateChannels(16);
 		Mix_Chunk *son ;
 		son = Mix_LoadWAV("data/music_menu.wav");
-		Mix_PlayChannel(2,son,0);
+		Mix_PlayChannel(2,son,0);*/
 
-			/*	Mix_Music *musique = NULL;
+			Mix_Music *musique = NULL;
 
-		    musique = Mix_LoadMUS("data/music_menu.mp4"); //Charge le son a l'adresse indiquée
+		    musique = Mix_LoadMUS("data/music_menu.mp3"); //Charge le son a l'adresse indiquée
 
 
-		    if(musique == NULL)  //Vérifie si le son est ok.
+		  /*  if(musique == NULL)  //Vérifie si le son est ok.
 		    {
 		        cout << "Erreur lors du chargement du son";
-		    }
+		    } */
 
-		    Mix_PlayMusic(musique, 1); // on joue notre son qu'une seul fois. */
+		    Mix_PlayMusic(musique,-1); // on joue notre son qu'une seul fois. */
 
 }
